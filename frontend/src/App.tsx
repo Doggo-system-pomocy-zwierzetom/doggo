@@ -19,16 +19,16 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <BrowserRouter>
-      <Navbar/>
+      <BrowserRouter basename="/">
+        <Navbar />
         <Switch>
-          <Route path="/" exact component = {Home}/>
-          <Route path="/zaginiecia" exact component = {Missing}/>
-          <Route path="/schroniska" exact component = {Shelters}/>
-          <Route path="/adopcja" exact component = {Adoption}/>
-          <Route path="/zapotrzebowania" exact component = {Needs}/>
-          <Route path="/pomoc" exact component = {Help}/>
-          <Route path="/kontakt" exact component = {Contact}/>
+          <Route path="/" exact component={Home} />
+          <Route path="/zaginiecia" exact component={Missing} />
+          <Route path="/schroniska" exact component={Shelters} />
+          <Route path="/adopcja" exact component={Adoption} />
+          <Route path="/zapotrzebowania" exact component={Needs} />
+          <Route path="/pomoc" exact component={Help} />
+          <Route path="/kontakt" exact component={Contact} />
         </Switch>
       </BrowserRouter>
     </div>

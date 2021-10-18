@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 const StyledNavbar = styled.div`
   background: gray;
   display: flex;
+  height: 3.5rem;
   ul {
     display: flex;
     list-style-type: none;
@@ -11,8 +12,12 @@ const StyledNavbar = styled.div`
       margin: 0 1rem;
       a {
         text-decoration: none;
+        color: white;
       }
     }
+  }
+  .selected {
+    color: #0059ff;
   }
 `;
 function Navbar() {
@@ -23,22 +28,34 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/zaginiecia">Zaginięcia</Link>
+          <NavLink activeClassName="selected" to="/zaginiecia">
+            Zaginięcia
+          </NavLink>
         </li>
         <li>
-          <Link to="/schroniska">Schroniska</Link>
+          <NavLink activeClassName="selected" to="/schroniska">
+            Schroniska
+          </NavLink>
         </li>
         <li>
-          <Link to="/adopcja">Adopcja</Link>
+          <NavLink activeClassName="selected" to="/adopcja">
+            Adopcja
+          </NavLink>
         </li>
         <li>
-          <Link to="/zapotrzebowania">Zapotrzebowania</Link>
+          <NavLink activeClassName="selected" to="/zapotrzebowania">
+            Zapotrzebowania
+          </NavLink>
         </li>
         <li>
-          <Link to="/pomoc">Pomoc</Link>
+          <NavLink activeClassName="selected" to="/pomoc">
+            Pomoc
+          </NavLink>
         </li>
         <li>
-          <Link to="/kontakt">Kontakt</Link>
+          <NavLink activeClassName="selected" to="/kontakt">
+            Kontakt
+          </NavLink>
         </li>
       </ul>
     </StyledNavbar>
