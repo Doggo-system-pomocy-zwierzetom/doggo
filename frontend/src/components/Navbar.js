@@ -4,6 +4,16 @@ import styled from 'styled-components';
 const StyledNavbar = styled.div`
   background: gray;
   display: flex;
+  ul {
+    display: flex;
+    list-style-type: none;
+    li {
+      margin: 0 1rem;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 `;
 function Navbar() {
   return (
