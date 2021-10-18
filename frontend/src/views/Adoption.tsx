@@ -1,7 +1,9 @@
+import Animal from '../components/Animal';
+
 function Adoption(){
 
     return(
-        <p>Adoption</p>
+        <Animal/>
     )
 }
 export default Adoption;

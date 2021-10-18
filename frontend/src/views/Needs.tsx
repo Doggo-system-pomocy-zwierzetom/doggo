@@ -1,7 +1,8 @@
+import Shelter from '../components/Shelter';
 function Needs(){
 
     return(
-        <p>Needs</p>
+        <Shelter/>
     )
 }
 export default Needs;

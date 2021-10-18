@@ -51,6 +51,13 @@ function Navbar() {
           <NavLink activeClassName="selected" to="/pomoc">
             Pomoc
           </NavLink>
+          <Link to="/adoptuj">Adoptuj</Link>
+        </li>
+        <li>
+          <Link to="/wesprzyj-schronisko">Wesprzyj schronisko</Link>
+        </li>
+        <li>
+          <Link to="/zbiorki">Zbiórki</Link>
         </li>
         <li>
           <NavLink activeClassName="selected" to="/kontakt">
