@@ -10,6 +10,7 @@ function Contact(){
             <input type="email" id="fmail" name="fmail" required/>
             <label>Wiadomość:</label>
             <input type="text" id="fcontent" name="fcontent" required/>
+            <button type="submit">Wyślij</button>
         </form>
         </div>
     )
