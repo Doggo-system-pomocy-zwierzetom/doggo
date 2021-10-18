@@ -17,8 +17,8 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Navbar/>
       <BrowserRouter>
+      <Navbar/>
         <Switch>
           <Route path="/">
             <Home />
