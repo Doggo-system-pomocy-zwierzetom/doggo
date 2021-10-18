@@ -1,11 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Route, BrowserRouter, Link, Switch} from 'react-router-dom';
+import { Route, BrowserRouter, Link, Switch } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+`;
 
 function App() {
   return (
     <div className="App">
+      <GlobalStyle />
       <BrowserRouter>
         <Switch>
           <Route path="/">
@@ -18,7 +23,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
-    </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }
