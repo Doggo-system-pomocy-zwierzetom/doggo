@@ -13,10 +13,16 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/zaginiecia">Zaginięcia</Link>
         </li>
         <li>
-          <Link to="/topics">Topics</Link>
+          <Link to="/schroniska">Schroniska</Link>
+        </li>
+        <li>
+          <Link to="/pomoc">Pomoc</Link>
+        </li>
+        <li>
+          <Link to="/kontakt">Kontakt</Link>
         </li>
       </ul>
     </StyledNavbar>
