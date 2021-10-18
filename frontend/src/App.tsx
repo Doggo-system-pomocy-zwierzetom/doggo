@@ -1,16 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Route, BrowserRouter, Link, Switch} from 'react-router-dom';
 import Home from './views/Home';
 import Missing from './views/Missing';
 import Shelters from './views/Shelters';
 import Help from './views/Help';
 import Contact from './views/Contact';
+import { Route, BrowserRouter, Link, Switch } from 'react-router-dom';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Navbar from './components/Navbar';
+
+const GlobalStyle = createGlobalStyle`
+`;
 
 function App() {
   return (
     <div className="App">
+      <GlobalStyle />
+      <Navbar/>
       <BrowserRouter>
         <Switch>
           <Route path="/">
@@ -29,7 +36,7 @@ function App() {
             <Contact />
           </Route>
         </Switch>
-    </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }
