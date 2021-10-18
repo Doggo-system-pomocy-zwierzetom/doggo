@@ -26,16 +26,13 @@ function Navbar() {
           <Link to="/zaginiecia">Zaginięcia</Link>
         </li>
         <li>
-          <Link to="/schroniska">Schroniska</Link>
+          <Link to="/adoptuj">Adoptuj</Link>
         </li>
         <li>
-          <Link to="/adopcja">Adopcja</Link>
+          <Link to="/wesprzyj-schronisko">Wesprzyj schronisko</Link>
         </li>
         <li>
-          <Link to="/zapotrzebowania">Zapotrzebowania</Link>
-        </li>
-        <li>
-          <Link to="/pomoc">Pomoc</Link>
+          <Link to="/zbiorki">Zbiórki</Link>
         </li>
         <li>
           <Link to="/kontakt">Kontakt</Link>
