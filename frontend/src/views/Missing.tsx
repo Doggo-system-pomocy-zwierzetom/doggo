@@ -3,8 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
 
 const StyledMissing = styled.div`
-  /* height: calc(100vh - 3.5rem); */
-  height: 100vh;
+  height: calc(100vh - 3.5rem);
   width: 100%;
 `;
 

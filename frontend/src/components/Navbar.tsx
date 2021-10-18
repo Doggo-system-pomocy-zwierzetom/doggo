@@ -33,32 +33,21 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="selected" to="/schroniska">
-            Schroniska
+          <NavLink activeClassName="selected" to="/adoptuj">
+            Adoptuj
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="selected" to="/adopcja">
-            Adopcja
+          <NavLink activeClassName="selected" to="/wesprzyj-schronisko">
+            Wesprzyj schronisko
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="selected" to="/zapotrzebowania">
-            Zapotrzebowania
+          <NavLink activeClassName="selected" to="/zbiorki">
+            Zbiórki
           </NavLink>
         </li>
-        <li>
-          <NavLink activeClassName="selected" to="/pomoc">
-            Pomoc
-          </NavLink>
-          <Link to="/adoptuj">Adoptuj</Link>
-        </li>
-        <li>
-          <Link to="/wesprzyj-schronisko">Wesprzyj schronisko</Link>
-        </li>
-        <li>
-          <Link to="/zbiorki">Zbiórki</Link>
-        </li>
+
         <li>
           <NavLink activeClassName="selected" to="/kontakt">
             Kontakt
