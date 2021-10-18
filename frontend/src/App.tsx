@@ -20,21 +20,11 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
-          <Route path="/zaginiecia">
-            <Missing />
-          </Route>
-          <Route path="/schroniska">
-            <Shelters />
-          </Route>
-          <Route path="/pomoc">
-            <Help />
-          </Route>
-          <Route path="/kontakt">
-            <Contact />
-          </Route>
+          <Route path="/" exact component = {Home}/>
+          <Route path="/zaginiecia" exact component = {Missing}/>
+          <Route path="/schroniska" exact component = {Shelters}/>
+          <Route path="/pomoc" exact component = {Help}/>
+          <Route path="/kontakt" exact component = {Contact}/>
         </Switch>
       </BrowserRouter>
     </div>
