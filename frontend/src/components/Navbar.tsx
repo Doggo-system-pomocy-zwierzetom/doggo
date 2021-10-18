@@ -29,6 +29,12 @@ function Navbar() {
           <Link to="/schroniska">Schroniska</Link>
         </li>
         <li>
+          <Link to="/adopcja">Adopcja</Link>
+        </li>
+        <li>
+          <Link to="/zapotrzebowania">Zapotrzebowania</Link>
+        </li>
+        <li>
           <Link to="/pomoc">Pomoc</Link>
         </li>
         <li>
