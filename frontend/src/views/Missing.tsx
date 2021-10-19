@@ -26,7 +26,7 @@ export default function Missing() {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
+        <AnyReactComponent lat={50.8231985} lng={19.1153909} text="WIMiI" />
       </GoogleMapReact>
     </StyledMissing>
   );
