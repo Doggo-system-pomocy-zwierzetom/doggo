@@ -1,38 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { MyContext } from '../contexts/MyContext';
 
-function Register() {
-  const { toggleNav, registerUser } = useContext(MyContext);
+export default function LoginView() {
+  const { toggleNav, loginUser, isLoggedIn } = useContext(MyContext);
+
   const initialState = {
     userInfo: {
-      name: '',
       email: '',
       password: '',
     },
     errorMsg: '',
     successMsg: '',
   };
+
   const [state, setState] = useState(initialState);
 
-  // On Submit the Registration Form
-  const submitForm = async (event: any) => {
-    event.preventDefault();
-    const data = await registerUser(state.userInfo);
-    if (data.success) {
-      setState({
-        ...initialState,
-        successMsg: data.message,
-      });
-    } else {
-      setState({
-        ...state,
-        successMsg: '',
-        errorMsg: data.message,
-      });
-    }
-  };
-
-  // On change the Input Value (name, email, password)
+  // On change input value (email & password)
   const onChangeValue = (e: any) => {
     setState({
       ...state,
@@ -43,7 +26,26 @@ function Register() {
     });
   };
 
-  // Show Message on Success or Error
+  // On Submit Login From
+  const submitForm = async (event: any) => {
+    event.preventDefault();
+    const data = await loginUser(state.userInfo);
+    if (data.success && data.token) {
+      setState({
+        ...initialState,
+      });
+      localStorage.setItem('loginToken', data.token);
+      await isLoggedIn();
+    } else {
+      setState({
+        ...state,
+        successMsg: '',
+        errorMsg: data.message,
+      });
+    }
+  };
+
+  // Show Message on Error or Success
   let successMsg: any = '';
   let errorMsg: any = '';
   if (state.errorMsg) {
@@ -55,52 +57,39 @@ function Register() {
 
   return (
     <div className="_loginRegister">
-      <h1>Sign Up</h1>
+      <h1>Login</h1>
       <form onSubmit={submitForm} noValidate>
-        <div className="form-control">
-          <label>Full Name</label>
-          <input
-            name="name"
-            required
-            type="text"
-            value={state.userInfo.name}
-            onChange={onChangeValue}
-            placeholder="Enter your name"
-          />
-        </div>
         <div className="form-control">
           <label>Email</label>
           <input
             name="email"
-            required
             type="email"
+            required
+            placeholder="Enter your email"
             value={state.userInfo.email}
             onChange={onChangeValue}
-            placeholder="Enter your email"
           />
         </div>
         <div className="form-control">
-          <label>Password</label>
+          <label>PassWord</label>
           <input
             name="password"
-            required
             type="password"
+            required
+            placeholder="Enter your password"
             value={state.userInfo.password}
             onChange={onChangeValue}
-            placeholder="Enter your password"
           />
         </div>
         {errorMsg}
         {successMsg}
         <div className="form-control">
-          <button type="submit">Sign Up</button>
+          <button type="submit">Login</button>
         </div>
       </form>
       <div className="_navBtn">
-        <button onClick={toggleNav}>Login</button>
+        <button onClick={toggleNav}>Register</button>
       </div>
     </div>
   );
 }
-
-export default Register;

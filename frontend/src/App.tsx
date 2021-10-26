@@ -1,17 +1,17 @@
 import React from 'react';
-// import logo from './logo.svg';
-import './App.css';
-import Home from './views/Home';
-import Missing from './views/Missing';
-import Help from './views/Help';
-import Contact from './views/Contact';
-import Adoption from './views/Adoption';
-import Needs from './views/Needs';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
+// import logo from './logo.svg';
+import './App.css';
+import HomeView from './views/HomeView';
+import MissingView from './views/MissingView';
+import HelpView from './views/HelpView';
+import ContactView from './views/ContactView';
+import AdoptionView from './views/AdoptionView';
+import NeedsView from './views/NeedsView';
 import Navbar from './components/Navbar';
-import Login from './views/Login';
-import Register from './views/Register';
+import LoginView from './views/LoginView';
+import RegisterView from './views/RegisterView';
 import MyContextProvider from './contexts/MyContext';
 
 const GlobalStyle = createGlobalStyle`
@@ -25,14 +25,14 @@ function App() {
         <MyContextProvider>
           <Navbar />
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/kontakt" exact component={Contact} />
-            <Route path="/zaginiecia" exact component={Missing} />
-            <Route path="/adoptuj" exact component={Adoption} />
-            <Route path="/wesprzyj-schronisko" exact component={Needs} />
-            <Route path="/zbiorki" exact component={Help} />
-            <Route path="/logowanie" exact component={Login} />
-            <Route path="/rejestracja" exact component={Register} />
+            <Route path="/" exact component={HomeView} />
+            <Route path="/kontakt" exact component={ContactView} />
+            <Route path="/zaginiecia" exact component={MissingView} />
+            <Route path="/adoptuj" exact component={AdoptionView} />
+            <Route path="/wesprzyj-schronisko" exact component={NeedsView} />
+            <Route path="/zbiorki" exact component={HelpView} />
+            <Route path="/logowanie" exact component={LoginView} />
+            <Route path="/rejestracja" exact component={RegisterView} />
           </Switch>
         </MyContextProvider>
       </BrowserRouter>

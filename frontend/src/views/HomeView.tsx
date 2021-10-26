@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { MyContext } from '../contexts/MyContext';
 
 // Importing the Login & Register Component
-import Login from './Login';
-import Register from './Register';
+import Login from './LoginView';
+import Register from './RegisterView';
 
-function Home() {
+export default function HomeView() {
   const { rootState, logoutUser } = useContext(MyContext);
   const { isAuth, theUser, showLogin } = rootState;
 
@@ -33,5 +33,3 @@ function Home() {
     return <Register />;
   }
 }
-
-export default Home;

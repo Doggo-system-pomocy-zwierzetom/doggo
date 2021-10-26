@@ -1,4 +1,4 @@
-function Contact(){
+export default function ContactView(){
 
     return(
         <div>
@@ -15,4 +15,3 @@ function Contact(){
         </div>
     )
 }
-export default Contact;
