@@ -8,8 +8,7 @@ const StyledMissingContainerElement = styled.div`
 function MissingContainerElement() {
   return (
     <StyledMissingContainerElement>
-      <p>Zdjęcie</p>
-      <p>Imie pieska, miejscowość</p>
+      <p>Zdjęcie, Imie pieska, Miejscowość</p>
     </StyledMissingContainerElement>
   );
 }

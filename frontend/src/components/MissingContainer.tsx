@@ -8,7 +8,7 @@ const StyledMissingContainer = styled.div`
 function MissingContainer() {
   return (
     <StyledMissingContainer>
-      <p>Zaginione suczki w twojej okolicy XD</p>
+      <p>Zaginione zwierzęta w okolicy</p>
       <div className="missing-catalog">
         <MissingContainerElement />
       </div>
