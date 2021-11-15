@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 const StyledMissingContainerElement = styled.div`
   display: flex;
   margin: 0.2rem 0;
@@ -8,6 +9,7 @@ const StyledMissingContainerElement = styled.div`
 function MissingContainerElement() {
   return (
     <StyledMissingContainerElement>
+      
       <p>Zdjęcie, Imie pieska, Miejscowość</p>
     </StyledMissingContainerElement>
   );
