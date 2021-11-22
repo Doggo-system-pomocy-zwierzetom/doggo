@@ -6,16 +6,16 @@ import { useEffect, useState } from 'react';
 const StyledAdoptionView = styled.div``;
 
 export default function AdoptionView() {
-  const [data, setData] = useState(Array);
+  const [data, setData] = useState([]);
 
   async function getData() {
-    // fetch('/api/faults/list', { credentials: 'include' })
-    fetch('https://localhost:3307/getAll/getUsers.php', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+    await fetch('/getAll/getUsers.php', {
+      // method: 'GET',
+      // headers: {
+      //   // 'Access-Control-Allow-Origin': '*',
+      //   // Accept: 'application/json',
+      //   // 'Content-Type': 'application/json',
+      // },
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -33,9 +33,10 @@ export default function AdoptionView() {
   return (
     <StyledAdoptionView>
       <h1>Adoptuj</h1>
+      {data.map((e: any) => {
+        return <p>{e.mail}</p>;
+      })}
       <AdoptionContainer />
     </StyledAdoptionView>
   );
 }
-
-// "proxy": "http://localhost:3307/getAll",

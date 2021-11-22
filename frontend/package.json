@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://localhost:3333",
   "private": true,
   "dependencies": {
     "@tensorflow-models/mobilenet": "^2.1.0",
