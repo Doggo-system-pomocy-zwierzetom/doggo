@@ -3,13 +3,16 @@ import styled from 'styled-components';
 
 import { useEffect, useState } from 'react';
 
-const StyledAdoptionView = styled.div``;
+const StyledAdoptionView = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
 
 export default function AdoptionView() {
   const [data, setData] = useState([]);
 
   async function getData() {
-    await fetch('/getAll/getUsers.php', {
+    await fetch('/getAll/getAdoptions.php', {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',
@@ -34,9 +37,9 @@ export default function AdoptionView() {
     <StyledAdoptionView>
       <h1>Adoptuj</h1>
       {data.map((e: any) => {
-        return <p>{e.mail}</p>;
+        return <AdoptionContainer key={e.id} name={e.name} description={e.description} image={e.image} />;
+        // <p>{e.name}</p>;
       })}
-      <AdoptionContainer />
     </StyledAdoptionView>
   );
 }
