@@ -1,21 +1,34 @@
 <?php 
-header('Content-type:application/json;charset=utf-8');
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
+header("Content-Type: application/json; charset=UTF-8");
 
 $id = $_GET["id"];
-$mysqli = new mysqli("localhost:3307", "root", "", "test");
+$connection = mysqli_connect("localhost:3307", "root", "", "test") or die("Error " . mysqli_error($connection));
 
-$mysqli->select_db("test");
-if ($result = $mysqli -> query("SELECT * FROM notifications WHERE id=$id")) {
-  while( $row = $result->fetch_array()){
-    printf(json_encode(['title'=>$row['title'], 
-    'image'=> base64_encode($row['image']),
-    'creator'=>$row['creator'], 
-    'time'=> $row['time'],
-    'description'=>$row['description'], 
-    'place'=> $row['place'],
-    'id'=> $row['id']]));
+
+// prepare and bind
+if($stmt = $connection->prepare("SELECT * FROM notifications WHERE id= ? LIMIT 1")){
+$stmt->bind_param("i", $id);
+// set parameters and execute
+$stmt->execute();
+
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+if($row){
+    $emparray[] = ['title'=>$row['title'], 
+                      'image'=> base64_encode($row['image']),
+                      'creator'=>$row['creator'], 
+                      'time'=> $row['time'],
+                      'description'=>$row['description'], 
+                      'place'=> $row['place'],
+                      'id'=> $row['id']];
+    echo json_encode($emparray);
 }
+else  echo json_encode([]);
 }
- $mysqli -> close();
+//close the db connection
+mysqli_close($connection);
+
 ?>
