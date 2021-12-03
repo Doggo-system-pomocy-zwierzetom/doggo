@@ -1,19 +1,21 @@
 <?php
-header('Content-type:application/json;charset=utf-8');
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$mysqli = new mysqli("localhost:3307", "root", "", "test");
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
+header("Content-Type: application/json; charset=UTF-8");
 
-$mysqli->select_db("test");
-if ($result = $mysqli -> query("SELECT * FROM shelters")) {
-  while( $row = $result->fetch_array() )
-{
-  printf(json_encode(['mail'=>$row['mail'], 
-                      'password'=> $row['password'],
-                      'NIP'=>$row['NIP'], 
-                      'name'=> $row['name'],
-                      'food'=>$row['food'], 
-                      'equipment'=> $row['equipment']]));
-}
-}
- $mysqli -> close();
+$connection = mysqli_connect("localhost:3307", "root", "", "test") or die("Error " . mysqli_error($connection));
+
+$sql = "SELECT * FROM shelters";
+$result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
+
+$emparray = array();
+    while($row =mysqli_fetch_assoc($result))
+    {
+        $emparray[] = $row;
+    }
+    echo json_encode($emparray);
+
+    //close the db connection
+    mysqli_close($connection);
 ?>

@@ -1,19 +1,24 @@
 <?php
-header('Content-type:application/json;charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
+header("Content-Type: application/json; charset=UTF-8");
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$mysqli = new mysqli("localhost:3307", "root", "", "test");
+$connection = mysqli_connect("localhost:3307", "root", "", "test") or die("Error " . mysqli_error($connection));
 
-$mysqli->select_db("test");
-if ($result = $mysqli -> query("SELECT * FROM adoptions")) {
-  while( $row = $result->fetch_array() )
-{
-  printf(json_encode(['name'=>$row['name'], 
+    //fetch table rows from mysql db
+$sql = "SELECT * FROM adoptions";
+$result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
+    //create an array
+$emparray = array();
+while($row =mysqli_fetch_assoc($result)){
+  $emparray[] = ['name'=>$row['name'], 
                       'image'=> base64_encode($row['image']),
                       'userMail'=>$row['userMail'], 
                       'shelterName'=> $row['shelterName'],
                       'description'=>$row['description'], 
-                      'id'=> $row['id']]));
+                      'id'=> $row['id']];
 }
-}
- $mysqli -> close();
+echo json_encode($emparray);
+mysqli_close($connection);
 ?>
