@@ -1,17 +1,19 @@
 <?php 
-header('Content-type:application/json;charset=utf-8');
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
+header("Content-Type: application/json; charset=UTF-8");
 
 $mail = $_GET["mail"];
 $password = $_GET["password"];
-$mysqli = new mysqli("localhost:3307", "root", "", "test");
-$mysqli->select_db("test");
-$sql = "INSERT INTO Administrators (mail, password) VALUES ($mail, $password)";
 
-if ($mysqli->query($sql) === TRUE) {
-    echo "New record created successfully";
-  } else {
-    echo "Error: " . $sql . "<br>" . $mysqli->error;
-  }
- $mysqli -> close();
+$connection = mysqli_connect("localhost:3307", "root", "", "test") or die("Error " . mysqli_error($connection));
+
+ $stmt = $connection->prepare("INSERT INTO administrators (mail, password) VALUES (?, ?)");
+ $stmt->bind_param('ss', $mail, $password);
+ 
+ $stmt->execute();
+
+ mysqli_close($connection);
+ 
 ?>
