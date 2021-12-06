@@ -2,6 +2,7 @@ import AdoptionContainer from '../components/AdoptionContainer';
 import styled from 'styled-components';
 
 import { useEffect, useState } from 'react';
+import Upload from '../components/Upload';
 
 const StyledAdoptionView = styled.div`
   max-width: 800px;
@@ -37,7 +38,9 @@ export default function AdoptionView() {
     <StyledAdoptionView>
       <h1>Adoptuj</h1>
       {data.map((e: any) => {
-        return <AdoptionContainer key={e.id} name={e.name} description={e.description} image={e.image} />;
+        return (
+          <AdoptionContainer key={e.id} id={e.id} name={e.name} description={e.description} image={e.image} />
+        );
         // <p>{e.name}</p>;
       })}
     </StyledAdoptionView>

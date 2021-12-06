@@ -1,5 +1,5 @@
 // import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
 import MissingContainer from '../components/MissingContainer';
@@ -47,6 +47,30 @@ const defaultMapOptions = {
 
 export default function MissingView() {
   const [isAddMissingClicked, setIsAddMissingClicked] = useState(false);
+
+  const [data, setData] = useState([]);
+
+  async function getData() {
+    await fetch('/getAll/getMissings.php', {
+      // method: 'GET',
+      // headers: {
+      //   // 'Access-Control-Allow-Origin': '*',
+      //   // Accept: 'application/json',
+      //   // 'Content-Type': 'application/json',
+      // },
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .then((data) => {
+        setData(data);
+        console.log(data);
+      });
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <StyledMissing>

@@ -13,6 +13,8 @@ import Navbar from './components/Navbar';
 import LoginView from './views/LoginView';
 import RegisterView from './views/RegisterView';
 import MyContextProvider from './contexts/MyContext';
+import AdoptionSingleView from './views/AdoptionSingleView';
+import Upload from './components/Upload';
 
 const GlobalStyle = createGlobalStyle`
 `;
@@ -33,6 +35,8 @@ function App() {
             <Route path="/zbiorki" exact component={HelpView} />
             <Route path="/logowanie" exact component={LoginView} />
             <Route path="/rejestracja" exact component={RegisterView} />
+            <Route path="/adoptuj/:id" exact component={AdoptionSingleView} />
+            <Route path="/dodaj-zdjecie" exact component={Upload} />
           </Switch>
         </MyContextProvider>
       </BrowserRouter>
