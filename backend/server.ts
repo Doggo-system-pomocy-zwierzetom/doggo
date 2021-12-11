@@ -21,7 +21,7 @@ try {
     res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
   });
 
-  app.listen(4444, () => {
+  app.listen(process.env.PORT || 4444, () => {
     console.log('🚀 Server is up!');
   });
 } catch (err: any) {
