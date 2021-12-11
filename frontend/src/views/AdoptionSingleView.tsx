@@ -42,7 +42,7 @@ export default function AdoptionSingleView() {
 
   async function getData() {
     // await fetch(`/getRow/getAdoption.php?id=${id}`, {
-    await fetch(`/single-adoption/${id}`, {
+    await fetch(`/api/single-adoption/${id}`, {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',

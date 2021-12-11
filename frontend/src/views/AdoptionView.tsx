@@ -14,7 +14,7 @@ export default function AdoptionView() {
 
   async function getData() {
     // await fetch('/getAll/getAdoptions.php', {
-    await fetch('/adoptions', {
+    await fetch('/api/adoptions', {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',

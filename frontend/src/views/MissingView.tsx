@@ -51,7 +51,7 @@ export default function MissingView() {
   const [data, setData] = useState([]);
 
   async function getData() {
-    await fetch('/getAll/getMissings.php', {
+    await fetch('/api/getAll/getMissings.php', {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',

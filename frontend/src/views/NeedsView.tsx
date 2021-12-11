@@ -12,7 +12,7 @@ export default function NeedsView() {
   const [data, setData] = useState([]);
 
   async function getData() {
-    await fetch('/getAll/getShelters.php', {
+    await fetch('/api/getAll/getShelters.php', {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',
