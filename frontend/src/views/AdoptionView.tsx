@@ -13,7 +13,8 @@ export default function AdoptionView() {
   const [data, setData] = useState([]);
 
   async function getData() {
-    await fetch('/getAll/getAdoptions.php', {
+    // await fetch('/getAll/getAdoptions.php', {
+    await fetch('/adoptions', {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',

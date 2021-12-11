@@ -41,7 +41,8 @@ export default function AdoptionSingleView() {
   const [description, setDescription] = useState('');
 
   async function getData() {
-    await fetch(`/getRow/getAdoption.php?id=${id}`, {
+    // await fetch(`/getRow/getAdoption.php?id=${id}`, {
+    await fetch(`/single-adoption/${id}`, {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',
