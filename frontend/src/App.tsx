@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 // import logo from './logo.svg';

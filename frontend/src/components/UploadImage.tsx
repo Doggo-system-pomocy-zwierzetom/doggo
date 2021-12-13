@@ -1,43 +1,20 @@
 import { useState } from 'react';
+import { Alert, Button, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const StyledUploadImage = styled.div`
   .image-preview {
     max-width: 100%;
-    max-height: 400px;
+    max-height: 300px;
   }
 `;
 
 export default function UploadImage({ setImageURL }: any) {
   const [file, setFile] = useState<string>('');
   const [imagePreview, setImagePreview] = useState<any>('');
-  const [base64, setBase64] = useState<string>();
-  // const [name, setName] = useState<string>();
-  // const [size, setSize] = useState<string>();
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const onChange = (e: any) => {
-    console.log('file', e.target.files[0]);
-    let file = e.target.files[0];
-    if (file) {
-      setFile(file);
-      // const reader = new FileReader();
-      // reader.onload = _handleReaderLoaded;
-      // reader.readAsBinaryString(file);
-    }
-  };
-
-  // const _handleReaderLoaded = (readerEvt: any) => {
-  //   let binaryString = readerEvt.target.result;
-  //   setBase64(btoa(binaryString));
-  // };
 
   const onFileSubmit = (e: any) => {
-    // setIsLoading(true);
     e.preventDefault();
-    // console.log('bine', base64);
-    // let payload = { image: base64 };
-    // console.log('payload', payload);
     if (file !== '') saveToServer(file);
     else console.log('Nie wybrano pliku!');
   };
@@ -46,15 +23,13 @@ export default function UploadImage({ setImageURL }: any) {
     e.preventDefault();
     const reader = new FileReader();
     const file2 = e.target.files[0];
-    console.log('reader', reader);
-    // console.log('file', file);
+    // console.log('reader', reader);
+
     if (reader !== undefined && file2 !== undefined) {
       reader.onloadend = () => {
         console.log(file);
 
         setFile(file2);
-        // setSize(file.size);
-        // setName(file.name);
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file2);
@@ -94,24 +69,17 @@ export default function UploadImage({ setImageURL }: any) {
       });
   }
 
-  const remove = () => {
-    setFile('');
-    // setImagePreview('');
-    // setBase64('');
-    // setName('');
-    // setSize('');
-  };
-
   return (
     <StyledUploadImage>
       {imagePreview === '' ? (
-        <p>wybierz zdjęcie</p>
+        <Alert variant="info">wybierz zdjęcie</Alert>
       ) : (
         <img className="image-preview" src={imagePreview} alt="Podgląd zdjęcia" />
       )}
-      <form onSubmit={(e) => onFileSubmit(e)} onChange={(e) => onChange(e)}>
+      {/* <form onSubmit={(e) => onFileSubmit(e)} onChange={(e) => onChange(e)}> */}
+      <Form onSubmit={(e) => onFileSubmit(e)}>
         {/* <form onSubmit={(e) => saveToServer()} onChange={(e) => onChange(e)}> */}
-        <input
+        <Form.Control
           type="file"
           name="avatar"
           id="file"
@@ -119,11 +87,10 @@ export default function UploadImage({ setImageURL }: any) {
           onChange={photoUpload}
           src={imagePreview}
         />
-        {/* {imagePreview !== '' && <button type="submit">{isLoading ? <p>ładowanie</p> : <>Wyślij</>}</button>} */}
-        {/* {imagePreview !== '' && <button type="submit">Wyślij</button>} */}
-        <button type="submit">Wyślij</button>
-        <button>Anuluj</button>
-      </form>
+        <Button variant="secondary" type="submit">
+          Wyślij
+        </Button>
+      </Form>
     </StyledUploadImage>
   );
 }

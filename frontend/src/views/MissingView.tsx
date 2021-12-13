@@ -69,7 +69,7 @@ export default function MissingView() {
   }
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
   return (
