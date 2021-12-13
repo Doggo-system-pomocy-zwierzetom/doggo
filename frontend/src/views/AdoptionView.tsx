@@ -2,7 +2,7 @@ import AdoptionContainer from '../components/AdoptionContainer';
 import styled from 'styled-components';
 
 import { useEffect, useState } from 'react';
-import Upload from '../components/Upload';
+import Upload from '../components/UploadImage';
 
 const StyledAdoptionView = styled.div`
   max-width: 800px;

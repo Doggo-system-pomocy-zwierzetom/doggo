@@ -14,7 +14,7 @@ import LoginView from './views/LoginView';
 import RegisterView from './views/RegisterView';
 import MyContextProvider from './contexts/MyContext';
 import AdoptionSingleView from './views/AdoptionSingleView';
-import Upload from './components/Upload';
+import Upload from './components/UploadImage';
 
 const GlobalStyle = createGlobalStyle`
 `;
