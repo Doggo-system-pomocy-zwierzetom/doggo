@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 
 import { useEffect, useState } from 'react';
 
-const StyledAdoptionSingleView = styled.div`
+const StyledAdoptionSingleView = styled.main`
   display: flex;
   /* justify-content: space-between; */
   flex-direction: column;
@@ -42,14 +42,7 @@ export default function AdoptionSingleView() {
 
   async function getData() {
     // await fetch(`/getRow/getAdoption.php?id=${id}`, {
-    await fetch(`/api/single-adoption/${id}`, {
-      // method: 'GET',
-      // headers: {
-      //   // 'Access-Control-Allow-Origin': '*',
-      //   // Accept: 'application/json',
-      //   // 'Content-Type': 'application/json',
-      // },
-    })
+    await fetch(`/adoptions/${id}`, {})
       .then((res) => {
         if (res.ok) return res.json();
       })
@@ -60,7 +53,7 @@ export default function AdoptionSingleView() {
       });
   }
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
   return (

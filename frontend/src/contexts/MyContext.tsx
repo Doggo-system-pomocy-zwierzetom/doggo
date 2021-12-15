@@ -83,6 +83,8 @@ class MyContextProvider extends Component {
   };
 
   render() {
+    console.log(this.state.isAuth);
+
     const contextValue = {
       rootState: this.state,
       toggleNav: this.toggleNav,

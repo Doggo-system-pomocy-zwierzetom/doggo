@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useEffect, useState } from 'react';
 
-const StyledNeedsView = styled.div`
+const StyledNeedsView = styled.main`
   max-width: 800px;
   margin: 0 auto;
 `;
@@ -12,14 +12,7 @@ export default function NeedsView() {
   const [data, setData] = useState([]);
 
   async function getData() {
-    await fetch('/api/getAll/getShelters.php', {
-      // method: 'GET',
-      // headers: {
-      //   // 'Access-Control-Allow-Origin': '*',
-      //   // Accept: 'application/json',
-      //   // 'Content-Type': 'application/json',
-      // },
-    })
+    await fetch('/api/getAll/getShelters.php', {})
       .then((res) => {
         if (res.ok) return res.json();
       })
@@ -30,7 +23,7 @@ export default function NeedsView() {
   }
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
   return (
     <StyledNeedsView>

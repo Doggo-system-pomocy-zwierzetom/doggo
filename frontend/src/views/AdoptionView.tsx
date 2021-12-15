@@ -1,39 +1,23 @@
 import AdoptionContainer from '../components/AdoptionContainer';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Upload from '../components/UploadImage';
-
-const StyledAdoptionView = styled.div`
+import { fetchAdoptions } from '../api';
+import axios from 'axios';
+const StyledAdoptionView = styled.main`
   max-width: 800px;
   margin: 0 auto;
 `;
 
 export default function AdoptionView() {
-  const adoptions = useSelector((state:any)=>state.adoptions);
-  const [data, setData] = useState([]);
-
-  async function getData() {
-    // await fetch('/getAll/getAdoptions.php', {
-    await fetch('/adoptions', {
-      // method: 'GET',
-      // headers: {
-      //   // 'Access-Control-Allow-Origin': '*',
-      //   // Accept: 'application/json',
-      //   // 'Content-Type': 'application/json',
-      // },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }
+  const [data, setData] = useState<any>([]);
 
   useEffect(() => {
-    getData();
+    // axios.get('/adoptions').then((res) => console.log(res.data));
+    axios.get('/adoptions').then((res) => setData(res.data));
+
+    // getData();
   }, []);
 
   return (

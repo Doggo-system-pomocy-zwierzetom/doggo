@@ -1,3 +1,9 @@
+import styled from 'styled-components';
+
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { signin, signup } from '../actions/auth';
 // import React, { useContext, useState } from 'react';
 // import { MyContext } from '../contexts/MyContext';
 
@@ -93,55 +99,57 @@
 //     </div>
 //   );
 // }
+const StyledLoginView = styled.main``;
 
-import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import {signin, signup} from '../actions/auth';
+function LoginView() {
+  const [isSignup, setIsSignup] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const initialState = { firstName: '', lastName: '', email: '', password: '', confirmpassword: '' };
+  const [formData, setFormData] = useState(initialState);
 
-function LoginView(){
-    const [isSignup, setIsSignup] = useState(false);
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const initialState = {firstName: '', lastName: '', email: '', password:'', confirmpassword:''};
-    const [formData, setFormData] = useState(initialState);
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(formData, history));
+      dispatch(signin(formData, history));
+    } else {
+      var res = dispatch(signin(formData, history));
+      console.log(res);
+    }
+  };
+  const handleChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const switchSignup = () => {
+    setIsSignup(!isSignup);
+  };
+  return (
+    <StyledLoginView>
+      {isSignup ? 'Zarejestruj się' : 'Zaloguj się'}
+      <form onSubmit={handleSubmit}>
+        {isSignup && (
+          <>
+            <input name="firstName" placeholder="Imię" onChange={handleChange} />
+            <input name="lastName" placeholder="Nazwisko" onChange={handleChange} />
+          </>
+        )}
+        <input name="email" placeholder="E-mail" type="email" onChange={handleChange} />
+        <input name="password" placeholder="Hasło" type="password" onChange={handleChange} />
+        {isSignup && (
+          <input
+            name="confirmPassword"
+            placeholder="Potwierdź hasło"
+            type="password"
+            onChange={handleChange}
+          />
+        )}
 
-    const handleSubmit = (e:any) =>{
-        e.preventDefault(); 
-        if(isSignup) {
-          dispatch(signup(formData, history));
-          dispatch(signin(formData, history));
-        }
-        else{
-            var res = dispatch(signin(formData, history));
-            console.log(res);
-        }
-    };
-    const handleChange = (e:any) => setFormData({ ...formData, [e.target.name]: e.target.value });
-    const switchSignup = ()=>{
-        setIsSignup(!isSignup);
-    };
-    return(
-        <div>
-            {isSignup ? 'Zarejestruj się' : 'Zaloguj się'}
-            <form onSubmit={handleSubmit}>
-                {
-                    isSignup && (
-                        <>
-                        <input name="firstName" placeholder="Imię" onChange={handleChange}/>
-                        <input name="lastName" placeholder="Nazwisko" onChange={handleChange}/>
-                        </>
-                    )
-                }           
-                <input name="email" placeholder="E-mail" type="email" onChange={handleChange}/>
-                <input name="password" placeholder="Hasło" type='password' onChange={handleChange}/>
-                {isSignup && <input name="confirmPassword" placeholder="Potwierdź hasło" type='password' onChange={handleChange}/>}
-                
-                <button type="submit">{isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</button>
-                <p style={{cursor:"pointer"}} onClick={switchSignup}>{isSignup ? "Posiadasz już konto? Zaloguj się" : "Nie posiadasz konta? Zarejestruj się"}</p>
-            </form>
-        </div>
-    );
+        <button type="submit">{isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</button>
+        <p style={{ cursor: 'pointer' }} onClick={switchSignup}>
+          {isSignup ? 'Posiadasz już konto? Zaloguj się' : 'Nie posiadasz konta? Zarejestruj się'}
+        </p>
+      </form>
+    </StyledLoginView>
+  );
 }
 
 export default LoginView;

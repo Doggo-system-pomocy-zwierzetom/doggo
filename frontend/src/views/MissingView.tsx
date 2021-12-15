@@ -6,8 +6,9 @@ import MissingContainer from '../components/MissingContainer';
 import AddMissingButton from '../components/AddMissingButton';
 import AddMissingContainer from '../components/AddMissingContainer';
 
-const StyledMissing = styled.div`
-  height: calc(100vh - 3.5rem);
+const StyledMissing = styled.main`
+  /* height: calc(100vh - 3.5rem); */
+  height: 100vh;
   width: 100%;
   .missing-container {
     position: absolute;
