@@ -1,6 +1,6 @@
 import AdoptionContainer from '../components/AdoptionContainer';
 import styled from 'styled-components';
-
+import {useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 import Upload from '../components/UploadImage';
 
@@ -10,11 +10,12 @@ const StyledAdoptionView = styled.div`
 `;
 
 export default function AdoptionView() {
+  const adoptions = useSelector((state:any)=>state.adoptions);
   const [data, setData] = useState([]);
 
   async function getData() {
     // await fetch('/getAll/getAdoptions.php', {
-    await fetch('/api/adoptions', {
+    await fetch('/adoptions', {
       // method: 'GET',
       // headers: {
       //   // 'Access-Control-Allow-Origin': '*',
@@ -46,4 +47,12 @@ export default function AdoptionView() {
       })}
     </StyledAdoptionView>
   );
+  // return (
+  //     <StyledAdoptionView>
+  //       <h1>Adoptuj</h1>
+  //       {adoptions.map((e:any, index:any) => <li key={index}>
+  //       <AdoptionContainer id={e.id} name={e.name} description={e.description} image={e.image}/>
+  //                                                       </li>)}
+  //     </StyledAdoptionView>
+  //   );
 }

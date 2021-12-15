@@ -41,7 +41,7 @@ const StyledAdoptionContainer = styled.div`
 export default function AdoptionContainer({ id, name, description, image }: any) {
   return (
     <StyledAdoptionContainer>
-      <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" />
+      {/* <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" /> */}
       <div className="adoption_info">
         <p className="animal-name">{name}</p>
         <p>{description}</p>
