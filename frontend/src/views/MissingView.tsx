@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MissingContainer from '../components/MissingContainer';
 import AddMissingButton from '../components/AddMissingButton';
 import AddMissingContainer from '../components/AddMissingContainer';
+import BackgroundMap from '../components/BackgroundMap';
 
 const StyledMissing = styled.main`
   /* height: calc(100vh - 3.5rem); */
@@ -33,33 +34,21 @@ const StyledMissing = styled.main`
   }
 `;
 
-const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
-const defaultProps = {
-  center: {
-    lat: 50.8210857,
-    lng: 19.0765357,
-  },
-  zoom: 11,
-};
-
-const defaultMapOptions = {
-  fullscreenControl: false,
-};
-
 export default function MissingView() {
   const [isAddMissingClicked, setIsAddMissingClicked] = useState(false);
 
   const [data, setData] = useState([]);
+  // const [latitude, setLatitude] = useState(50.8210857);
+  // const [longitude, setLongitude] = useState(19.0765357);
+  const [defaultProps, setDefaultProps] = useState({
+    center: {
+      lat: 50.8210857,
+      lng: 19.0765357,
+    },
+  });
 
   async function getData() {
-    await fetch('/api/getAll/getMissings.php', {
-      // method: 'GET',
-      // headers: {
-      //   // 'Access-Control-Allow-Origin': '*',
-      //   // Accept: 'application/json',
-      //   // 'Content-Type': 'application/json',
-      // },
-    })
+    await fetch('/api/getAll/getMissings.php', {})
       .then((res) => {
         if (res.ok) return res.json();
       })
@@ -70,11 +59,25 @@ export default function MissingView() {
   }
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      // console.log('Latitude is :', position.coords.latitude);
+      // console.log('Longitude is :', position.coords.longitude);
+      // setLatitude(position.coords.latitude);
+      // setLongitude(position.coords.longitude);
+      setDefaultProps({
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+      });
+    });
     // getData();
   }, []);
 
   return (
     <StyledMissing>
+      {/* <p>{defaultProps.center.lat}</p>
+      <p>{defaultProps.center.lng}</p> */}
       {!isAddMissingClicked ? (
         <>
           <div className="missing-container">
@@ -90,14 +93,7 @@ export default function MissingView() {
         </div>
       )}
 
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: '' }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-        options={defaultMapOptions}
-      >
-        <AnyReactComponent lat={50.8231985} lng={19.1153909} text="WIMiI" />
-      </GoogleMapReact>
+      <BackgroundMap props={defaultProps} />
     </StyledMissing>
   );
 }
