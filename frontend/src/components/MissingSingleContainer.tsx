@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 type Props = {
   background: string;
 };
 
-const StyledMissingContainerElement = styled.div<Props>`
+const StyledMissingSingleContainer = styled.div`
   display: flex;
   gap: 1rem;
   margin: 0.2rem 0;
   /* background: #dfdfdf; */
-  background:${(props) => props.background || 'red'};
+  background: #fff;
  
   border-radius: 0.2rem;
   padding: 10px;
   img {
-    width: 7rem;
-    height: 7rem;
-    object-fit: cover;
+    width: 30rem;
+    height: 40rem;
+    object-fit: contain;
     border-radius: 3px;
+    background:#000;
   }
   .info{
 display:flex;
@@ -34,13 +34,12 @@ flex-direction:column;
   }
   .btn-more {
     margin: 0 auto;
-    /* cursor: pointer; */
+    cursor: pointer;
     background: #0d6efd;
     color: #fff;
     border: transparent;
     border-radius: 0.25rem;
     padding: 0.375rem 0.75rem;
-    text-decoration:none;
 
     &:hover {
       /* background: green; */
@@ -53,32 +52,17 @@ flex-direction:column;
     height:100%;
   }
 `;
-function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates }: any) {
+function MissingSingleContainer({ data, index }: any) {
+  //   console.log(data);
+
   return (
-    <StyledMissingContainerElement
-      background={`${selectedItem === index && '#dfdfdf'}`}
-      onClick={() => {
-        setSelectedItem(index);
-        setCordinates({
-          center: {
-            lat: data.latitude,
-            lng: data.longitude,
-          },
-        });
-      }}
-    >
+    <StyledMissingSingleContainer>
       <img src={`${data.photo}`} alt="Zdjęcie psa." />
       <div className="info">
         <p className="name">{data.name}</p>
         <p className="description">{data.description}</p>
-        {/* <button className="btn-more">Szczegóły</button> */}
-        <Link to={`/zaginiecia/${data.id}`} className="btn-more">
-          Szczegóły
-        </Link>
-
-        {/* <Button></Button> */}
       </div>
-    </StyledMissingContainerElement>
+    </StyledMissingSingleContainer>
   );
 }
-export default MissingContainerElement;
+export default MissingSingleContainer;

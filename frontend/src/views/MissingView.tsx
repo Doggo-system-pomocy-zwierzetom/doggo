@@ -31,14 +31,21 @@ const StyledMissing = styled.main`
     z-index: 1;
   }
   .pin {
-    width: 7rem;
+    /* width: 7rem;
     height: 7rem;
-    padding: 2rem;
+    padding: 2rem; */
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    top: -3rem;
+    left: -1.5rem;
     cursor: pointer;
     &.selected {
-      width: 10rem;
-      height: 10rem;
-      padding: 0 4rem 5rem 1rem;
+      /* transition: height 0.3s; */
+      width: 5rem;
+      height: 5rem;
+      top: -5rem;
+      left: -2.5rem;
     }
   }
 `;
@@ -47,6 +54,7 @@ export default function MissingView() {
   const [isAddMissingClicked, setIsAddMissingClicked] = useState(false);
   const [data, setData] = useState([
     {
+      id: 1,
       name: 'name1',
       photo: 'https://ipla.pluscdn.pl/dituel/cp/d3/d37xo712edjjpmgi3hm3w51m9zb5e3pa.jpg',
       description: 'Piesek taki',
@@ -54,6 +62,7 @@ export default function MissingView() {
       longitude: 19.13413241318411,
     },
     {
+      id: 2,
       name: 'name2',
       photo: 'https://bi.im-g.pl/im/e3/12/14/z21048035V.jpg',
       description: 'Piesek taki',
@@ -61,6 +70,7 @@ export default function MissingView() {
       longitude: 19.09466313721529,
     },
     {
+      id: 3,
       name: 'name3',
       photo:
         'https://sp-ao.shortpixel.ai/client/q_lossless,ret_img,w_768/https://apetete.pl/blog/wp-content/uploads/2019/07/kr%C3%B3l-lew-768x495.jpeg',
@@ -92,12 +102,12 @@ export default function MissingView() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      // setDefaultProps({
-      //   center: {
-      //     lat: position.coords.latitude,
-      //     lng: position.coords.longitude,
-      //   },
-      // });
+      setDefaultProps({
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+      });
     });
     // getData();
   }, []);
@@ -125,7 +135,7 @@ export default function MissingView() {
             />
           </div>
           <div className="add-missing-button">
-            <AddMissingButton setIsAddMissingClicked={setIsAddMissingClicked} />
+            {/* <AddMissingButton setIsAddMissingClicked={setIsAddMissingClicked} /> */}
           </div>
         </>
       ) : (

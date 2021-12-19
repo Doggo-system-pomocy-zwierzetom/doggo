@@ -1,5 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useState } from 'react';
 const StyledPageHeader = styled.div`
@@ -27,6 +27,24 @@ const StyledPageHeader = styled.div`
   /* .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover */
   .selected.nav-link:focus {
     color: #000;
+  }
+  .dropdown-toggle.nav-link {
+    color: #000;
+  }
+  .btn-missing {
+    margin: auto;
+    padding: 0.5rem 0.7rem;
+    background: #ff2323;
+    border-radius: 0.2rem;
+    /* font-size: 1.2rem; */
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-decoration: none;
+  }
+  .user-menu {
+    display: flex;
+    gap: 1rem;
   }
 `;
 function PageHeader() {
@@ -113,6 +131,20 @@ function PageHeader() {
                 Kontakt
               </Nav.Link>
             </Nav>
+            <div className="user-menu">
+              {/* <button> */}
+              <Link to="/zglaszanie-zaginiecia" className="btn-missing">
+                Zgłoś zaginięcie
+              </Link>
+              {/* </button> */}
+
+              <NavDropdown title={`Imię Nazwisko`} id="navbarScrollingDropdown">
+                <NavDropdown.Item href="#action3">Moje konto</NavDropdown.Item>
+                <NavDropdown.Item href="#action4">Zgłoszone zaginięcia</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action5">Wyloguj</NavDropdown.Item>
+              </NavDropdown>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
