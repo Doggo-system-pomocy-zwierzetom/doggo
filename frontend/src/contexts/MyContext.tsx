@@ -1,4 +1,4 @@
-import React, { createContext, Component } from 'react';
+import { createContext, Component } from 'react';
 import axios from 'axios';
 
 export const MyContext = createContext<any>(undefined);

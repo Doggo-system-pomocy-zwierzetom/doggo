@@ -1,6 +1,4 @@
-// import React from 'react';
 import { useState, useEffect } from 'react';
-import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
 import MissingContainer from '../components/MissingContainer';
 import AddMissingButton from '../components/AddMissingButton';
@@ -32,20 +30,54 @@ const StyledMissing = styled.main`
     margin: 4rem 0.5rem;
     z-index: 1;
   }
+  .pin {
+    width: 7rem;
+    height: 7rem;
+    padding: 2rem;
+    cursor: pointer;
+    &.selected {
+      width: 10rem;
+      height: 10rem;
+      padding: 0 4rem 5rem 1rem;
+    }
+  }
 `;
 
 export default function MissingView() {
   const [isAddMissingClicked, setIsAddMissingClicked] = useState(false);
-
-  const [data, setData] = useState([]);
-  // const [latitude, setLatitude] = useState(50.8210857);
-  // const [longitude, setLongitude] = useState(19.0765357);
+  const [data, setData] = useState([
+    {
+      name: 'name1',
+      photo: 'https://ipla.pluscdn.pl/dituel/cp/d3/d37xo712edjjpmgi3hm3w51m9zb5e3pa.jpg',
+      description: 'Piesek taki',
+      latitude: 50.81943861899984,
+      longitude: 19.13413241318411,
+    },
+    {
+      name: 'name2',
+      photo: 'https://bi.im-g.pl/im/e3/12/14/z21048035V.jpg',
+      description: 'Piesek taki',
+      latitude: 50.79696106848947,
+      longitude: 19.09466313721529,
+    },
+    {
+      name: 'name3',
+      photo:
+        'https://sp-ao.shortpixel.ai/client/q_lossless,ret_img,w_768/https://apetete.pl/blog/wp-content/uploads/2019/07/kr%C3%B3l-lew-768x495.jpeg',
+      description: 'Piesek taki',
+      latitude: 50.803036789758025,
+      longitude: 19.13706349732271,
+    },
+  ]);
+  const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
   const [defaultProps, setDefaultProps] = useState({
     center: {
       lat: 50.8210857,
       lng: 19.0765357,
     },
   });
+
+  const [selectedItem, setSelectedItem] = useState<number>();
 
   async function getData() {
     await fetch('/api/getAll/getMissings.php', {})
@@ -60,19 +92,23 @@ export default function MissingView() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      // console.log('Latitude is :', position.coords.latitude);
-      // console.log('Longitude is :', position.coords.longitude);
-      // setLatitude(position.coords.latitude);
-      // setLongitude(position.coords.longitude);
-      setDefaultProps({
-        center: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        },
-      });
+      // setDefaultProps({
+      //   center: {
+      //     lat: position.coords.latitude,
+      //     lng: position.coords.longitude,
+      //   },
+      // });
     });
     // getData();
   }, []);
+
+  useEffect(() => {
+    console.log(selectedItem);
+  }, [selectedItem]);
+
+  useEffect(() => {
+    console.log(onClickLocation);
+  }, [onClickLocation]);
 
   return (
     <StyledMissing>
@@ -81,7 +117,12 @@ export default function MissingView() {
       {!isAddMissingClicked ? (
         <>
           <div className="missing-container">
-            <MissingContainer />
+            <MissingContainer
+              data={data}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              setCordinates={setDefaultProps}
+            />
           </div>
           <div className="add-missing-button">
             <AddMissingButton setIsAddMissingClicked={setIsAddMissingClicked} />
@@ -93,7 +134,13 @@ export default function MissingView() {
         </div>
       )}
 
-      <BackgroundMap props={defaultProps} />
+      <BackgroundMap
+        props={defaultProps}
+        data={data}
+        setOnClickLocation={setOnClickLocation}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
     </StyledMissing>
   );
 }

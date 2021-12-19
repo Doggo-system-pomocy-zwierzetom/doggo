@@ -1,42 +1,52 @@
 import GoogleMapReact from 'google-map-react';
 import { useEffect, useState } from 'react';
+import image from '../img/pin.png';
 const defaultMapOptions = {
   fullscreenControl: false,
 };
 
-export default function BackgroundMap({ props }: any) {
-  const [cordinates, setCordinates] = useState(props);
-  useEffect(() => {
-    setCordinates(props);
-    console.log(props);
-  }, [props]);
+export default function BackgroundMap({
+  props,
+  setOnClickLocation,
+  data,
+  selectedItem,
+  setSelectedItem,
+}: any) {
+  // const [cordinates, setCordinates] = useState(props);
+  // useEffect(() => {
+  //   setCordinates(props);
+  // }, [props]);
   return (
     <GoogleMapReact
       bootstrapURLKeys={{ key: '' }}
-      center={cordinates.center}
-      defaultZoom={11}
+      center={props.center}
+      onClick={(e) => {
+        setOnClickLocation({ lat: e.lat, lng: e.lng });
+      }}
+      defaultZoom={14}
       options={defaultMapOptions}
     >
-      <AnyReactComponent lat={50.8231985} lng={19.1153909} text="WIMiI" />
+      {data.map((e: any, index: number) => (
+        <AnyReactComponent
+          lat={e.latitude}
+          lng={e.longitude}
+          text={`${e.name}`}
+          index={index}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+      ))}
     </GoogleMapReact>
   );
 }
 
-const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
-
-// function TheMap(props: any) {
-//   useEffect(() => {}, [props]);
-
-//   useEffect(() => {
-//     setCordinates(props);
-//   }, [props]);
-
-//   return (
-//     <GoogleMapReact
-//       yesIWantToUseGoogleMapApiInternals
-//       bootstrapURLKeys={{ key: 'THE KEY' }}
-//       defaultZoom={11}
-//       center={cordinates.center}
-//     ></GoogleMapReact>
-//   );
-// }
+const AnyReactComponent = ({ text, lat, lng, index, selectedItem, setSelectedItem }: any) => (
+  <img
+    onClick={() => {
+      setSelectedItem(index);
+    }}
+    className={`pin ${selectedItem === index && 'selected'}`}
+    src={`${image}`}
+    alt=""
+  />
+);

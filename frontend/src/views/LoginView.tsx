@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signin, signup } from '../actions/auth';

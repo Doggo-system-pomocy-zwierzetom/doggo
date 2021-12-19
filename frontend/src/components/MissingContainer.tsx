@@ -4,13 +4,30 @@ const StyledMissingContainer = styled.div`
   padding: 1rem;
   background: white;
   border-radius: 0.2rem;
+  width: 33vw;
+  min-width: 25rem;
+  .title {
+    font-size: 1.5em;
+    font-weight: 600;
+  }
 `;
-function MissingContainer() {
+function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates }: any) {
+  console.log(selectedItem);
   return (
     <StyledMissingContainer>
-      <p>Zaginione zwierzęta w okolicy</p>
+      <p className="title">Zaginione zwierzęta w okolicy</p>
       <div className="missing-catalog">
-        <MissingContainerElement />
+        {data.map((e: any, index: number) => {
+          return (
+            <MissingContainerElement
+              data={e}
+              index={index}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              setCordinates={setCordinates}
+            />
+          );
+        })}
       </div>
     </StyledMissingContainer>
   );
