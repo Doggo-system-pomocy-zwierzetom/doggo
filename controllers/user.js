@@ -1,12 +1,13 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken'; //stay logged
 import User from '../models/user.js';
+import Shelter from '../models/shelter.js';
 
 export const signin = async (req, res) => {
     const {email, password} = req.body;
     
     try{
-        const existingUser = await User.findOne({email});
+        const existingUser = await User.findOne({email}) || Shelter.findOne({email});
         if(!existingUser) return res.status(404).json({message: "Użytkownik nie istnieje"});
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
         if(!isPasswordCorrect) return res.status(400).json({message: "Niepoprawne hasło"});
