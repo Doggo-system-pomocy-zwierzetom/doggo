@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
@@ -48,7 +48,13 @@ const StyledPageHeader = styled.div`
   }
 `;
 function PageHeader() {
+  const profile: any = localStorage.getItem('profile');
+  const [user, setUser] = useState(JSON.parse(profile));
   const [expanded, setExpanded] = useState(false);
+  useEffect(() => {
+    setUser(JSON.parse(profile));
+  }, []);
+
   return (
     <StyledPageHeader>
       {/* <ul>
@@ -137,13 +143,20 @@ function PageHeader() {
                 Zgłoś zaginięcie
               </Link>
               {/* </button> */}
-
-              <NavDropdown title={`Imię Nazwisko`} id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Moje konto</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Zgłoszone zaginięcia</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">Wyloguj</NavDropdown.Item>
-              </NavDropdown>
+              {user ? (
+                <NavDropdown title={`Imię Nazwisko`} id="navbarScrollingDropdown">
+                  <NavDropdown.Item href="#action3">Moje konto</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">Zgłoszone zaginięcia</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action5" onClick={() => localStorage.clear()}>
+                    Wyloguj
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <Link to="/logowanie" className="btn-missing">
+                  Zaloguj
+                </Link>
+              )}
             </div>
           </Navbar.Collapse>
         </Container>

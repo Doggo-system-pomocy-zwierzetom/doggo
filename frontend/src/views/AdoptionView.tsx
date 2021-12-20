@@ -9,7 +9,27 @@ const StyledAdoptionView = styled.main`
   max-width: 800px;
   margin: 0 auto;
 `;
+const profile: any = localStorage.getItem('profile') || null;
+const token: any = profile ? JSON.parse(profile).token : 'dupa';
+function addAdoption() {
+  console.log(token);
 
+  axios
+    .post(
+      '/adoptions',
+      {
+        name: 'Fred',
+        userMail: 'random@mail.com',
+        shelterName: 'asdasd',
+        image: 'sadadasdsa',
+        description: 'asdasd',
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then(function (response) {
+      console.log(response);
+    });
+}
 export default function AdoptionView() {
   const [data, setData] = useState<any>([]);
 
@@ -19,13 +39,21 @@ export default function AdoptionView() {
 
     // getData();
   }, []);
+  console.log(data);
 
   return (
     <StyledAdoptionView>
+      <button onClick={() => addAdoption()}>Dodaj adopcje</button>
       <h1>Adoptuj</h1>
       {data.map((e: any) => {
         return (
-          <AdoptionContainer key={e.id} id={e.id} name={e.name} description={e.description} image={e.image} />
+          <AdoptionContainer
+            key={e.id}
+            id={e._id}
+            name={e.name}
+            description={e.description}
+            image={e.image}
+          />
         );
         // <p>{e.name}</p>;
       })}

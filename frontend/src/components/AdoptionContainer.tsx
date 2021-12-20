@@ -39,6 +39,8 @@ const StyledAdoptionContainer = styled.div`
 `;
 
 export default function AdoptionContainer({ id, name, description, image }: any) {
+  console.log(id);
+
   return (
     <StyledAdoptionContainer>
       {/* <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" /> */}

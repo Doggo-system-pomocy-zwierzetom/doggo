@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router';
+import axios from 'axios';
 
 import { useEffect, useState } from 'react';
 
@@ -42,6 +43,12 @@ export default function AdoptionSingleView() {
 
   async function getData() {
     // await fetch(`/getRow/getAdoption.php?id=${id}`, {
+
+    // axios.get('/adoptions').then((res) => console.log(res.data));
+    // axios.get('/adoptions').then((res) => setData(res.data));
+
+    // getData();
+
     await fetch(`/adoptions/${id}`, {})
       .then((res) => {
         if (res.ok) return res.json();
@@ -53,7 +60,7 @@ export default function AdoptionSingleView() {
       });
   }
   useEffect(() => {
-    // getData();
+    getData();
   }, []);
 
   return (
