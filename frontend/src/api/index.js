@@ -16,5 +16,13 @@ export const updateAdoption = (id, updatedAdoption) => API.patch(`/adoptions/${i
 
 export const deleteAdoption = (id) => API.delete(`/adoptions/${id}`);
 
+export const fetchMissings = () => API.get('/missings');
+
+export const createMissing = (newMissing) => API.post('/missings', newMissing);
+
+export const updateMissing = (id, updatedMissing) => API.patch(`/missings/${id}`, updatedMissing);
+
+export const deleteMissing = (id) => API.delete(`/missings/${id}`);
+
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
