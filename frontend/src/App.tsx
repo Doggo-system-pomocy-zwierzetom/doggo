@@ -19,7 +19,10 @@ const GlobalStyle = createGlobalStyle`
 margin: 0;
 padding:0;
 main{
-  padding-top: 3.5rem
+  padding-top: 3.5rem;
+  margin: 0 auto;
+  max-width: 800px;
+
 }
 `;
 

@@ -42,6 +42,12 @@ const StyledPageHeader = styled.div`
     color: #fff;
     text-decoration: none;
   }
+  .link-login {
+    color: #000;
+    text-decoration: none;
+    margin: auto;
+    font-weight: 600;
+  }
   .user-menu {
     display: flex;
     gap: 1rem;
@@ -120,14 +126,14 @@ function PageHeader() {
               >
                 Wesprzyj schronisko
               </Nav.Link>
-              <Nav.Link
+              {/* <Nav.Link
                 as={NavLink}
                 activeClassName="selected"
                 to="/zbiorki"
                 onClick={() => setExpanded(false)}
               >
                 Zbiórki
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link
                 as={NavLink}
                 activeClassName="selected"
@@ -153,7 +159,7 @@ function PageHeader() {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <Link to="/logowanie" className="btn-missing">
+                <Link to="/logowanie" className="link-login">
                   Zaloguj
                 </Link>
               )}

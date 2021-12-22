@@ -5,16 +5,18 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const StyledAdoptionSingleView = styled.main`
-  display: flex;
+  /* display: flex; */
+  /* margin: 0 auto; */
+
   /* justify-content: space-between; */
-  flex-direction: column;
-  justify-content: stretch;
+  /* flex-direction: column; */
+  /* justify-content: stretch; */
   background: #ccc;
   /* margin: 1rem 3vw; */
-  padding: 1rem;
+  /* padding: 1rem; */
   /* min-height: 10rem; */
-  gap: 1rem;
-  text-align: start;
+  /* gap: 1rem; */
+  /* text-align: start; */
 
   .adoption_image {
     max-width: 500px;
@@ -49,11 +51,14 @@ export default function AdoptionSingleView() {
 
     // getData();
 
-    await fetch(`/adoptions/${id}`, {})
+    await fetch(`/adoptions/`, {})
       .then((res) => {
         if (res.ok) return res.json();
       })
       .then((data) => {
+        data = data.filter((e: any) => e._id === id);
+        console.log(data);
+
         setImage(data[0].image);
         setName(data[0].name);
         setDescription(data[0].description);

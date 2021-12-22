@@ -7,6 +7,8 @@ import BackgroundMap from '../components/BackgroundMap';
 
 const StyledMissing = styled.main`
   /* height: calc(100vh - 3.5rem); */
+  max-width: 100%;
+
   height: 100vh;
   width: 100%;
   .missing-container {

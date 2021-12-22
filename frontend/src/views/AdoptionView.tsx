@@ -6,7 +6,6 @@ import Upload from '../components/UploadImage';
 import { fetchAdoptions } from '../api';
 import axios from 'axios';
 const StyledAdoptionView = styled.main`
-  max-width: 800px;
   margin: 0 auto;
 `;
 const profile: any = localStorage.getItem('profile') || null;

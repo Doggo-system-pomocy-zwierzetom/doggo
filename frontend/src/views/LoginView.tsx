@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signin, signup } from '../actions/auth';
+import { Form, Button } from 'react-bootstrap';
 // import React, { useContext, useState } from 'react';
 // import { MyContext } from '../contexts/MyContext';
 
@@ -99,7 +100,14 @@ import { signin, signup } from '../actions/auth';
 //     </div>
 //   );
 // }
-const StyledLoginView = styled.main``;
+const StyledLoginView = styled.main`
+  max-width: 300px;
+  margin: 0 auto;
+  .link {
+    cursor: pointer;
+    text-align: center;
+  }
+`;
 
 function LoginView() {
   const [isSignup, setIsSignup] = useState(false);
@@ -124,18 +132,18 @@ function LoginView() {
   };
   return (
     <StyledLoginView>
-      {isSignup ? 'Zarejestruj się' : 'Zaloguj się'}
-      <form onSubmit={handleSubmit}>
+      {isSignup ? <h1>Rejestracja</h1> : <h1>Logowanie</h1>}
+      <Form onSubmit={handleSubmit}>
         {isSignup && (
           <>
-            <input name="firstName" placeholder="Imię" onChange={handleChange} />
-            <input name="lastName" placeholder="Nazwisko" onChange={handleChange} />
+            <Form.Control name="firstName" placeholder="Imię" onChange={handleChange} />
+            <Form.Control name="lastName" placeholder="Nazwisko" onChange={handleChange} />
           </>
         )}
-        <input name="email" placeholder="E-mail" type="email" onChange={handleChange} />
-        <input name="password" placeholder="Hasło" type="password" onChange={handleChange} />
+        <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleChange} />
+        <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleChange} />
         {isSignup && (
-          <input
+          <Form.Control
             name="confirmPassword"
             placeholder="Potwierdź hasło"
             type="password"
@@ -143,11 +151,29 @@ function LoginView() {
           />
         )}
 
-        <button type="submit">{isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</button>
-        <p style={{ cursor: 'pointer' }} onClick={switchSignup}>
+        <Button type="submit">{isSignup ? 'Zarejestruj się' : 'Zaloguj się'}</Button>
+        <p className="link" onClick={switchSignup}>
           {isSignup ? 'Posiadasz już konto? Zaloguj się' : 'Nie posiadasz konta? Zarejestruj się'}
         </p>
-      </form>
+      </Form>
+      {/* <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Check me out" />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form> */}
     </StyledLoginView>
   );
 }

@@ -1,9 +1,13 @@
 import { Card, Button, Form } from 'react-bootstrap';
 import UploadImage from '../components/UploadImage';
+import styled from 'styled-components';
 
+const StyledMissingAddView = styled.main`
+  max-width: 700px;
+`;
 export default function MissingAddView() {
   return (
-    <>
+    <StyledMissingAddView>
       <Card>
         <Card.Header>
           <Card.Title> Zgłaszanie zaginięcia </Card.Title>
@@ -24,6 +28,6 @@ export default function MissingAddView() {
           <div>{/* <button type="submit" disabled={!confirmedImg}>Wyślij zgłoszenie</button> */}</div>
         </Card.Body>
       </Card>
-    </>
+    </StyledMissingAddView>
   );
 }
