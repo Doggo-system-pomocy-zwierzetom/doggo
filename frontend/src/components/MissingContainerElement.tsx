@@ -14,8 +14,10 @@ const StyledMissingContainerElement = styled.div<Props>`
   /* background: #dfdfdf; */
   background:${(props) => props.background || 'red'};
   border: 0.1rem solid var(--outline);
+  box-shadow: 0 0 20px -5px var(--outline-darken);
+
  
-  border-radius: 0.2rem;
+  border-radius: 0.3rem;
   padding: 10px;
   img {
     width: 7rem;

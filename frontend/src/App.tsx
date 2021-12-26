@@ -20,20 +20,26 @@ import Upload from './components/UploadImage';
 const GlobalStyle = createGlobalStyle`
 margin: 0;
 padding:0;
+
+body{
+  background: var(--outline-lighten);
+
+}
 main{
   padding-top: 3.5rem;
   margin: 0 auto;
   max-width: 800px;
-
 }
 :root{
-  --main: #0D5C63;
-  --second: #368181 ;
-  --white: #FFFFFA;
-  --black: #000000;
-  --warning: #c0563d ;
-  --selected-item: #EDFBFD;
-  --outline: #F5F3F7;
+  --main: hsl(184.88372093023256, 76.78571428571429%, 21.96078431372549%);
+  --second: hsl(180, 40.983606557377044%, 35.88235294117647%) ;
+  --white: hsl(60, 100%, 99.01960784313727%);
+  --black: hsl(0, 0%, 0%);
+  --warning: hsl(11.450381679389315, 51.778656126482204%, 49.6078431372549%) ;
+  --selected-item: hsl(187.50000000000009, 80.00000000000006%, 96.07843137254902%);
+  --outline: hsl(270.0000000000002, 20.000000000000085%, 96.078431372549%);
+  --outline-lighten: hsl(270.0000000000002, 20.000000000000085%, 99.078431372549%);
+  --outline-darken: hsl(270.0000000000002, 20.000000000000085%, 90.078431372549%);
 
 }
 `;

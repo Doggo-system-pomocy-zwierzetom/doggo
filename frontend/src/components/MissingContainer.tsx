@@ -3,9 +3,12 @@ import MissingContainerElement from './MissingContainerElement';
 const StyledMissingContainer = styled.div`
   max-width: 550px;
   padding: 1.5rem;
-  background: white;
+  background: var(--outline-lighten);
+  /* box-shadow: inset 0 0 10px var(--outline); */
+  box-shadow: inset -20px 0px 20px -10px var(--outline);
   border-radius: 0.2rem;
   width: 33vw;
+  height: 100%;
   min-width: 25rem;
   .title {
     font-size: 1.5em;

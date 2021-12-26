@@ -5,8 +5,11 @@ const StyledAdoptionContainer = styled.div`
   display: flex;
   /* justify-content: space-between; */
   justify-content: stretch;
-  background: #ccc;
-  margin: 1rem 3vw;
+  background: var(--white);
+  box-shadow: 0 0 20px -5px var(--outline-darken);
+  border: 0.1rem solid var(--outline);
+
+  margin: 1rem 0;
   padding: 1rem;
   min-height: 10rem;
   gap: 2rem;

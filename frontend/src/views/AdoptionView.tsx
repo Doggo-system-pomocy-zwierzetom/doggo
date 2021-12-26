@@ -6,7 +6,11 @@ import Upload from '../components/UploadImage';
 import { fetchAdoptions } from '../api';
 import axios from 'axios';
 const StyledAdoptionView = styled.main`
-  margin: 0 auto;
+  .view-header {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 const profile: any = localStorage.getItem('profile') || null;
 const token: any = profile ? JSON.parse(profile).token : 'dupa';
@@ -41,8 +45,10 @@ export default function AdoptionView() {
 
   return (
     <StyledAdoptionView>
-      <button onClick={() => addAdoption()}>Dodaj adopcje</button>
-      <h1>Adoptuj</h1>
+      <div className="view-header">
+        <h1>Adoptuj</h1>
+        <button onClick={() => addAdoption()}>Dodaj adopcje</button>
+      </div>
       {data.map((e: any) => {
         return (
           <AdoptionContainer
