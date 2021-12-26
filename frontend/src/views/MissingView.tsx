@@ -6,17 +6,19 @@ import AddMissingContainer from '../components/AddMissingContainer';
 import BackgroundMap from '../components/BackgroundMap';
 
 const StyledMissing = styled.main`
+  display: flex;
   /* height: calc(100vh - 3.5rem); */
   max-width: 100%;
 
   height: 100vh;
-  width: 100%;
+  /* width: 100%; */
   .missing-container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 4rem 0.5rem;
-    z-index: 1;
+    /* max-width: 600px; */
+    /* position: absolute; */
+    /* left: 0; */
+    /* top: 0; */
+    /* margin: 4rem 0.5rem; */
+    /* z-index: 1; */
   }
   .add-missing-button {
     position: absolute;
@@ -126,16 +128,17 @@ export default function MissingView() {
     <StyledMissing>
       {/* <p>{defaultProps.center.lat}</p>
       <p>{defaultProps.center.lng}</p> */}
+      <div className="missing-container">
+        <MissingContainer
+          data={data}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          setCordinates={setDefaultProps}
+        />
+      </div>
+
       {!isAddMissingClicked ? (
         <>
-          <div className="missing-container">
-            <MissingContainer
-              data={data}
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              setCordinates={setDefaultProps}
-            />
-          </div>
           <div className="add-missing-button">
             {/* <AddMissingButton setIsAddMissingClicked={setIsAddMissingClicked} /> */}
           </div>

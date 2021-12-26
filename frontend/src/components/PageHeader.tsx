@@ -1,7 +1,8 @@
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
@@ -25,21 +26,48 @@ const StyledPageHeader = styled.div`
   }
 } */
   /* .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover */
+  .navbar {
+    /* background: #545454; */
+    background: var(--main);
+    a {
+      color: var(--white);
+    }
+    a.nav-link {
+      color: var(--white);
+      &:hover {
+        color: var(--white);
+      }
+      .navbar-toggler-icon {
+        color: var(--white);
+      }
+    }
+    .navbar-brand:hover {
+      color: var(--white);
+    }
+  }
+  .selected {
+    color: var(--white);
+    font-weight: 600;
+  }
   .selected.nav-link:focus {
-    color: #000;
+    color: var(--white);
   }
   .dropdown-toggle.nav-link {
-    color: #000;
+    color: var(--white);
+  }
+  a.dropdown-item {
+    color: var(--black);
   }
   .btn-missing {
     margin: auto;
-    padding: 0.5rem 0.7rem;
-    background: #ff2323;
+    padding: 0.5rem 0.8rem;
+    background: var(--warning);
+    color: var(--black);
     border-radius: 0.2rem;
+    font-weight: 600;
     /* font-size: 1.2rem; */
     cursor: pointer;
     border: none;
-    color: #fff;
     text-decoration: none;
   }
   .link-login {
@@ -50,16 +78,19 @@ const StyledPageHeader = styled.div`
   }
   .user-menu {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 `;
 function PageHeader() {
-  const profile: any = localStorage.getItem('profile');
-  const [user, setUser] = useState(JSON.parse(profile));
+  const [user, setUser] = useContext(LoginInfoContext);
+
+  // const profile: any = localStorage.getItem('profile');
+  // const [user, setUser] = useState(JSON.parse(profile));
   const [expanded, setExpanded] = useState(false);
-  useEffect(() => {
-    setUser(JSON.parse(profile));
-  }, []);
+  // useEffect(() => {
+  //   setUser(JSON.parse(profile));
+  // }, []);
+  console.log(user && user.result.name);
 
   return (
     <StyledPageHeader>
@@ -94,7 +125,7 @@ function PageHeader() {
           </NavLink>
         </li>
       </ul> */}
-      <Navbar bg="success" expand="lg" expanded={expanded}>
+      <Navbar expand="lg" variant="dark" expanded={expanded}>
         <Container>
           <Navbar.Brand as={Link} to="/">
             Home
@@ -145,16 +176,24 @@ function PageHeader() {
             </Nav>
             <div className="user-menu">
               {/* <button> */}
-              <Link to="/zglaszanie-zaginiecia" className="btn-missing">
+              <Link to={user ? '/zglaszanie-zaginiecia' : '/logowanie'} className="btn-missing">
                 Zgłoś zaginięcie
               </Link>
               {/* </button> */}
               {user ? (
-                <NavDropdown title={`Imię Nazwisko`} id="navbarScrollingDropdown">
+                <NavDropdown title={`${user && user.result.name}`} id="navbarScrollingDropdown">
+                  <NavDropdown.Item href="#action3">{user.name}</NavDropdown.Item>
+
                   <NavDropdown.Item href="#action3">Moje konto</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Zgłoszone zaginięcia</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5" onClick={() => localStorage.clear()}>
+                  <NavDropdown.Item
+                    href="#action5"
+                    onClick={() => {
+                      localStorage.clear();
+                      setUser(null);
+                    }}
+                  >
                     Wyloguj
                   </NavDropdown.Item>
                 </NavDropdown>

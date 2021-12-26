@@ -4,19 +4,21 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, compose} from 'redux';
+import { Provider } from 'react-redux';
+import LoginInfoContextProvider from './contexts/LoginInfoContextProvider';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <LoginInfoContextProvider>
+      <Provider store={store}>
         <App />
       </Provider>
+    </LoginInfoContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

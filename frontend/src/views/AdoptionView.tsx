@@ -10,9 +10,8 @@ const StyledAdoptionView = styled.main`
 `;
 const profile: any = localStorage.getItem('profile') || null;
 const token: any = profile ? JSON.parse(profile).token : 'dupa';
+console.log(JSON.parse(profile));
 function addAdoption() {
-  console.log(token);
-
   axios
     .post(
       '/adoptions',

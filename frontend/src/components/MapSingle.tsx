@@ -1,5 +1,5 @@
 import GoogleMapReact from 'google-map-react';
-import image from '../img/pin.png';
+import image from '../img/pin.svg';
 import styled from 'styled-components';
 
 const StyledMapSingle = styled.div`

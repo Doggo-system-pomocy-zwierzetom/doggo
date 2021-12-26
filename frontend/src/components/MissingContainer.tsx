@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import MissingContainerElement from './MissingContainerElement';
 const StyledMissingContainer = styled.div`
-  padding: 1rem;
+  max-width: 550px;
+  padding: 1.5rem;
   background: white;
   border-radius: 0.2rem;
   width: 33vw;

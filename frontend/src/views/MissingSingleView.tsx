@@ -18,7 +18,7 @@ const StyledMissingSingleView = styled.main`
   .pin {
     width: 5rem;
     height: 5rem;
-
+    background: red;
     position: absolute;
     top: -5rem;
 

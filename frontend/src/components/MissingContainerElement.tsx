@@ -9,9 +9,11 @@ type Props = {
 const StyledMissingContainerElement = styled.div<Props>`
   display: flex;
   gap: 1rem;
-  margin: 0.2rem 0;
+  margin: 0.5rem auto;
+  width: 100%;
   /* background: #dfdfdf; */
   background:${(props) => props.background || 'red'};
+  border: 0.1rem solid var(--outline);
  
   border-radius: 0.2rem;
   padding: 10px;
@@ -35,8 +37,8 @@ flex-direction:column;
   .btn-more {
     margin: 0 auto;
     /* cursor: pointer; */
-    background: #0d6efd;
-    color: #fff;
+    background: var(--second);
+    color: var(--white);
     border: transparent;
     border-radius: 0.25rem;
     padding: 0.375rem 0.75rem;
@@ -56,7 +58,7 @@ flex-direction:column;
 function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates }: any) {
   return (
     <StyledMissingContainerElement
-      background={`${selectedItem === index && '#dfdfdf'}`}
+      background={`${selectedItem === index && 'var(--selected-item)'}`}
       onClick={() => {
         setSelectedItem(index);
         setCordinates({

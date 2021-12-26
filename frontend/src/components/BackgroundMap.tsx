@@ -1,6 +1,6 @@
 import GoogleMapReact from 'google-map-react';
 import { useEffect, useState } from 'react';
-import image from '../img/pin.png';
+import image from '../img/pin.svg';
 const defaultMapOptions = {
   fullscreenControl: false,
 };
