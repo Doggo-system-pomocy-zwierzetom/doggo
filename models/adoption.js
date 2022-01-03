@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const adoptionSchema = mongoose.Schema({
-    id :Number,
+    id :String,
     name :String,
     userMail :String,
     shelterName :String,

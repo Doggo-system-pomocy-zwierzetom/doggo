@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const missingSchema = mongoose.Schema({
-    id :Number,
+    id :String,
     title :String,
     image :String,
     creator :String,
