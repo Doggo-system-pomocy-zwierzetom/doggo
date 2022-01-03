@@ -4,12 +4,16 @@ import styled from 'styled-components';
 import { Form, Button } from 'react-bootstrap';
 import { signin, signup } from '../actions/auth';
 import { useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, Redirect } from 'react-router-dom';
+import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
+
 const StyledRegisterView = styled.main`
   max-width: 300px;
 `;
 
 export default function RegisterView() {
+  const [user, setUser] = useContext(LoginInfoContext);
+
   const initialState = { firstName: '', lastName: '', email: '', password: '', confirmpassword: '' };
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
@@ -22,24 +26,30 @@ export default function RegisterView() {
     dispatch(signin(formData, history));
   };
   return (
-    <StyledRegisterView>
-      <h1>Rejestracja</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Control name="firstName" placeholder="Imię" />
-        <Form.Control name="lastName" placeholder="Nazwisko" />
+    <>
+      {user ? (
+        <Redirect to="/" />
+      ) : (
+        <StyledRegisterView>
+          <h1>Rejestracja</h1>
+          <Form onSubmit={handleSubmit}>
+            <Form.Control name="firstName" placeholder="Imię" />
+            <Form.Control name="lastName" placeholder="Nazwisko" />
 
-        <Form.Control name="email" placeholder="E-mail" type="email" />
-        <Form.Control name="password" placeholder="Hasło" type="password" />
+            <Form.Control name="email" placeholder="E-mail" type="email" />
+            <Form.Control name="password" placeholder="Hasło" type="password" />
 
-        <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" />
+            <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" />
 
-        <Button type="submit">{'Zarejestruj się'}</Button>
-        <p className="link">
-          Posiadasz już konto?
-          <Link to="/logowanie">Zaloguj się</Link>
-        </p>
-      </Form>
-    </StyledRegisterView>
+            <Button type="submit">{'Zarejestruj się'}</Button>
+            <p className="link">
+              Posiadasz już konto?
+              <Link to="/logowanie">Zaloguj się</Link>
+            </p>
+          </Form>
+        </StyledRegisterView>
+      )}
+    </>
   );
 }
 
