@@ -4,8 +4,10 @@ import MissingModel from '../models/missing.js';
 export const getMissings = async (req, res) => {
   try {
     const MissingModels = await MissingModel.find();
+    console.log('dziala');
     res.status(200).json(MissingModels);
   } catch (error) {
+    console.log('nie dziala');
     res.status(404).json({ message: error.message });
   }
 };

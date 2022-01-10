@@ -35,44 +35,47 @@ const StyledMissingSingleView = styled.main`
 export default function MissingSingleView() {
   const { id }: any = useParams();
 
-  const [data, setData] = useState({
-    name: 'name1',
-    photo: 'https://ipla.pluscdn.pl/dituel/cp/d3/d37xo712edjjpmgi3hm3w51m9zb5e3pa.jpg',
-    description: 'Piesek taki',
-    latitude: 50.81943861899984,
-    longitude: 19.13413241318411,
-  });
+  // const [data, setData] = useState({
+  //   name: 'name1',
+  //   photo: 'https://ipla.pluscdn.pl/dituel/cp/d3/d37xo712edjjpmgi3hm3w51m9zb5e3pa.jpg',
+  //   description: 'Piesek taki',
+  //   latitude: 50.81943861899984,
+  //   longitude: 19.13413241318411,
+  // });
+
+  const [data, setData] = useState([{ latitude: 0, longitude: 0 }]);
   const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
   const [defaultProps, setDefaultProps] = useState({
     center: {
-      lat: data.latitude,
-      lng: data.longitude,
+      lat: data[0].latitude,
+      lng: data[0].longitude,
     },
   });
 
   const [selectedItem, setSelectedItem] = useState<number>();
 
   async function getData() {
-    await fetch('/api/getAll/getMissings.php', {})
+    await fetch('/missings', {})
       .then((res) => {
         if (res.ok) return res.json();
       })
       .then((data) => {
+        data = data.filter((e: any) => e._id === id);
         setData(data);
-        console.log(data);
+        // console.log(data);
       });
   }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      // setDefaultProps({
-      //   center: {
-      //     lat: position.coords.latitude,
-      //     lng: position.coords.longitude,
-      //   },
-      // });
+      setDefaultProps({
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+      });
     });
-    // getData();
+    getData();
   }, []);
 
   useEffect(() => {
@@ -88,7 +91,7 @@ export default function MissingSingleView() {
       <MissingSingleContainer data={data} />
       <MapSingle
         props={defaultProps}
-        data={data}
+        data={data[0]}
         setOnClickLocation={setOnClickLocation}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}

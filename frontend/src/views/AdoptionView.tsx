@@ -1,9 +1,11 @@
 import AdoptionContainer from '../components/AdoptionContainer';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Upload from '../components/UploadImage';
 import { fetchAdoptions } from '../api';
+import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
+
 import axios from 'axios';
 const StyledAdoptionView = styled.main`
   .view-header {
@@ -14,7 +16,7 @@ const StyledAdoptionView = styled.main`
 `;
 const profile: any = localStorage.getItem('profile') || null;
 const token: any = profile ? JSON.parse(profile).token : 'dupa';
-console.log(JSON.parse(profile));
+// console.log(JSON.parse(profile));
 function addAdoption() {
   axios
     .post(
@@ -29,10 +31,12 @@ function addAdoption() {
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then(function (response) {
-      console.log(response);
+      // console.log(response);
     });
 }
 export default function AdoptionView() {
+  const [user, setUser] = useContext(LoginInfoContext);
+
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
@@ -41,13 +45,13 @@ export default function AdoptionView() {
 
     // getData();
   }, []);
-  console.log(data);
+  // console.log(data);
 
   return (
     <StyledAdoptionView>
       <div className="view-header">
         <h1>Adoptuj</h1>
-        <button onClick={() => addAdoption()}>Dodaj adopcje</button>
+        {user.shelter && <button onClick={() => addAdoption()}>Dodaj adopcje</button>}
       </div>
       {data.map((e: any) => {
         return (

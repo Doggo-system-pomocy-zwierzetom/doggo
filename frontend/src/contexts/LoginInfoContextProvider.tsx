@@ -8,6 +8,7 @@ const LoginInfoContextProvider = (props: any) => {
   //   const token: any = profile ? JSON.parse(profile).token : 'dupa';
   //   const profile: any = localStorage.getItem('profile');
   const [user, setUser] = useState(null);
+  // const [user, setUser] = useState({ token: null, role: null });
 
   useEffect(() => {
     setUser(JSON.parse(profile));

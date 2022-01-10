@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import adoptionsRoutes from './routes/adoptions.js';
 import userRoutes from './routes/users.js';
+import missingsRoutes from './routes/missings.js';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 app.use('/adoptions', adoptionsRoutes);
+app.use('/missings', missingsRoutes);
 app.use('/user', userRoutes);
 
 if (process.env.NODE_ENV === 'production') {

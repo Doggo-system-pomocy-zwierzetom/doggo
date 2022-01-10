@@ -56,33 +56,34 @@ const StyledMissing = styled.main`
 
 export default function MissingView() {
   const [isAddMissingClicked, setIsAddMissingClicked] = useState(false);
-  const [data, setData] = useState([
-    {
-      id: 1,
-      name: 'name1',
-      photo: 'https://ipla.pluscdn.pl/dituel/cp/d3/d37xo712edjjpmgi3hm3w51m9zb5e3pa.jpg',
-      description: 'Piesek taki',
-      latitude: 50.81943861899984,
-      longitude: 19.13413241318411,
-    },
-    {
-      id: 2,
-      name: 'name2',
-      photo: 'https://bi.im-g.pl/im/e3/12/14/z21048035V.jpg',
-      description: 'Piesek taki',
-      latitude: 50.79696106848947,
-      longitude: 19.09466313721529,
-    },
-    {
-      id: 3,
-      name: 'name3',
-      photo:
-        'https://sp-ao.shortpixel.ai/client/q_lossless,ret_img,w_768/https://apetete.pl/blog/wp-content/uploads/2019/07/kr%C3%B3l-lew-768x495.jpeg',
-      description: 'Piesek taki',
-      latitude: 50.803036789758025,
-      longitude: 19.13706349732271,
-    },
-  ]);
+  // const [data, setData] = useState([
+  //   {
+  //     id: 1,
+  //     name: 'name1',
+  //     photo: 'https://ipla.pluscdn.pl/dituel/cp/d3/d37xo712edjjpmgi3hm3w51m9zb5e3pa.jpg',
+  //     description: 'Piesek taki',
+  //     latitude: 50.81943861899984,
+  //     longitude: 19.13413241318411,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'name2',
+  //     photo: 'https://bi.im-g.pl/im/e3/12/14/z21048035V.jpg',
+  //     description: 'Piesek taki',
+  //     latitude: 50.79696106848947,
+  //     longitude: 19.09466313721529,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'name3',
+  //     photo:
+  //       'https://sp-ao.shortpixel.ai/client/q_lossless,ret_img,w_768/https://apetete.pl/blog/wp-content/uploads/2019/07/kr%C3%B3l-lew-768x495.jpeg',
+  //     description: 'Piesek taki',
+  //     latitude: 50.803036789758025,
+  //     longitude: 19.13706349732271,
+  //   },
+  // ]);
+  const [data, setData] = useState([{}]);
   const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
   const [defaultProps, setDefaultProps] = useState({
     center: {
@@ -94,13 +95,17 @@ export default function MissingView() {
   const [selectedItem, setSelectedItem] = useState<number>();
 
   async function getData() {
-    await fetch('/api/getAll/getMissings.php', {})
+    console.log('getData');
+    await fetch('/missings', {})
       .then((res) => {
+        console.log(res);
         if (res.ok) return res.json();
       })
       .then((data) => {
         setData(data);
-        console.log(data);
+        console.log('odebarne');
+
+        console.log('odebarne', data);
       });
   }
 
@@ -113,15 +118,15 @@ export default function MissingView() {
         },
       });
     });
-    // getData();
+    getData();
   }, []);
 
   useEffect(() => {
-    console.log(selectedItem);
+    // console.log(selectedItem);
   }, [selectedItem]);
 
   useEffect(() => {
-    console.log(onClickLocation);
+    // console.log(onClickLocation);
   }, [onClickLocation]);
 
   return (

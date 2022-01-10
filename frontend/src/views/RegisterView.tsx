@@ -8,7 +8,12 @@ import { useHistory, Link, Redirect } from 'react-router-dom';
 import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
 
 const StyledRegisterView = styled.main`
+  /* display: flex; */
+  /* gap: 1rem; */
   max-width: 300px;
+  form {
+    display: flex;
+  }
 `;
 
 export default function RegisterView() {

@@ -71,12 +71,12 @@ function MissingContainerElement({ data, index, selectedItem, setSelectedItem, s
         });
       }}
     >
-      <img src={`${data.photo}`} alt="Zdjęcie psa." />
+      <img src={`${data.image}`} alt="Zdjęcie psa." />
       <div className="info">
-        <p className="name">{data.name}</p>
+        <p className="name">{data.title}</p>
         <p className="description">{data.description}</p>
         {/* <button className="btn-more">Szczegóły</button> */}
-        <Link to={`/zaginiecia/${data.id}`} className="btn-more">
+        <Link to={`/zaginiecia/${data._id}`} className="btn-more">
           Szczegóły
         </Link>
 

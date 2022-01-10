@@ -52,15 +52,15 @@ flex-direction:column;
     height:100%;
   }
 `;
-function MissingSingleContainer({ data, index }: any) {
-  //   console.log(data);
+function MissingSingleContainer({ data }: any) {
+  // console.log(data);
 
   return (
     <StyledMissingSingleContainer>
-      <img src={`${data.photo}`} alt="Zdjęcie psa." />
+      <img src={`${data[0].image}`} alt="Zdjęcie psa." />
       <div className="info">
-        <p className="name">{data.name}</p>
-        <p className="description">{data.description}</p>
+        <p className="name">{data[0].title}</p>
+        <p className="description">{data[0].description}</p>
       </div>
     </StyledMissingSingleContainer>
   );

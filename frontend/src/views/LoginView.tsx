@@ -38,6 +38,7 @@ function LoginView() {
       })
       .then((res: any) => {
         localStorage.setItem('profile', JSON.stringify(res.data));
+
         console.log(localStorage.getItem('profile'));
 
         const profile: any = localStorage.getItem('profile') || null;

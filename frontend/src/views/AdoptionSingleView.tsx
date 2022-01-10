@@ -51,7 +51,7 @@ export default function AdoptionSingleView() {
 
     // getData();
 
-    await fetch(`/adoptions/`, {})
+    await fetch(`/adoptions`, {})
       .then((res) => {
         if (res.ok) return res.json();
       })
@@ -71,7 +71,7 @@ export default function AdoptionSingleView() {
   return (
     <StyledAdoptionSingleView>
       <h1>{name}</h1>
-      <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" />
+      <img className="adoption_image" src={image} alt="" />
       <div className="adoption_info">
         <p>{description}</p>
       </div>
