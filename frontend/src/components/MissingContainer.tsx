@@ -15,7 +15,7 @@ const StyledMissingContainer = styled.div`
     font-weight: 600;
   }
 `;
-function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates }: any) {
+function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, setDeleteMissing }: any) {
   // console.log(selectedItem);
   console.log(data.length);
 
@@ -32,6 +32,7 @@ function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates }
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
                 setCordinates={setCordinates}
+                setDeleteMissing={setDeleteMissing}
               />
             );
           })}

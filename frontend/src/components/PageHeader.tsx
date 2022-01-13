@@ -1,8 +1,9 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
 import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
+import decode from 'jwt-decode';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
@@ -87,11 +88,17 @@ function PageHeader() {
   // const profile: any = localStorage.getItem('profile');
   // const [user, setUser] = useState(JSON.parse(profile));
   const [expanded, setExpanded] = useState(false);
+  const history = useHistory();
   // useEffect(() => {
   //   setUser(JSON.parse(profile));
   // }, []);
-  console.log(user && user.result.name);
-
+  const location = useLocation();
+  function logout(){
+    localStorage.clear();
+    setUser(null);
+    //window.location.reload();
+  }
+    
   return (
     <StyledPageHeader>
       {/* <ul>
@@ -190,8 +197,7 @@ function PageHeader() {
                   <NavDropdown.Item
                     href="#action5"
                     onClick={() => {
-                      localStorage.clear();
-                      setUser(null);
+                      logout()
                     }}
                   >
                     Wyloguj

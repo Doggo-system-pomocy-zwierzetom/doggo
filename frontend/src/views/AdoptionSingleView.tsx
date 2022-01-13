@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const StyledAdoptionSingleView = styled.main`
   /* display: flex; */
@@ -75,6 +76,9 @@ export default function AdoptionSingleView() {
       <div className="adoption_info">
         <p>{description}</p>
       </div>
+      <Link className="link-more-info" to={`/adoptuj/`}>
+          Powrót
+        </Link>
     </StyledAdoptionSingleView>
   );
 }

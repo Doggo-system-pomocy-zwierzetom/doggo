@@ -84,6 +84,7 @@ export default function MissingView() {
   //   },
   // ]);
   const [data, setData] = useState([{}]);
+  const [deleteMissing, setDeleteMissing] = useState(false);
   const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
   const [defaultProps, setDefaultProps] = useState({
     center: {
@@ -99,7 +100,10 @@ export default function MissingView() {
     await fetch('/missings', {})
       .then((res) => {
         console.log(res);
-        if (res.ok) return res.json();
+        if (res.ok) {
+          //if(deleteMissing===true) setDeleteMissing(false);
+          return res.json();
+        }
       })
       .then((data) => {
         setData(data);
@@ -128,7 +132,6 @@ export default function MissingView() {
   useEffect(() => {
     // console.log(onClickLocation);
   }, [onClickLocation]);
-
   return (
     <StyledMissing>
       {/* <p>{defaultProps.center.lat}</p>
@@ -139,6 +142,7 @@ export default function MissingView() {
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           setCordinates={setDefaultProps}
+          setDeleteMissing = {setDeleteMissing}
         />
       </div>
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 const StyledAdoptionContainer = styled.div`
   display: flex;
@@ -41,18 +43,30 @@ const StyledAdoptionContainer = styled.div`
   }
 `;
 
-export default function AdoptionContainer({ id, name, description, image }: any) {
-  console.log(id);
-
+export default function AdoptionContainer({ id, name, description, image, shelterName}: any) {
+  const profile: any = localStorage.getItem('profile') || null;
+  const token: any = profile ? JSON.parse(profile).token : '';
+  function deleteAdoption(id:String){
+    axios
+    .delete(
+      `/adoptions/${id}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res:any) => {
+      if (res.ok) return res.json();
+    })
+  }
   return (
     <StyledAdoptionContainer>
       {/* <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" /> */}
       <div className="adoption_info">
         <p className="animal-name">{name}</p>
         <p>{description}</p>
+        <p>{shelterName}</p>
         <Link className="link-more-info" to={`/adoptuj/${id}`}>
           Szczegóły
         </Link>
+        {JSON.parse(profile)?.result.name===shelterName && JSON.parse(profile).shelter? <button onClick={()=>deleteAdoption(id)}>Usuń</button> : ''}
       </div>
     </StyledAdoptionContainer>
   );
