@@ -43,7 +43,7 @@ const StyledAdoptionContainer = styled.div`
   }
 `;
 
-export default function AdoptionContainer({ id, name, description, image, shelterName}: any) {
+export default function AdoptionContainer({ id, name, description, image, shelterName, userMail}: any) {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
   function deleteAdoption(id:String){
@@ -56,6 +56,8 @@ export default function AdoptionContainer({ id, name, description, image, shelte
       if (res.ok) return res.json();
     })
   }
+
+  
   return (
     <StyledAdoptionContainer>
       {/* <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" /> */}
@@ -67,6 +69,7 @@ export default function AdoptionContainer({ id, name, description, image, shelte
           Szczegóły
         </Link>
         {JSON.parse(profile)?.result.name===shelterName && JSON.parse(profile).shelter? <button onClick={()=>deleteAdoption(id)}>Usuń</button> : ''}
+        
       </div>
     </StyledAdoptionContainer>
   );

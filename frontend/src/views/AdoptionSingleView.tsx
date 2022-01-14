@@ -43,8 +43,14 @@ export default function AdoptionSingleView() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [userMail, setUserMail] = useState('');
+  const [shelterName, setShelterName] = useState('');
+
+  const profile: any = localStorage.getItem('profile') || null;
+  const token: any = profile ? JSON.parse(profile).token : '';
 
   async function getData() {
+    
     // await fetch(`/getRow/getAdoption.php?id=${id}`, {
 
     // axios.get('/adoptions').then((res) => console.log(res.data));
@@ -63,12 +69,32 @@ export default function AdoptionSingleView() {
         setImage(data[0].image);
         setName(data[0].name);
         setDescription(data[0].description);
+        setUserMail(data[0].userMail);
+        setShelterName(data[0].shelterName);
       });
   }
+  
+  function addUser(){
+
+    setUserMail(JSON.parse(profile).result.email);
+    axios
+    .patch(
+      `/adoptions/${id}`, {id :id,
+        name :name,
+        userMail :JSON.parse(profile).result.email,
+        shelterName :shelterName,
+        image: image,
+        description: description},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res:any) => {
+      if (res.ok) return res.json();
+    })
+  }
+  
   useEffect(() => {
     getData();
-  }, []);
-
+  }, [userMail]);
   return (
     <StyledAdoptionSingleView>
       <h1>{name}</h1>
@@ -76,6 +102,8 @@ export default function AdoptionSingleView() {
       <div className="adoption_info">
         <p>{description}</p>
       </div>
+      <p>{userMail}</p>
+      {JSON.parse(profile)?.shelter === false && !userMail? <button onClick={()=>addUser()}>Zgłoś chęć adopcji</button> : 'Ktoś już jest zainteresowany adopcją'}
       <Link className="link-more-info" to={`/adoptuj/`}>
           Powrót
         </Link>

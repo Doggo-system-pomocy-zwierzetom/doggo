@@ -15,6 +15,7 @@ import RegisterView from './views/RegisterView';
 import MyContextProvider from './contexts/MyContext';
 import AdoptionSingleView from './views/AdoptionSingleView';
 import MissingAddView from './views/MissingAddView';
+import AccountView from './views/AccountView';
 import Upload from './components/UploadImage';
 
 const GlobalStyle = createGlobalStyle`
@@ -64,6 +65,7 @@ function App() {
             <Route path="/rejestracja" exact component={RegisterView} />
             <Route path="/adoptuj/:id" exact component={AdoptionSingleView} />
             <Route path="/dodaj-zdjecie" exact component={Upload} />
+            <Route path="/konto" exact component={AccountView} />
           </Switch>
         </MyContextProvider>
       </BrowserRouter>

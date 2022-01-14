@@ -191,7 +191,7 @@ function PageHeader() {
                 <NavDropdown title={`${user && user.result.name}`} id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">{user.name}</NavDropdown.Item>
 
-                  <NavDropdown.Item href="#action3">Moje konto</NavDropdown.Item>
+                  <NavDropdown.Item><Link to="/konto">Moje konto</Link></NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Zgłoszone zaginięcia</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item
