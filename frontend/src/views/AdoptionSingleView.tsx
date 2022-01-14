@@ -102,11 +102,11 @@ export default function AdoptionSingleView() {
       <div className="adoption_info">
         <p>{description}</p>
       </div>
-      <p>{userMail}</p>
-      {JSON.parse(profile)?.shelter === false && !userMail? <button onClick={()=>addUser()}>Zgłoś chęć adopcji</button> : 'Ktoś już jest zainteresowany adopcją'}
+      {JSON.parse(profile)?.shelter === false && !userMail? <button onClick={()=>addUser()}>Zgłoś chęć adopcji</button> 
+      : (JSON.parse(profile)?.shelter === false ? 'Ktoś już jest zainteresowany adopcją' : '')}
       <Link className="link-more-info" to={`/adoptuj/`}>
           Powrót
-        </Link>
+      </Link>
     </StyledAdoptionSingleView>
   );
 }

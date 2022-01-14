@@ -96,6 +96,7 @@ function PageHeader() {
   function logout(){
     localStorage.clear();
     setUser(null);
+    history.push('/');
     //window.location.reload();
   }
     
