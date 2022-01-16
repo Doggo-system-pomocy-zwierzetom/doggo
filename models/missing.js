@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const missingSchema = mongoose.Schema({
   id: String,
   title: String,
@@ -8,8 +7,8 @@ const missingSchema = mongoose.Schema({
   time: Date,
   description: String,
   place: String,
-  longtitude: Number, //moze nie dzialac
-  latitude: Number,
+  longitude:  Number, 
+  latitude:  Number,
 });
 
 const MissingModel = mongoose.model('MissingModel', missingSchema);

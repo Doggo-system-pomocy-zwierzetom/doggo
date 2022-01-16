@@ -6,54 +6,105 @@ import { signin, signup } from '../actions/auth';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link, Redirect } from 'react-router-dom';
 import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
+import axios from 'axios';
+import { emitKeypressEvents } from 'readline';
 
 const StyledRegisterView = styled.main`
   /* display: flex; */
   /* gap: 1rem; */
   max-width: 300px;
-  form {
+  /*form {
     display: flex;
-  }
+  }*/
 `;
 
 export default function RegisterView() {
   const [user, setUser] = useContext(LoginInfoContext);
 
-  const initialState = { firstName: '', lastName: '', email: '', password: '', confirmpassword: '' };
-  const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch();
+  const initialUserState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+  const initialShelterState = { name: '', NIP: '', email: '', password: '', confirmPassword: '' };
+  const [formUserData, setFormUserData] = useState(initialUserState);
+  const [formShelterData, setFormShelterData] = useState(initialShelterState);
+  const [ifShelter, setIfShelter] = useState(false);
 
   const history = useHistory();
-  const handleSubmit = (e: any) => {
-    // e.preventDefault();
-
-    dispatch(signup(formData, history));
-    dispatch(signin(formData, history));
+  const handleSubmitUser = (e: any) => {
+    e.preventDefault();
+    axios
+      .post('/user/signup', formUserData)
+      .then((res) => {
+        console.log(res);
+        if (res.status !== 200) throw new Error('Error');
+        return res;
+      })
+      .then((res: any) => {
+        localStorage.setItem('profile', JSON.stringify(res.data));
+        const profile: any = localStorage.getItem('profile') || null;
+        setUser(JSON.parse(profile));
+        history.push('/');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
+  const handleSubmitShelter = (e: any) => {
+    e.preventDefault();
+    axios
+      .post('/user/signupShelter', formShelterData)
+      .then((res) => {
+        console.log(res);
+        if (res.status !== 200) throw new Error('Error');
+        return res;
+      })
+      .then((res: any) => {
+        localStorage.setItem('profile', JSON.stringify(res.data));
+        const profile: any = localStorage.getItem('profile') || null;
+        setUser(JSON.parse(profile));
+        history.push('/');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const handleUserChange = (e: any) => setFormUserData({ ...formUserData, [e.target.name]: e.target.value });
+  const handleShelterChange = (e: any) => setFormShelterData({ ...formShelterData, [e.target.name]: e.target.value });
   return (
-    <>
-      {user ? (
-        <Redirect to="/" />
-      ) : (
+    <>{user ? history.push('/') : 
         <StyledRegisterView>
           <h1>Rejestracja</h1>
-          <Form onSubmit={handleSubmit}>
-            <Form.Control name="firstName" placeholder="Imię" />
-            <Form.Control name="lastName" placeholder="Nazwisko" />
+          <button onClick={()=>setIfShelter(false)}>Użytkownik</button><button onClick={()=>setIfShelter(true)}>Schronisko</button>
+          {ifShelter ?
+          (<Form onSubmit={handleSubmitShelter}>
+            <Form.Control name="name" placeholder="Nazwa" onChange={handleShelterChange} />
+            <Form.Control name="NIP" placeholder="NIP" onChange={handleShelterChange}/>
 
-            <Form.Control name="email" placeholder="E-mail" type="email" />
-            <Form.Control name="password" placeholder="Hasło" type="password" />
+            <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleShelterChange}/>
+            <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleShelterChange}/>
 
-            <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" />
-
-            <Button type="submit">{'Zarejestruj się'}</Button>
+            <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" onChange={handleShelterChange}/>
+            <Button type="submit">Zarejestruj się</Button>
             <p className="link">
               Posiadasz już konto?
               <Link to="/logowanie">Zaloguj się</Link>
             </p>
-          </Form>
+          </Form>)
+          :
+          (<Form onSubmit={handleSubmitUser}>
+            <Form.Control name="firstName" placeholder="Imię" onChange={handleUserChange} />
+            <Form.Control name="lastName" placeholder="Nazwisko" onChange={handleUserChange}/>
+
+            <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleUserChange}/>
+            <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleUserChange}/>
+
+            <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" onChange={handleUserChange}/>
+            <Button type="submit">Zarejestruj się</Button>
+            <p className="link">
+              Posiadasz już konto?
+              <Link to="/logowanie">Zaloguj się</Link>
+            </p>
+          </Form>)}
         </StyledRegisterView>
-      )}
+      }
     </>
   );
 }

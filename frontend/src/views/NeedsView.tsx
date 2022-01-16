@@ -2,6 +2,8 @@ import AdoptionContainer from '../components/AdoptionContainer';
 import styled from 'styled-components';
 
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ShelterContainer from '../components/ShelterContainer';
 
 const StyledNeedsView = styled.main`
   max-width: 800px;
@@ -9,30 +11,33 @@ const StyledNeedsView = styled.main`
 `;
 
 export default function NeedsView() {
-  const [data, setData] = useState([]);
 
+  const [data, setData] = useState([{}]);
   async function getData() {
-    await fetch('/api/getAll/getShelters.php', {})
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }
-
-  useEffect(() => {
-    // getData();
-  }, []);
+    await fetch('/shelters', {})
+        .then((res) => {
+          console.log(res);
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          setData(data);
+        });
+    }
+    useEffect(() => {
+      getData();
+    }, []);
+    
   return (
+    
     <StyledNeedsView>
       <h1>Schroniska</h1>
       {data.map((e: any) => {
         return (
-          <AdoptionContainer key={e.id} id={e.id} name={e.name} description={e.description} image={e.image} />
+          <ShelterContainer key={e.id} name={e.name} email={e.email} food={e.food} equipment={e.equipment} />
         );
-        // <p>{e.name}</p>;
       })}
     </StyledNeedsView>
   );

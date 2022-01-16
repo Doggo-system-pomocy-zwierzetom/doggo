@@ -35,7 +35,8 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
     const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' });
-    res.status(200).json({ result, token });
+    let shelter = false;
+    res.status(200).json({ result, token, shelter});
   } catch (error) {
     res.status(500).json({ message: 'Coś poszło nie tak...' });
   }
@@ -51,7 +52,8 @@ export const signupShelter = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await Shelter.create({ email, password: hashedPassword, name, NIP, food, equipment });
     const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' });
-    res.status(200).json({ result, token });
+    let shelter = true;
+    res.status(200).json({ result, token, shelter});
   } catch (error) {
     res.status(500).json({ message: 'Coś poszło nie tak...' });
   }

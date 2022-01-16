@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 type Props = {
   background: string;
@@ -58,22 +59,10 @@ flex-direction:column;
     height:100%;
   }
 `;
-function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates, setDeleteMissing }: any) {
+function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates}: any) {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
-  function deleteMissing(id:String){
-    axios
-    .delete(
-      `/missings/${id}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
-    .then((res:any) => {
-      if (res.ok) {
-        setDeleteMissing(true);
-        return res.json();
-      }
-    })
-  }
+  
   return (
     <StyledMissingContainerElement
       background={`${selectedItem === index && 'var(--selected-item)'}`}
@@ -95,7 +84,6 @@ function MissingContainerElement({ data, index, selectedItem, setSelectedItem, s
         <Link to={`/zaginiecia/${data._id}`} className="btn-more">
           Szczegóły
         </Link>
-        {JSON.parse(profile)?.result.email===data.creator ? <button onClick={()=>deleteMissing(data._id)}>Usuń</button> : ''}
 
         {/* <Button></Button> */}
       </div>

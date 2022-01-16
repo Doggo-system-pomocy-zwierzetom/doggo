@@ -99,17 +99,12 @@ export default function MissingView() {
     console.log('getData');
     await fetch('/missings', {})
       .then((res) => {
-        console.log(res);
         if (res.ok) {
-          //if(deleteMissing===true) setDeleteMissing(false);
           return res.json();
         }
       })
       .then((data) => {
         setData(data);
-        console.log('odebarne');
-
-        console.log('odebarne', data);
       });
   }
 
@@ -130,8 +125,9 @@ export default function MissingView() {
   }, [selectedItem]);
 
   useEffect(() => {
-    // console.log(onClickLocation);
+    //console.log(onClickLocation);
   }, [onClickLocation]);
+  
   return (
     <StyledMissing>
       {/* <p>{defaultProps.center.lat}</p>
@@ -142,7 +138,6 @@ export default function MissingView() {
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           setCordinates={setDefaultProps}
-          setDeleteMissing = {setDeleteMissing}
         />
       </div>
 

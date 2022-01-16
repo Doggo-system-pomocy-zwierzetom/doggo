@@ -5,6 +5,7 @@ import cors from 'cors';
 import adoptionsRoutes from './routes/adoptions.js';
 import userRoutes from './routes/users.js';
 import missingsRoutes from './routes/missings.js';
+import sheltersRoutes from './routes/shelters.js';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/adoptions', adoptionsRoutes);
 app.use('/missings', missingsRoutes);
 app.use('/user', userRoutes);
+app.use('/shelters', sheltersRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Have Node serve the files for our built React app

@@ -17,6 +17,7 @@ import AdoptionSingleView from './views/AdoptionSingleView';
 import MissingAddView from './views/MissingAddView';
 import AccountView from './views/AccountView';
 import Upload from './components/UploadImage';
+import MyMissingsView from './views/MyMissingsView';
 
 const GlobalStyle = createGlobalStyle`
 margin: 0;
@@ -66,6 +67,7 @@ function App() {
             <Route path="/adoptuj/:id" exact component={AdoptionSingleView} />
             <Route path="/dodaj-zdjecie" exact component={Upload} />
             <Route path="/konto" exact component={AccountView} />
+            <Route path="/moje-zaginiecia" exact component={MyMissingsView} />
           </Switch>
         </MyContextProvider>
       </BrowserRouter>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   background: string;
@@ -54,14 +55,16 @@ flex-direction:column;
 `;
 function MissingSingleContainer({ data }: any) {
   // console.log(data);
-
+  const history = useHistory();
   return (
     <StyledMissingSingleContainer>
       <img src={`${data[0].image}`} alt="Zdjęcie psa." />
       <div className="info">
         <p className="name">{data[0].title}</p>
         <p className="description">{data[0].description}</p>
+        <button onClick={()=>history.push('/zaginiecia')}>Powrót</button>
       </div>
+      
     </StyledMissingSingleContainer>
   );
 }

@@ -193,7 +193,7 @@ function PageHeader() {
                   <NavDropdown.Item href="#action3">{user.name}</NavDropdown.Item>
 
                   <NavDropdown.Item><Link to="/konto">Moje konto</Link></NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Zgłoszone zaginięcia</NavDropdown.Item>
+                  <NavDropdown.Item><Link to="/moje-zaginiecia">Zgłoszone zaginięcia</Link></NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     href="#action5"

@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const StyledAccountView = styled.main`
@@ -37,6 +39,8 @@ export default function AccountView() {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
   const [data, setData] = useState([])
+  const [formData, setFormData] = useState({food:'', equipment:''})
+  const [removedAdoption, setRemovedAdoption] = useState(false);
   async function getData() {
 
     await fetch(`/adoptions`, {})
@@ -49,12 +53,71 @@ export default function AccountView() {
         setData(data);
       });
   }
+  function removeAdoption(e:any){
+    axios
+    .patch(
+      `/adoptions/${e.id}`, {id :e.id,
+        name :e.name,
+        userMail :'',
+        shelterName :e.shelterName,
+        image: e.image,
+        description: e.description},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res:any) => {
+      if (res.ok) {
+        return res.json();
+        setRemovedAdoption(true);
+      }
+    })
+  }
+  function deleteAdoption(id:String){
+    axios
+    .delete(
+      `/adoptions/${id}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res:any) => {
+      if (res.ok) return res.json();
+    })
+  }
   useEffect(() => {
     getData();
-  }, []);
+  }, [removeAdoption, deleteAdoption]);
+
+  function handleSubmit(e:any){
+    e.preventDefault();
+    let shelter = JSON.parse(profile).result;
+    let id = JSON.parse(profile).result._id;
+    // console.log(shelter);
+    // console.log(id);
+    axios
+    .patch(
+      `/shelters/${id}`, {id :id,
+        name :shelter.name,
+        email :shelter.email,
+        password :shelter.password,
+        NIP: shelter.NIP,
+        food: formData.food,
+        equipment: formData.equipment},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res:any) => {
+      console.log(res);
+      setFormData({food:'', equipment:''});
+      if (res.ok) return res.json();
+    })
+  }
+  const handleChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value });
   return (
     <StyledAccountView>
-    {JSON.parse(profile).shelter ? <h1>Stworzone adopcje</h1> : <h1>Moje adopcje</h1>}
+    {JSON.parse(profile).shelter ? 
+    (<><Form onSubmit={handleSubmit}>
+          <Form.Control name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />
+          <Form.Control name="equipment" placeholder="Potrzebne wyposażenie" onChange={handleChange} />
+          <Button type="submit">Zatwierdź</Button>
+        </Form><h1>Stworzone adopcje</h1></>)
+    : <h1>Moje adopcje</h1>}
     {data.map((e: any) => {
         return (
           <div>
@@ -62,6 +125,7 @@ export default function AccountView() {
             <img className="adoption_image" src={e.image} alt="" />
             {JSON.parse(profile).shelter ? <p>{e.userMail}</p> : <p>{e.shelterName}</p>}
             <p>{e.description}</p>
+            {!JSON.parse(profile).shelter ? <button onClick={()=>removeAdoption(e)}>Zrezygnuj</button> : <button onClick={()=>deleteAdoption(e._id)}>Usuń</button>}
           </div>
         );})}
     
