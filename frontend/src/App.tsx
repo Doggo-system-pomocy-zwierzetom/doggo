@@ -1,4 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
@@ -54,7 +58,7 @@ function App() {
         <MyContextProvider>
           <PageHeader />
           <Switch>
-            <Route path="/" exact component={HomeView} /> 
+            <Route path="/" exact component={HomeView} />
             <Route path="/kontakt" exact component={ContactView} />
             <Route path="/zaginiecia" exact component={MissingView} />
             <Route path="/zglaszanie-zaginiecia" exact component={MissingAddView} />
