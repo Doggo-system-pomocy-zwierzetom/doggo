@@ -30,6 +30,8 @@ const StyledMissingContainerElement = styled.div<Props>`
   .info{
 display:flex;
 flex-direction:column;
+/* background:red; */
+width: 100%;
   }
   p{
     margin:0;
@@ -59,10 +61,10 @@ flex-direction:column;
     height:100%;
   }
 `;
-function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates}: any) {
+function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates }: any) {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
-  
+
   return (
     <StyledMissingContainerElement
       background={`${selectedItem === index && 'var(--selected-item)'}`}

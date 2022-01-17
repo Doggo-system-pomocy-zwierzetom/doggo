@@ -22,12 +22,16 @@ export default function MapSingle({ props, setOnClickLocation, data, selectedIte
   //   setCordinates(props);
   // }, [props]);
   console.log(data);
+  console.log(props.center);
 
   return (
     <StyledMapSingle>
       <GoogleMapReact
         bootstrapURLKeys={{ key: '' }}
-        center={props.center}
+        center={{
+          lat: data.latitude,
+          lng: data.longitude,
+        }}
         defaultZoom={14}
         options={defaultMapOptions}
       >
@@ -44,5 +48,5 @@ export default function MapSingle({ props, setOnClickLocation, data, selectedIte
 }
 
 const AnyReactComponent = ({ text, lat, lng, index, selectedItem, setSelectedItem }: any) => (
-  <img onClick={() => {}} className={`pin ${selectedItem === index && 'selected'}`} src={`${image}`} alt="" />
+  <img onClick={() => {}} className={`pin`} src={`${image}`} alt="" />
 );
