@@ -18,7 +18,7 @@ const StyledMissingSingleView = styled.main`
   .pin {
     width: 5rem;
     height: 5rem;
-    background: red;
+    /* background: red; */
     position: absolute;
     top: -5rem;
 
@@ -44,7 +44,7 @@ export default function MissingSingleView() {
   // });
 
   const [data, setData] = useState([{ latitude: 0, longitude: 0 }]);
-  const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
+  // const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
   const [defaultProps, setDefaultProps] = useState({
     center: {
       lat: data[0].latitude,
@@ -67,14 +67,15 @@ export default function MissingSingleView() {
   }
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setDefaultProps({
-        center: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        },
-      });
+    // navigator.geolocation.getCurrentPosition((position) => {
+    console.log(data);
+    setDefaultProps({
+      center: {
+        lat: data[0].latitude,
+        lng: data[0].longitude,
+      },
     });
+    // });
     getData();
   }, []);
 
@@ -82,9 +83,9 @@ export default function MissingSingleView() {
     console.log(selectedItem);
   }, [selectedItem]);
 
-  useEffect(() => {
-    console.log(onClickLocation);
-  }, [onClickLocation]);
+  // useEffect(() => {
+  //   console.log(onClickLocation);
+  // }, [onClickLocation]);
 
   return (
     <StyledMissingSingleView>
@@ -92,7 +93,7 @@ export default function MissingSingleView() {
       <MapSingle
         props={defaultProps}
         data={data[0]}
-        setOnClickLocation={setOnClickLocation}
+        // setOnClickLocation={setOnClickLocation}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
       />
