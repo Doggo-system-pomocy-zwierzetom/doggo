@@ -50,21 +50,7 @@ export default function HomeView() {
   //   document.body.appendChild(script);
   // }, []);
   return (
-<<<<<<< HEAD
-      <div style={{width:"100%"}}><header></header>
 
-<section id="hero" className="d-flex align-items-center justify-content-center">
-  <div className="container" data-aos="fade-up">
-
-    <div className="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-      <div className="col-xl-6 col-lg-8">
-        <h1>Strona dla zwierząt</h1>
-        <h2>Tu może wyświetlać się logo</h2>
-      </div>
-    </div>
-  </div>
-</section>
-=======
     <div style={{ width: '100%' }}>
       <header></header>
 
@@ -78,7 +64,6 @@ export default function HomeView() {
               <h2>Nie wiemy co robimy</h2>
             </div>
           </div>
->>>>>>> 015b0dfe6971535e38f3b3a46228c8ad15d9b1e6
 
           <div className="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
             <div className="col-xl-2 col-md-4">
