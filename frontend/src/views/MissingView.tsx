@@ -19,6 +19,8 @@ const StyledMissing = styled.main`
     /* top: 0; */
     /* margin: 4rem 0.5rem; */
     /* z-index: 1; */
+    max-height: 100vh;
+    /* height: 100vh; */
   }
   .add-missing-button {
     position: absolute;
@@ -127,7 +129,7 @@ export default function MissingView() {
   useEffect(() => {
     //console.log(onClickLocation);
   }, [onClickLocation]);
-  
+
   return (
     <StyledMissing>
       {/* <p>{defaultProps.center.lat}</p>

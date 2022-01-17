@@ -42,10 +42,12 @@ main{
   --white: hsl(60, 100%, 99.01960784313727%);
   --black: hsl(0, 0%, 0%);
   --warning: hsl(11.450381679389315, 51.778656126482204%, 49.6078431372549%) ;
-  --selected-item: hsl(187.50000000000009, 80.00000000000006%, 96.07843137254902%);
+  --selected-item: hsl(187.50000000000009, 80.00000000000006%, 93.07843137254902%);
+  --not-selected-item: hsl(0, 0%, 97%);
   --outline: hsl(270.0000000000002, 20.000000000000085%, 96.078431372549%);
+  --card-outline: hsl(270.0000000000002, 20.000000000000085%, 90.078431372549%);
   --outline-lighten: hsl(270.0000000000002, 20.000000000000085%, 99.078431372549%);
-  --outline-darken: hsl(270.0000000000002, 20.000000000000085%, 90.078431372549%);
+  --outline-darken: hsl(270.0000000000002, 20.000000000000085%, 81.078431372549%);
 
 }
 `;
@@ -58,8 +60,7 @@ function App() {
         <MyContextProvider>
           <PageHeader />
           <Switch>
-
-            <Route path="/" exact component={HomeView} /> 
+            <Route path="/" exact component={HomeView} />
 
             <Route path="/zaginiecia" exact component={MissingView} />
             <Route path="/zglaszanie-zaginiecia" exact component={MissingAddView} />

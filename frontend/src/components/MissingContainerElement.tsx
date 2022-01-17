@@ -13,10 +13,10 @@ const StyledMissingContainerElement = styled.div<Props>`
   gap: 1rem;
   margin: 0.5rem auto;
   width: 100%;
-  background: #ddd;
-  // background:${(props) => props.background || 'red'};
-  border: 0.1rem solid var(--outline);
-  box-shadow: 0 0 20px -5px var(--outline-darken);
+  /* background: #ddd; */
+  background:${(props) => props.background || 'red'};
+  border: 0.07rem solid var(--card-outline);
+  box-shadow: 0 0 20px -2px var(--outline-darken);
 
  
   border-radius: 0.3rem;
@@ -67,7 +67,7 @@ function MissingContainerElement({ data, index, selectedItem, setSelectedItem, s
 
   return (
     <StyledMissingContainerElement
-      background={`${selectedItem === index && 'var(--selected-item)'}`}
+      background={`${selectedItem === index ? 'var(--selected-item)' : 'var(--not-selected-item)'}`}
       onClick={() => {
         setSelectedItem(index);
         setCordinates({
