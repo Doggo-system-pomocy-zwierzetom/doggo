@@ -173,14 +173,6 @@ function PageHeader() {
               >
                 Zbiórki
               </Nav.Link> */}
-              <Nav.Link
-                as={NavLink}
-                activeClassName="selected"
-                to="/kontakt"
-                onClick={() => setExpanded(false)}
-              >
-                Kontakt
-              </Nav.Link>
             </Nav>
             <div className="user-menu">
               {/* <button> */}

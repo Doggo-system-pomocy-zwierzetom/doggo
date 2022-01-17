@@ -13,8 +13,8 @@ const StyledMissingContainerElement = styled.div<Props>`
   gap: 1rem;
   margin: 0.5rem auto;
   width: 100%;
-  /* background: #dfdfdf; */
-  background:${(props) => props.background || 'red'};
+  background: #ddd;
+  // background:${(props) => props.background || 'red'};
   border: 0.1rem solid var(--outline);
   box-shadow: 0 0 20px -5px var(--outline-darken);
 

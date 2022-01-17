@@ -9,10 +9,20 @@ import axios from 'axios';
 import AddAdoptionContainer from '../components/AddAdoptionContainer';
 
 const StyledAdoptionView = styled.main`
-  .view-header {
+  
+
+.view-header {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
+    margin-left: auto;
+    margin-right:auto;
+    width: 700px;
+  }
+  .aa{
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 const profile: any = localStorage.getItem('profile') || null;
@@ -33,12 +43,12 @@ export default function AdoptionView() {
   // console.log(data);
 
   return (
-    <StyledAdoptionView>
+    <StyledAdoptionView><div className="main">
       <div className="view-header">
         <h1>Adoptuj</h1>
         {user?.shelter && <button onClick={() => setIsAddAdoptionClicked(true)}>Dodaj adopcje</button>}
       </div>
-      {isAddAdoptionClicked ? <AddAdoptionContainer setIsAddMissingClicked={setIsAddAdoptionClicked}></AddAdoptionContainer> : ''}
+      {isAddAdoptionClicked ? <div className="aa"><AddAdoptionContainer setIsAddMissingClicked={setIsAddAdoptionClicked}></AddAdoptionContainer></div> : ''}
       {data.map((e: any) => {
         return (
           <AdoptionContainer
@@ -50,8 +60,7 @@ export default function AdoptionView() {
             shelterName = {e.shelterName}
           />
         );
-        // <p>{e.name}</p>;
-      })}
+      })}</div>
     </StyledAdoptionView>
   );
   // return (

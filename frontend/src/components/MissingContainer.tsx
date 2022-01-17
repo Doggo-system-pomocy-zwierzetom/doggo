@@ -9,6 +9,8 @@ const StyledMissingContainer = styled.div`
   border-radius: 0.2rem;
   width: 33vw;
   height: 100%;
+  background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url("https://i.ibb.co/gy897P8/tlo.png");
+  
   min-width: 25rem;
   .title {
     font-size: 1.5em;

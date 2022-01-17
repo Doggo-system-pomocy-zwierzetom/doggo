@@ -12,7 +12,7 @@ import { emitKeypressEvents } from 'readline';
 const StyledRegisterView = styled.main`
   /* display: flex; */
   /* gap: 1rem; */
-  max-width: 300px;
+  max-width: 500px;
   /*form {
     display: flex;
   }*/
@@ -26,7 +26,7 @@ export default function RegisterView() {
   const [formUserData, setFormUserData] = useState(initialUserState);
   const [formShelterData, setFormShelterData] = useState(initialShelterState);
   const [ifShelter, setIfShelter] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
   const handleSubmitUser = (e: any) => {
     e.preventDefault();
@@ -35,6 +35,7 @@ export default function RegisterView() {
       .then((res) => {
         console.log(res);
         if (res.status !== 200) throw new Error('Error');
+        setErrorMessage('');
         return res;
       })
       .then((res: any) => {
@@ -42,9 +43,11 @@ export default function RegisterView() {
         const profile: any = localStorage.getItem('profile') || null;
         setUser(JSON.parse(profile));
         history.push('/');
+        console.log(res);
       })
       .catch(function (error) {
-        console.log(error);
+        setErrorMessage('Coś poszło nie tak...');
+        //console.log(error);
       });
   };
   const handleSubmitShelter = (e: any) => {
@@ -54,6 +57,7 @@ export default function RegisterView() {
       .then((res) => {
         console.log(res);
         if (res.status !== 200) throw new Error('Error');
+        setErrorMessage('');
         return res;
       })
       .then((res: any) => {
@@ -63,25 +67,29 @@ export default function RegisterView() {
         history.push('/');
       })
       .catch(function (error) {
-        console.log(error);
+        setErrorMessage('Coś poszło nie tak...');
+       // console.log(error);
       });
   };
-  const handleUserChange = (e: any) => setFormUserData({ ...formUserData, [e.target.name]: e.target.value });
-  const handleShelterChange = (e: any) => setFormShelterData({ ...formShelterData, [e.target.name]: e.target.value });
+  const handleUserChange = (e: any) => {setFormUserData({ ...formUserData, [e.target.name]: e.target.value })};
+  const handleShelterChange = (e: any) => {setFormShelterData({ ...formShelterData, [e.target.name]: e.target.value });};
   return (
     <>{user ? history.push('/') : 
+        
         <StyledRegisterView>
-          <h1>Rejestracja</h1>
-          <button onClick={()=>setIfShelter(false)}>Użytkownik</button><button onClick={()=>setIfShelter(true)}>Schronisko</button>
+          
+          <h1>Rejestracja{ifShelter ? ' schroniska' : ' użytkownika'}</h1>
+          <button onClick={()=>{setIfShelter(false); setFormUserData(initialUserState);}}>Użytkownik</button><button onClick={()=>{setIfShelter(true); setFormShelterData(initialShelterState)}}>Schronisko</button>
+          <p style={{color: "red"}}>{errorMessage}</p>
           {ifShelter ?
           (<Form onSubmit={handleSubmitShelter}>
-            <Form.Control name="name" placeholder="Nazwa" onChange={handleShelterChange} />
-            <Form.Control name="NIP" placeholder="NIP" onChange={handleShelterChange}/>
+            <Form.Control value={formShelterData.name} name="name" placeholder="Nazwa" onChange={handleShelterChange} />
+            <Form.Control value={formShelterData.NIP} name="NIP" placeholder="NIP" onChange={handleShelterChange}/>
 
-            <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleShelterChange}/>
-            <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleShelterChange}/>
+            <Form.Control value={formShelterData.email} name="email" placeholder="E-mail" type="email" onChange={handleShelterChange}/>
+            <Form.Control value={formShelterData.password} name="password" placeholder="Hasło" type="password" onChange={handleShelterChange}/>
 
-            <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" onChange={handleShelterChange}/>
+            <Form.Control value={formShelterData.confirmPassword} name="confirmPassword" placeholder="Potwierdź hasło" type="password" onChange={handleShelterChange}/>
             <Button type="submit">Zarejestruj się</Button>
             <p className="link">
               Posiadasz już konto?
@@ -90,13 +98,13 @@ export default function RegisterView() {
           </Form>)
           :
           (<Form onSubmit={handleSubmitUser}>
-            <Form.Control name="firstName" placeholder="Imię" onChange={handleUserChange} />
-            <Form.Control name="lastName" placeholder="Nazwisko" onChange={handleUserChange}/>
+            <Form.Control value={formUserData.firstName} name="firstName" placeholder="Imię" onChange={handleUserChange} />
+            <Form.Control value={formUserData.lastName} name="lastName" placeholder="Nazwisko" onChange={handleUserChange}/>
 
-            <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleUserChange}/>
-            <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleUserChange}/>
+            <Form.Control value={formUserData.email} name="email" placeholder="E-mail" type="email" onChange={handleUserChange}/>
+            <Form.Control value={formUserData.password} name="password" placeholder="Hasło" type="password" onChange={handleUserChange}/>
 
-            <Form.Control name="confirmPassword" placeholder="Potwierdź hasło" type="password" onChange={handleUserChange}/>
+            <Form.Control value={formUserData.confirmPassword} name="confirmPassword" placeholder="Potwierdź hasło" type="password" onChange={handleUserChange}/>
             <Button type="submit">Zarejestruj się</Button>
             <p className="link">
               Posiadasz już konto?

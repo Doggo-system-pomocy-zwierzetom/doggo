@@ -14,6 +14,9 @@ const StyledAddAdoptionContainer = styled.div`
   /* h1 {
     margin: 0;
   } */
+  .card{
+    max_width: 600px;
+  }
 `;
 
 function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
@@ -61,7 +64,7 @@ function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
   
   return (
     <StyledAddAdoptionContainer>
-      <Card>
+      <Card className="card">
         <Card.Header>
           <Card.Title> Zgłaszanie adopcji </Card.Title>
         </Card.Header>

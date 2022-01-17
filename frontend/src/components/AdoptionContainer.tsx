@@ -16,6 +16,9 @@ const StyledAdoptionContainer = styled.div`
   min-height: 10rem;
   gap: 2rem;
   border-radius: 7px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 
   .adoption_image {
     max-width: 10rem;
@@ -40,6 +43,7 @@ const StyledAdoptionContainer = styled.div`
     /* background: white; */
     /* padding: 0.7rem; */
     /* border-radius: 0.7px; */
+    clear: both;
   }
 `;
 
@@ -62,13 +66,15 @@ export default function AdoptionContainer({ id, name, description, image, shelte
     <StyledAdoptionContainer>
       {/* <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" /> */}
       <div className="adoption_info">
-        <p className="animal-name">{name}</p>
+        <div style={{float:"left"}}><p className="animal-name">{name}</p>
         <p>{description}</p>
         <p>{shelterName}</p>
-        <Link className="link-more-info" to={`/adoptuj/${id}`}>
+        <button><Link className="link-more-info" to={`/adoptuj/${id}`}>
           Szczegóły
-        </Link>
-        {JSON.parse(profile)?.result.name===shelterName && JSON.parse(profile).shelter? <button onClick={()=>deleteAdoption(id)}>Usuń</button> : ''}
+        </Link></button>{JSON.parse(profile)?.result.name===shelterName && JSON.parse(profile).shelter? <button onClick={()=>deleteAdoption(id)}>Usuń</button> : ''}</div>
+        <div style={{float:"right"}}><img src={image} width="200px"/></div>
+        
+        
         
       </div>
     </StyledAdoptionContainer>

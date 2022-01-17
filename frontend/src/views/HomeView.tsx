@@ -45,34 +45,10 @@ export default function HomeView() {
 
     <div className="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
       <div className="col-xl-6 col-lg-8">
-        <h1>Drużyna pierścienia<span>.</span></h1>
-        <h2>Nie wiemy co robimy</h2>
+        <h1>Strona dla zwierząt</h1>
+        <h2>Tu może wyświetlać się logo</h2>
       </div>
     </div>
-
-    <div className="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-
-      <div className="col-xl-2 col-md-4">
-          <h3><img src="assets/img/testimonials/testimonials-5.jpg"/></h3>
-      </div>
-
-      <div className="col-xl-2 col-md-4">
-         <h3><img src="assets/img/testimonials/testimonials-5.jpg"/></h3> 
-      </div>
-
-      <div className="col-xl-2 col-md-4">
-        <h3><img src="assets/img/testimonials/testimonials-5.jpg"/></h3>
-      </div>
-
-      <div className="col-xl-2 col-md-4">
-         <h3><img src="assets/img/testimonials/testimonials-5.jpg"/></h3> 
-      </div>
-
-      <div className="col-xl-2 col-md-4">
-        <h3><img src="assets/img/testimonials/testimonials-5.jpg"/></h3>
-      </div>
-    </div>
-
   </div>
 </section>
 

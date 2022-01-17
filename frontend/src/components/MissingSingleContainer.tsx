@@ -9,6 +9,7 @@ type Props = {
 const StyledMissingSingleContainer = styled.div`
   display: flex;
   gap: 1rem;
+ 
   margin: 0.2rem 0;
   /* background: #dfdfdf; */
   background: #fff;
@@ -24,6 +25,7 @@ const StyledMissingSingleContainer = styled.div`
   }
   .info{
 display:flex;
+width: max-content;
 flex-direction:column;
   }
   p{

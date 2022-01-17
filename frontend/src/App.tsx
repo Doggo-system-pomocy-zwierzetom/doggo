@@ -6,7 +6,6 @@ import HomeView from './views/HomeView';
 import MissingView from './views/MissingView';
 import MissingSingleView from './views/MissingSingleView';
 import HelpView from './views/HelpView';
-import ContactView from './views/ContactView';
 import AdoptionView from './views/AdoptionView';
 import NeedsView from './views/NeedsView';
 import PageHeader from './components/PageHeader';
@@ -25,12 +24,13 @@ padding:0;
 
 body{
   background: var(--outline-lighten);
+  background: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9)), url("https://i.ibb.co/gy897P8/tlo.png");
 
 }
 main{
   padding-top: 3.5rem;
   margin: 0 auto;
-  max-width: 800px;
+  //max-width:1000px;
 }
 :root{
   --main: hsl(184.88372093023256, 76.78571428571429%, 21.96078431372549%);
@@ -55,7 +55,6 @@ function App() {
           <PageHeader />
           <Switch>
             <Route path="/" exact component={HomeView} /> 
-            <Route path="/kontakt" exact component={ContactView} />
             <Route path="/zaginiecia" exact component={MissingView} />
             <Route path="/zglaszanie-zaginiecia" exact component={MissingAddView} />
             <Route path="/zaginiecia/:id" exact component={MissingSingleView} />
