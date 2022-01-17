@@ -7,12 +7,15 @@ import { useHistory } from 'react-router-dom';
 import FormMap from '../components/FormMap';
 
 const StyledMissingAddView = styled.main`
-  /* max-width: 700px; */
+  max-width: 1000px;
+  width: 90vw;
   padding-top: 6rem;
-  min-width: 1000px;
+  /* min-width: 1000px; */
   height: 100vh;
   max-height: 700px;
   display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
   .card {
     min-width: 300px;
   }
@@ -31,6 +34,12 @@ const StyledMissingAddView = styled.main`
       height: 10rem;
       padding: 0 4rem 5rem 1rem;
     } */
+  }
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+    .card {
+      width: 100%;
+    }
   }
 `;
 export default function MissingAddView({ setIsAddMissingClicked }: any) {
@@ -70,9 +79,9 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
   }
   function handleSubmit(e: any) {
     e.preventDefault();
-    console.log(onClickLocation.lat, onClickLocation.lng);
+    // console.log(onClickLocation.lat, onClickLocation.lng);
 
-    setMissing({ ...missing, longitude: onClickLocation.lng, latitude: onClickLocation.lat });
+    // setMissing({ ...missing, longitude: onClickLocation.lng, latitude: onClickLocation.lat });
     console.log(missing);
 
     if (profile) {
@@ -103,6 +112,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
 
   useEffect(() => {
     console.log(onClickLocation);
+    setMissing({ ...missing, longitude: onClickLocation.lng, latitude: onClickLocation.lat });
   }, [onClickLocation]);
 
   return (
@@ -148,7 +158,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
               required
             />
             {/* <UploadImage /> */}
-            <Form.Label htmlFor="">Wybierz miejsce zaginięcia z mapy obok.</Form.Label>
+            <Form.Label htmlFor="">Wybierz miejsce zaginięcia na mapie.</Form.Label>
 
             <Form.Group>
               <Button type="submit">Wyślij zgłoszenie</Button>
