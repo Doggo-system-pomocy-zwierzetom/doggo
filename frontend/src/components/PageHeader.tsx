@@ -10,6 +10,8 @@ const StyledPageHeader = styled.div`
   width: 100vw;
   /* width: 100% */
   z-index: 2;
+  box-shadow: 0 10px 20px 50px var(--outline);
+
   /* margin: 0 0 auto 0 */
   /* background: gray; */
   /* display: flex; */
@@ -93,13 +95,13 @@ function PageHeader() {
   //   setUser(JSON.parse(profile));
   // }, []);
   const location = useLocation();
-  function logout(){
+  function logout() {
     localStorage.clear();
     setUser(null);
     history.push('/');
     //window.location.reload();
   }
-    
+
   return (
     <StyledPageHeader>
       {/* <ul>
@@ -184,13 +186,17 @@ function PageHeader() {
                 <NavDropdown title={`${user && user.result.name}`} id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">{user.name}</NavDropdown.Item>
 
-                  <NavDropdown.Item><Link to="/konto">Moje konto</Link></NavDropdown.Item>
-                  <NavDropdown.Item><Link to="/moje-zaginiecia">Zgłoszone zaginięcia</Link></NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="/konto">Moje konto</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="/moje-zaginiecia">Zgłoszone zaginięcia</Link>
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     href="#action5"
                     onClick={() => {
-                      logout()
+                      logout();
                     }}
                   >
                     Wyloguj

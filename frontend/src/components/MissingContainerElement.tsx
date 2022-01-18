@@ -6,49 +6,72 @@ import { useEffect } from 'react';
 
 type Props = {
   background: string;
+  outline: string;
 };
 
 const StyledMissingContainerElement = styled.div<Props>`
+padding-right:1.3rem;
   display: flex;
-  gap: 1rem;
-  margin: 0.5rem auto;
+  gap: 1.2rem;
+  /* margin: 0.6rem auto; */
   width: 100%;
+  /* max-width:min-content; */
+min-width:0;
   /* background: #ddd; */
   background:${(props) => props.background || 'red'};
-  border: 0.07rem solid var(--card-outline);
-  box-shadow: 0 0 20px -2px var(--outline-darken);
+  /* border: 0.07rem solid var(--card-outline); */
+  outline: ${(props) => props.outline || ''};
+  box-shadow: -2px 0 11px 0px var(--outline-darken);
+   p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
+    height:100%;
+    /* height: min-content; */
+    
+  }
  
-  border-radius: 0.3rem;
-  padding: 10px;
+  border-radius: 5px;
   img {
-    width: 7rem;
-    height: 7rem;
+    width: 8rem;
+    height: 8rem;
     object-fit: cover;
-    border-radius: 3px;
+  /* border: 0.2rem solid var(--dark-grey); */
+
+    border-radius: 5px 0 0 5px ;
   }
   .info{
+    min-width:0;
+    width:100%;
+  padding: 0.4rem 0 0.8rem 0 ;
+
+    /* max-width:100% */
 display:flex;
 flex-direction:column;
 /* background:red; */
-width: 100%;
+/* width: 100%; */
+/* max-width: 100%; */
   }
   p{
     margin:0;
   }
   .name {
-    font-size: 1.5em;
+    font-size: 1.4em;
     margin: 0;
   }
   .btn-more {
-    margin: 0 auto;
+    margin: 0 auto 0 0;
     /* cursor: pointer; */
     background: var(--second);
     color: var(--white);
     border: transparent;
     border-radius: 0.25rem;
-    padding: 0.375rem 0.75rem;
+    padding: 0.4rem 1.1rem;
     text-decoration:none;
+    font-weight:600;
+    font-size:1.03em;
+    letter-spacing: 0.02em;
 
     &:hover {
       /* background: green; */
@@ -68,6 +91,7 @@ function MissingContainerElement({ data, index, selectedItem, setSelectedItem, s
   return (
     <StyledMissingContainerElement
       background={`${selectedItem === index ? 'var(--selected-item)' : 'var(--not-selected-item)'}`}
+      outline={`${selectedItem === index ? 'var(--outline-selected)' : 'var(--outline)'}`}
       onClick={() => {
         setSelectedItem(index);
         setCordinates({

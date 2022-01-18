@@ -46,8 +46,28 @@ const StyledMissing = styled.main`
     top: -3rem;
     left: -1.5rem;
     cursor: pointer;
+    filter: drop-shadow(0px 0px 5px hsla(0, 0%, 20%, 0.5));
     &.selected {
       /* transition: height 0.3s; */
+      width: 6rem;
+      height: 6rem;
+      top: -6rem;
+      left: -3rem;
+      animation-duration: 1.25s;
+      animation-name: changewidth;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+  }
+  @keyframes changewidth {
+    from {
+      width: 6rem;
+      height: 6rem;
+      top: -6rem;
+      left: -3rem;
+    }
+
+    to {
       width: 5rem;
       height: 5rem;
       top: -5rem;

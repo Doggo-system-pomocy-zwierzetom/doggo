@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import MissingContainerElement from './MissingContainerElement';
 const StyledMissingContainer = styled.div`
-  max-width: 550px;
-  padding: 1.5rem;
+  max-width: 450px;
+  padding: 0 1rem 1.5rem 1rem;
   /* background: var(--outline-lighten); */
   /* box-shadow: inset 0 0 10px var(--outline); */
   box-shadow: inset -20px 0px 20px -10px var(--outline);
@@ -16,8 +16,17 @@ const StyledMissingContainer = styled.div`
 
   min-width: 25rem;
   .title {
-    font-size: 1.5em;
-    font-weight: 600;
+    color: var(--dark-grey);
+    font-size: 1.7em;
+    font-weight: 700;
+    text-align: center;
+    margin: 1.3rem 0;
+    text-shadow: 0px 0px 15px var(--text-shadow-white);
+  }
+  .missing-catalog {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
   }
 `;
 function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, setDeleteMissing }: any) {

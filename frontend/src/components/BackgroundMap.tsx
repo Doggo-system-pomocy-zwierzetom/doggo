@@ -1,6 +1,7 @@
 import GoogleMapReact from 'google-map-react';
 import { useEffect, useState } from 'react';
-import image from '../img/pin.svg';
+import image from '../img/pin-green.svg';
+import image2 from '../img/pin.svg';
 const defaultMapOptions = {
   fullscreenControl: false,
 };
@@ -48,7 +49,7 @@ const AnyReactComponent = ({ text, lat, lng, index, selectedItem, setSelectedIte
       setSelectedItem(index);
     }}
     className={`pin ${selectedItem === index && 'selected'}`}
-    src={`${image}`}
+    src={`${selectedItem === index ? image2 : image}`}
     alt=""
   />
 );
