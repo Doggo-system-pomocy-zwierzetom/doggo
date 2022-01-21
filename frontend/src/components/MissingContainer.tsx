@@ -11,7 +11,7 @@ const StyledMissingContainer = styled.div`
   height: 100%;
   overflow-y: scroll;
 
-  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+  background: linear-gradient(rgba(255, 255, 255, 0.87), rgba(255, 255, 255, 0.87)),
     url('https://i.ibb.co/gy897P8/tlo.png');
 
   min-width: 25rem;

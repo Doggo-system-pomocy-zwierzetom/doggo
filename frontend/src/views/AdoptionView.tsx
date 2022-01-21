@@ -9,20 +9,36 @@ import axios from 'axios';
 import AddAdoptionContainer from '../components/AddAdoptionContainer';
 
 const StyledAdoptionView = styled.main`
-  
-
-.view-header {
+  padding-bottom: 1rem;
+  .view-header {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     margin-left: auto;
-    margin-right:auto;
-    width: 700px;
-  }
-  .aa{
-    max-width: 700px;
-    margin-left: auto;
     margin-right: auto;
+    padding-left: 2rem;
+    width: 800px;
+  }
+
+  .title {
+    color: var(--dark-grey);
+    font-weight: 700;
+
+    text-shadow: 0px 0px 15px var(--text-shadow-white);
+  }
+
+  .btn-adoption {
+    color: var(--white);
+    margin-right: 1.5rem;
+    padding: 0.5rem 1.3rem;
+    background: var(--warning);
+    border-radius: 0.3rem;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    box-shadow: inset -20px 0px 20px -10px var(--outline);
   }
 `;
 const profile: any = localStorage.getItem('profile') || null;
@@ -39,28 +55,41 @@ export default function AdoptionView() {
     axios.get('/adoptions').then((res) => setData(res.data));
 
     // getData();
-  }, [[],isAddAdoptionClicked]);
+  }, [[], isAddAdoptionClicked]);
   // console.log(data);
 
   return (
-    <StyledAdoptionView><div className="main">
-      <div className="view-header">
-        <h1>Adoptuj</h1>
-        {user?.shelter && <button onClick={() => setIsAddAdoptionClicked(true)}>Dodaj adopcje</button>}
+    <StyledAdoptionView>
+      <div className="main">
+        <div className="view-header">
+          <h1 className="title">Adoptuj</h1>
+          {user?.shelter && (
+            <button className="btn-adoption" onClick={() => setIsAddAdoptionClicked(true)}>
+              Dodaj adopcje
+            </button>
+          )}
+          {/* <button className="btn-adoption" onClick={() => setIsAddAdoptionClicked(true)}>
+            Dodaj adopcje
+          </button> */}
+        </div>
+        {isAddAdoptionClicked ? (
+          <AddAdoptionContainer setIsAddMissingClicked={setIsAddAdoptionClicked}></AddAdoptionContainer>
+        ) : (
+          ''
+        )}
+        {data.map((e: any) => {
+          return (
+            <AdoptionContainer
+              key={e.id}
+              id={e._id}
+              name={e.name}
+              description={e.description}
+              image={e.image}
+              shelterName={e.shelterName}
+            />
+          );
+        })}
       </div>
-      {isAddAdoptionClicked ? <div className="aa"><AddAdoptionContainer setIsAddMissingClicked={setIsAddAdoptionClicked}></AddAdoptionContainer></div> : ''}
-      {data.map((e: any) => {
-        return (
-          <AdoptionContainer
-            key={e.id}
-            id={e._id}
-            name={e.name}
-            description={e.description}
-            image={e.image}
-            shelterName = {e.shelterName}
-          />
-        );
-      })}</div>
     </StyledAdoptionView>
   );
   // return (

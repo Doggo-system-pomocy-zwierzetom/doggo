@@ -10,78 +10,58 @@ type Props = {
 };
 
 const StyledMissingContainerElement = styled.div<Props>`
-padding-right:1.3rem;
+  padding-right: 1.3rem;
   display: flex;
   gap: 1.2rem;
   /* margin: 0.6rem auto; */
   width: 100%;
   /* max-width:min-content; */
-min-width:0;
+  min-width: 0;
   /* background: #ddd; */
-  background:${(props) => props.background || 'red'};
+  background: ${(props) => props.background || 'red'};
   /* border: 0.07rem solid var(--card-outline); */
   outline: ${(props) => props.outline || ''};
   box-shadow: -2px 0 11px 0px var(--outline-darken);
-   p{
+  p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    height:100%;
+    height: 100%;
     /* height: min-content; */
-    
   }
- 
+
   border-radius: 5px;
   img {
     width: 8rem;
     height: 8rem;
     object-fit: cover;
-  /* border: 0.2rem solid var(--dark-grey); */
+    /* border: 0.2rem solid var(--dark-grey); */
 
-    border-radius: 5px 0 0 5px ;
+    border-radius: 5px 0 0 5px;
   }
-  .info{
-    min-width:0;
-    width:100%;
-  padding: 0.4rem 0 0.8rem 0 ;
+  .info {
+    min-width: 0;
+    width: 100%;
+    padding: 0.4rem 0 0.8rem 0;
 
     /* max-width:100% */
-display:flex;
-flex-direction:column;
-/* background:red; */
-/* width: 100%; */
-/* max-width: 100%; */
+    display: flex;
+    flex-direction: column;
+    /* background:red; */
+    /* width: 100%; */
+    /* max-width: 100%; */
   }
-  p{
-    margin:0;
+  p {
+    margin: 0;
   }
   .name {
     font-size: 1.4em;
     margin: 0;
   }
-  .btn-more {
-    margin: 0 auto 0 0;
-    /* cursor: pointer; */
-    background: var(--second);
-    color: var(--white);
-    border: transparent;
-    border-radius: 0.25rem;
-    padding: 0.4rem 1.1rem;
-    text-decoration:none;
-    font-weight:600;
-    font-size:1.03em;
-    letter-spacing: 0.02em;
 
-    &:hover {
-      /* background: green; */
-      /* transition: color .15s ease-in-out, background-color .15s ease-in-out,
-      border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
-    }
-}
-  }
-  .description{
-    height:100%;
+  .description {
+    height: 100%;
   }
 `;
 function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates }: any) {

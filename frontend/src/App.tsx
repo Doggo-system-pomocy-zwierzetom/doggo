@@ -56,6 +56,28 @@ main{
   --outline-selected: 0.15rem solid var(--card-outline-selected);
 
 }
+
+.btn-more {
+    margin: 0 auto 0 0;
+    /* cursor: pointer; */
+    background: var(--second);
+    color: var(--white);
+    border: transparent;
+    border-radius: 0.25rem;
+    padding: 0.4rem 1.1rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.03em;
+    letter-spacing: 0.02em;
+
+    &:hover {
+      /* background: green; */
+      /* transition: color .15s ease-in-out, background-color .15s ease-in-out,
+      border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
+      color: var(--white);
+
+    }
+  }
 `;
 
 function App() {

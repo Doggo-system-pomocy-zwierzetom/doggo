@@ -7,7 +7,8 @@ import decode from 'jwt-decode';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
-  width: 100vw;
+  width: 100%;
+  /* max-width: 100vw; */
   /* width: 100% */
   z-index: 2;
   box-shadow: 0 10px 20px 50px var(--outline);
