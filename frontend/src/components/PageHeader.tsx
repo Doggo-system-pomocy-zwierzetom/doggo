@@ -36,7 +36,7 @@ const StyledPageHeader = styled.div`
     /* background: #545454; */
 
     a {
-      color: var(--white);
+      /* color: var(--white); */
     }
     a.nav-link {
       color: var(--white);
@@ -61,14 +61,15 @@ const StyledPageHeader = styled.div`
   .dropdown-toggle.nav-link {
     color: var(--white);
   }
-  a.dropdown-item {
-    color: var(--black);
+  .dropdown-item > a {
+    color: var(--main);
   }
   .btn-missing {
+    color: var(--white);
     margin: auto;
     padding: 0.5rem 0.8rem;
     background: var(--warning);
-    color: var(--black);
+    /* color: var(--black); */
     border-radius: 0.2rem;
     font-weight: 600;
     /* font-size: 1.2rem; */
