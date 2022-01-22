@@ -2,38 +2,91 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import pin from '../img/pin-green.svg';
 
 const StyledAccountView = styled.main`
-/* display: flex; */
-  /* margin: 0 auto; */
-
-  /* justify-content: space-between; */
-  /* flex-direction: column; */
-  /* justify-content: stretch; */
-  background: #ccc;
-  /* margin: 1rem 3vw; */
-  /* padding: 1rem; */
-  /* min-height: 10rem; */
-  /* gap: 1rem; */
-  /* text-align: start; */
-
-  .adoption_image {
-    max-width: 500px;
-    max-height: 500px;
-    height: 100%;
-    width: 100%;
-    margin: auto 0;
-  }
-  .adoption_info {
-    /* width: 100%; */
-  }
-
-  .animal-name {
-    font-size: 1.2em;
-    font-weight: 600;
-  }
+.title{
   max-width: 800px;
-  margin: 0 auto;`;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.adoption_info{
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: stretch;
+  background: var(--white);
+  box-shadow: 0 0 20px -5px var(--outline-darken);
+  border: 0.1rem solid var(--outline);
+
+  margin: 1rem 0;
+  padding: 1.5rem 1.5rem 2rem 2rem;
+  min-height: 10rem;
+  gap: 2rem;
+  border-radius: 7px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.image {
+  max-width: 16rem;
+  max-height: 16rem;
+  /* height: 100%;
+  width: 100%; */
+  margin: auto 0;
+  border-radius: 6px;
+  object-fit: contain;
+  /* border-radius: 3px; */
+  background: #e6e6e6;
+  border: 2px solid #dddddd;
+}
+img {
+  width: 30rem;
+  height: 40rem;
+}
+}
+.info{
+    text-align: start;
+    width: 100%;
+    justify-content: space-between;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    
+    }
+    .animal-name {
+      margin: 0;
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+    .description {
+      max-height: 7.95rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .shelter {
+      margin-top: 1em;
+     color: var(--main);
+     font-weight: 600;
+     &::before {
+       content: '';
+       background: url(${pin}) no-repeat;
+       width: 1.4em;
+       height: 1.4em;
+       background-size: contain;
+       float: left;
+       margin-right: 0.2em;
+     }
+   }
+ 
+   .btn-more {
+     font-size: 1.1em;
+     padding: 0.7em 1.5em;
+     margin-left: 1.5rem;
+   }
+
+  `;
 
 export default function AccountView() {
   const profile: any = localStorage.getItem('profile') || null;
@@ -116,17 +169,19 @@ export default function AccountView() {
           <Form.Control name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />
           <Form.Control name="equipment" placeholder="Potrzebne wyposażenie" onChange={handleChange} />
           <Button type="submit">Zatwierdź</Button>
-        </Form><h1>Stworzone adopcje</h1></>)
-    : <h1>Moje adopcje</h1>}
+        </Form><h1 className="title">Stworzone adopcje</h1></>)
+    : <h1 className="title">Moje adopcje</h1>}
     {data.map((e: any) => {
         return (
-          <div>
-            <h2>{e.name}</h2>
-            <img className="adoption_image" src={e.image} alt="" />
-            {JSON.parse(profile).shelter ? <p>{e.userMail}</p> : <p>{e.shelterName}</p>}
-            <p>{e.description}</p>
-            {!JSON.parse(profile).shelter ? <button onClick={()=>removeAdoption(e)}>Zrezygnuj</button> : <button onClick={()=>deleteAdoption(e._id)}>Usuń</button>}
-          </div>
+          <div className="adoption_info">
+          <div className="info">
+            <h2 className="animal-name">{e.name}</h2>
+            {JSON.parse(profile).shelter ? <p>{e.userMail}</p> : <p className='shelter'>{e.shelterName}</p>}
+            <p className='description'>{e.description}</p>
+            {!JSON.parse(profile).shelter ? <button className="btn-more" onClick={()=>removeAdoption(e)}>Zrezygnuj</button> : <button className="btn-more" onClick={()=>deleteAdoption(e._id)}>Usuń</button>}
+            </div>
+            <img className="image" src={e.image} alt="" />
+            </div>
         );})}
     
     </StyledAccountView>

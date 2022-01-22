@@ -69,7 +69,7 @@ const StyledAdoptionContainer = styled.div`
   }
 
   .shelter {
-    margin-top: auto;
+     margin-top: 1em;
     color: var(--main);
     font-weight: 600;
     &::before {
@@ -105,8 +105,9 @@ export default function AdoptionContainer({ id, name, description, image, shelte
       <div className="adoption_info">
         <div className="info">
           <p className="animal-name">{name}</p>
-          <p className="description">{description}</p>
           <p className="shelter">{shelterName}</p>
+          <p className="description">{description}</p>
+          
 
           <Link className="btn-more" to={`/adoptuj/${id}`}>
             Szczegóły
