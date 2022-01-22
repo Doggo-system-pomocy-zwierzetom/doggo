@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
 import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
 import decode from 'jwt-decode';
+import logo from '../img/dog-logo.svg';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
@@ -32,7 +33,7 @@ const StyledPageHeader = styled.div`
   /* .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover */
   .navbar {
     width: calc(100vw - 1.7em);
-
+    font-size: 1.1em;
     /* background: #545454; */
 
     a {
@@ -47,8 +48,32 @@ const StyledPageHeader = styled.div`
         color: var(--white);
       }
     }
+    .link-login{
+      color: var(--white);
+    }
     .navbar-brand:hover {
       color: var(--white);
+    }
+    .container {
+      /* display: flex; */
+      a.navbar-brand {
+        padding:0;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        margin-right: 3rem;
+        p{
+          margin-bottom:0.1em;
+          font-size:1.1em;
+          font-weight:600;
+        }
+        .nav-logo {
+    /* width: 2rem; */
+    height: 2.5rem;
+    margin-right: 0.4rem;
+  }
+}
+      }
     }
   }
   .selected {
@@ -87,6 +112,7 @@ const StyledPageHeader = styled.div`
     display: flex;
     gap: 1.5rem;
   }
+
 `;
 function PageHeader() {
   const [user, setUser] = useContext(LoginInfoContext);
@@ -100,20 +126,21 @@ function PageHeader() {
     history.push('/');
   }
 
-useEffect(() => {
+  useEffect(() => {
     const token = user?.token;
-    if(token){
-        const decodedToken:any = decode(token);
-        if(decodedToken?.exp * 1000 < new Date().getTime()) logout();
+    if (token) {
+      const decodedToken: any = decode(token);
+      if (decodedToken?.exp * 1000 < new Date().getTime()) logout();
     }
-} ,[location]);
+  }, [location]);
 
   return (
     <StyledPageHeader>
       <Navbar expand="lg" variant="dark" expanded={expanded}>
         <Container>
           <Navbar.Brand as={Link} to="/">
-            Home
+            <img className="nav-logo" src={`${logo}`} alt="" />
+            <p>Doggo</p>
           </Navbar.Brand>
           <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
