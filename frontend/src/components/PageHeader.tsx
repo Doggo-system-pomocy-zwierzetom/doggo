@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
 import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
 import decode from 'jwt-decode';
-import logo from '../img/dog-logo.svg';
+import logo from '../img/dog-logo.gif';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
