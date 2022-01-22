@@ -91,54 +91,25 @@ const StyledPageHeader = styled.div`
 function PageHeader() {
   const [user, setUser] = useContext(LoginInfoContext);
 
-  // const profile: any = localStorage.getItem('profile');
-  // const [user, setUser] = useState(JSON.parse(profile));
   const [expanded, setExpanded] = useState(false);
   const history = useHistory();
-  // useEffect(() => {
-  //   setUser(JSON.parse(profile));
-  // }, []);
   const location = useLocation();
   function logout() {
     localStorage.clear();
     setUser(null);
     history.push('/');
-    //window.location.reload();
   }
+
+useEffect(() => {
+    const token = user?.token;
+    if(token){
+        const decodedToken:any = decode(token);
+        if(decodedToken?.exp * 1000 < new Date().getTime()) logout();
+    }
+} ,[location]);
 
   return (
     <StyledPageHeader>
-      {/* <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <NavLink activeClassName="selected" to="/zaginiecia">
-            Zaginięcia
-          </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="selected" to="/adoptuj">
-            Adoptuj
-          </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="selected" to="/wesprzyj-schronisko">
-            Wesprzyj schronisko
-          </NavLink>
-        </li>
-        <li>
-          <NavLink activeClassName="selected" to="/zbiorki">
-            Zbiórki
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink activeClassName="selected" to="/kontakt">
-            Kontakt
-          </NavLink>
-        </li>
-      </ul> */}
       <Navbar expand="lg" variant="dark" expanded={expanded}>
         <Container>
           <Navbar.Brand as={Link} to="/">
@@ -171,21 +142,11 @@ function PageHeader() {
               >
                 Wesprzyj schronisko
               </Nav.Link>
-              {/* <Nav.Link
-                as={NavLink}
-                activeClassName="selected"
-                to="/zbiorki"
-                onClick={() => setExpanded(false)}
-              >
-                Zbiórki
-              </Nav.Link> */}
             </Nav>
             <div className="user-menu">
-              {/* <button> */}
               <Link to={user ? '/zglaszanie-zaginiecia' : '/logowanie'} className="btn-missing">
                 Zgłoś zaginięcie
               </Link>
-              {/* </button> */}
               {user ? (
                 <NavDropdown title={`${user && user.result.name}`} id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">{user.name}</NavDropdown.Item>

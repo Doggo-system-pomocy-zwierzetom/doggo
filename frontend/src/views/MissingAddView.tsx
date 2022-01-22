@@ -93,8 +93,8 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
           { headers: { Authorization: `Bearer ${token}` } }
         )
         .then(function (response) {
-          console.log(response);
-          // history.push('/zaginiecia');
+          //console.log(response);
+          history.push('/zaginiecia');
         });
     }
   }
