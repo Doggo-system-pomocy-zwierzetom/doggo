@@ -922,42 +922,12 @@ export default function HomeView() {
         <div className="container" data-aos="fade-up">
           <div className="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
             <div className="col-xl-6 col-lg-8">
+            <img src="assets/img/testimonials/testimonials-5.gif" width="150" height="150" />
               <h1>
-                Drużyna pierścienia<span>.</span>
+                Doggo<span>.</span>
               </h1>
-              <h2>Nie wiemy co robimy</h2>
-            </div>
-          </div>
-
-          <div className="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-            <div className="col-xl-2 col-md-4">
-              <h3>
-                <img src="assets/img/testimonials/testimonials-5.jpg" />
-              </h3>
-            </div>
-
-            <div className="col-xl-2 col-md-4">
-              <h3>
-                <img src="assets/img/testimonials/testimonials-5.jpg" />
-              </h3>
-            </div>
-
-            <div className="col-xl-2 col-md-4">
-              <h3>
-                <img src="assets/img/testimonials/testimonials-5.jpg" />
-              </h3>
-            </div>
-
-            <div className="col-xl-2 col-md-4">
-              <h3>
-                <img src="assets/img/testimonials/testimonials-5.jpg" />
-              </h3>
-            </div>
-
-            <div className="col-xl-2 col-md-4">
-              <h3>
-                <img src="assets/img/testimonials/testimonials-5.jpg" />
-              </h3>
+              <h2>Aplikacja poświęcona zwierzętom!</h2>
+              <h2>Pod patronatem Colliego</h2>
             </div>
           </div>
         </div>
@@ -1217,6 +1187,9 @@ export default function HomeView() {
             </div>
           </div>
         </section>
+
+        
+
         <section id="team" className="team">
           <div className="container" data-aos="fade-up">
             <div className="section-title">
@@ -1304,8 +1277,56 @@ export default function HomeView() {
             </div>
           </div>
         </section>
-      </main>
 
+        <section id="about" className="about">
+          <div className="container" data-aos="fade-up">
+            <div className="row">
+              <div className="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+                <img src="assets/img/ekspertka.png" width="250" height="250" className="img-fluid" alt="" />
+              </div>
+              <div
+                className="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content"
+                data-aos="fade-right"
+                data-aos-delay="100"
+              >
+
+            <div className="section-title">
+              <h2>Współpraca</h2>
+              <p>WSPÓŁPRACE</p>
+            </div>
+                <p className="fst-italic">
+                  Współpracujemy ze światowej klasy ekspertem ds. Marketingu!
+                </p>
+                <ul>
+                  <li>
+                    <i className="ri-check-double-line"></i> Sekcja poświęcona współpracy. Można tutaj umieszczać firmy oraz schroniska które współpracują z aplikacją.
+                  </li>
+                  <li>
+                    <i className="ri-check-double-line"></i> cd...
+                  </li>
+                  <li>
+                    <i className="ri-check-double-line"></i> cd...
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </main>
       <a href="#" className="back-to-top d-flex align-items-center justify-content-center">
         <i className="bi bi-arrow-up-short"></i>
       </a>
