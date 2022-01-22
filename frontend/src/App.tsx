@@ -39,6 +39,7 @@ main{
 :root{
   --main: hsl(184.88372093023256, 76.78571428571429%, 21.96078431372549%);
   --second: hsl(180, 40.983606557377044%, 35.88235294117647%) ;
+  --second-hover: hsl(180, 40.983606557377044%, 45.88235294117647%) ;
   --white: hsl(60, 100%, 99.01960784313727%);
   --text-shadow-white: hsl(60, 100%, 99.01960784313727%);
   --black: hsl(0, 0%, 0%);
@@ -51,6 +52,8 @@ main{
   --card-outline-selected: hsl(180, 40.983606557377044%, 72.88235294117647%);
   --outline-lighten: hsl(270.0000000000002, 20.000000000000085%, 99.078431372549%);
   --outline-darken: hsl(270.0000000000002, 20.000000000000085%, 65.078431372549%);
+  --yellow: #ffc451;
+  --yellow-hover: #ffd584;
 
   --outline: 0.1rem solid var(--card-outline);
   --outline-selected: 0.15rem solid var(--card-outline-selected);
