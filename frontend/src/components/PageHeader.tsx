@@ -7,9 +7,9 @@ import decode from 'jwt-decode';
 const StyledPageHeader = styled.div`
   position: absolute;
   /* position: sticky; */
+  max-width: 100vw;
+  background: var(--main);
   width: 100%;
-  /* max-width: 100vw; */
-  /* width: 100% */
   z-index: 2;
   box-shadow: 0 10px 20px 50px var(--outline);
 
@@ -31,8 +31,10 @@ const StyledPageHeader = styled.div`
 } */
   /* .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover */
   .navbar {
+    width: calc(100vw - 1.7em);
+
     /* background: #545454; */
-    background: var(--main);
+
     a {
       color: var(--white);
     }

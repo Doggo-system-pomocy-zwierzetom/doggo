@@ -8,6 +8,7 @@ import LoginView from './LoginView';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
+import '../style/style.css';
 
 const StyledHomeView = styled.main``;
 
@@ -50,7 +51,6 @@ export default function HomeView() {
   //   document.body.appendChild(script);
   // }, []);
   return (
-
     <div style={{ width: '100%' }}>
       <header></header>
 

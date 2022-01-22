@@ -17,7 +17,7 @@ const StyledAdoptionView = styled.main`
     margin-left: auto;
     margin-right: auto;
     padding-left: 2rem;
-    width: 800px;
+    max-width: 800px;
   }
 
   .title {
