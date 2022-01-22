@@ -5,15 +5,48 @@ import { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link, Redirect } from 'react-router-dom';
 import { signin, signup } from '../actions/auth';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
+import dogImage from '../img/dog-login.png';
 
 const StyledLoginView = styled.main`
-  max-width: 300px;
+  max-width: 350px;
   margin: 0 auto;
   .link {
     cursor: pointer;
     text-align: center;
+  }
+  .image-dog {
+    /* margin-top: 2rem;
+    margin-bottom: -2rem; */
+    max-width: 300px;
+    position: relative;
+    z-index: 1;
+    margin: 2rem auto -2rem 2rem;
+  }
+  .card-body {
+    padding: 1.5rem;
+    gap: 1rem;
+    .form-title {
+      text-align: center;
+    }
+    form {
+      margin: 1rem 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      button {
+        margin-top: 1rem;
+        background: var(--second);
+        padding: 1rem;
+        font-size: 1.2em;
+        font-weight: 600;
+        border: none;
+      }
+    }
+    .register-link {
+      color: var(--main);
+    }
   }
 `;
 
@@ -49,8 +82,6 @@ function LoginView() {
       .catch(function (error) {
         console.log(error);
       });
-
-  
   };
   const handleChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -60,16 +91,24 @@ function LoginView() {
         <Redirect to="/" />
       ) : (
         <StyledLoginView>
-          <h1>Logowanie</h1>
-          <Form onSubmit={handleSubmit}>
-            <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleChange} />
-            <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleChange} />
+          <img className="image-dog" src={dogImage} alt="" />
+          <Card>
+            <Card.Body>
+              <h1 className="form-title">Logowanie</h1>
+              <Form onSubmit={handleSubmit}>
+                <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleChange} />
+                <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleChange} />
 
-            <Button type="submit">Zaloguj się</Button>
-            <p className="link">
-              Nie posiadasz konta? <Link to="rejestracja">Zarejestruj się</Link>
-            </p>
-          </Form>
+                <Button type="submit">Zaloguj się</Button>
+                <p className="link">
+                  Nie posiadasz konta?{' '}
+                  <Link className="register-link" to="rejestracja">
+                    Zarejestruj się
+                  </Link>
+                </p>
+              </Form>
+            </Card.Body>
+          </Card>
         </StyledLoginView>
       )}
     </>
