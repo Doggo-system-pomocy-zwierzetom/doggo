@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
+import bone from '../img/bone.svg';
+import house from '../img/house.png';
 
 const StyledShelterContainer = styled.div`
   display: flex;
@@ -12,7 +14,7 @@ const StyledShelterContainer = styled.div`
   border: 0.1rem solid var(--outline);
 
   margin: 1rem 0;
-  padding: 1rem;
+  padding: 1rem 2rem 2rem 2rem;
   min-height: 10rem;
   gap: 2rem;
   border-radius: 7px;
@@ -41,21 +43,74 @@ const StyledShelterContainer = styled.div`
     /* padding: 0.7rem; */
     /* border-radius: 0.7px; */
   }
+  .needs-container {
+    margin-top:1.5rem;
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .food-container {
+      background: var(--main-01);
+      h5 {
+        &::before {
+          content: '';
+          background: url(${bone}) no-repeat;
+          width: 1.6em;
+          height: 1.5em;
+          background-size: contain;
+          float: left;
+          margin-right: 0.4em;
+          margin-top:0.25em;
+        }
+      }
+    }
+    .tools-container {
+      background: var(--warning-01);
+      h5 {
+        &::before {
+          content: '';
+          background: url(${house}) no-repeat;
+          width: 1.5em;
+          height: 1.5em;
+          background-size: contain;
+          float: left;
+          margin-right: 0.4em;
+        }
+    }
+  }
+  .food-container,
+  .tools-container {
+    width: calc(50% - 1rem);
+    min-width: 250px;
+    padding: 1rem 1.3rem 0.3rem 1.3rem;
+    border-radius: 5px;
+    h5{
+      /* margin:1rem; */
+      font-weight: 600;
+    }
+    p{
+      padding-left:2.4em;
+    }
+  }
 `;
 
-export default function ShelterContainer( {name, email, food, equipment}: any) {
-  
+export default function ShelterContainer({ name, email, food, equipment }: any) {
   return (
     <StyledShelterContainer>
       {/* <img className="adoption_image" src={`data:image/png;base64, ${image}`} alt="" /> */}
       <div className="shelter_info">
         <p className="shelter-name">{name}</p>
         <p>{email}</p>
-        <h5>Zapotrzebowanie na żywność</h5>
-        <p>{food}</p>
-        <h5>Potrzebne wyposażenie</h5>
-        <p>{equipment}</p>
-        
+        <div className="needs-container">
+          <div className="food-container">
+            <h5>Zapotrzebowanie na żywność</h5>
+            <p>{food}</p>
+          </div>
+          <div className="tools-container">
+            <h5>Potrzebne wyposażenie</h5>
+            <p>{equipment}</p>
+          </div>
+        </div>
       </div>
     </StyledShelterContainer>
   );
