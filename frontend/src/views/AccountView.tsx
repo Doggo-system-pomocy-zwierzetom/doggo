@@ -11,6 +11,31 @@ const StyledAccountView = styled.main`
   margin-right: auto;
   margin-top: 3rem;
   margin-bottom: 3rem;
+  font-weight: 700;
+}
+.patch-title{
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+.form{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background: var(--white);
+  box-shadow: 0 0 20px -5px var(--outline-darken);
+  border: 0.1rem solid var(--outline);
+  padding: 1.5rem 1.5rem 2rem 2rem;
+  border-radius: 7px;
+}
+.form-input{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
 }
 .adoption_info{
   display: flex;
@@ -34,12 +59,12 @@ const StyledAccountView = styled.main`
   max-height: 16rem;
   /* height: 100%;
   width: 100%; */
-  margin: auto 0;
+  margin: 0 0;
   border-radius: 6px;
   object-fit: contain;
   /* border-radius: 3px; */
-  background: #e6e6e6;
-  border: 2px solid #dddddd;
+  // background: #e6e6e6;
+  // border: 2px solid #dddddd;
 }
 img {
   width: 30rem;
@@ -60,11 +85,6 @@ img {
       font-size: 1.6em;
       font-weight: 700;
     }
-    .description {
-      max-height: 7.95rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
     .shelter {
       margin-top: 1em;
      color: var(--main);
@@ -82,8 +102,7 @@ img {
  
    .btn-more {
      font-size: 1.1em;
-     padding: 0.7em 1.5em;
-     margin-left: 1.5rem;
+     padding: 0.5em 1.5em;
    }
 
   `;
@@ -94,9 +113,10 @@ export default function AccountView() {
   const [data, setData] = useState([])
   const [formData, setFormData] = useState({food:'', equipment:''})
   const [removedAdoption, setRemovedAdoption] = useState(false);
+  const [showClicked, setShowClicked] = useState(false);
   async function getData() {
 
-    await fetch(`/adoptions`, {})
+    fetch(`/adoptions`, {})
       .then((res) => {
         if (res.ok) return res.json();
       })
@@ -142,22 +162,25 @@ export default function AccountView() {
     e.preventDefault();
     let shelter = JSON.parse(profile).result;
     let id = JSON.parse(profile).result._id;
-    // console.log(shelter);
-    // console.log(id);
+    console.log(formData);
+    shelter.food = formData.food;
+    shelter.equipment = formData.equipment;
+    setShowClicked(false);
+    setFormData({food:'', equipment:''});
     axios
     .patch(
-      `/shelters/${id}`, {id :id,
+      `/shelters/${id}`, {_id:id,
         name :shelter.name,
         email :shelter.email,
-        password :shelter.password,
         NIP: shelter.NIP,
-        food: formData.food,
-        equipment: formData.equipment},
+        password :shelter.password,
+        food: shelter.food,
+        equipment: shelter.equipment},
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then((res:any) => {
       console.log(res);
-      setFormData({food:'', equipment:''});
+      //setFormData({food:'', equipment:''});
       if (res.ok) return res.json();
     })
   }
@@ -165,11 +188,14 @@ export default function AccountView() {
   return (
     <StyledAccountView>
     {JSON.parse(profile).shelter ? 
-    (<><Form onSubmit={handleSubmit}>
-          <Form.Control name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />
-          <Form.Control name="equipment" placeholder="Potrzebne wyposażenie" onChange={handleChange} />
-          <Button type="submit">Zatwierdź</Button>
-        </Form><h1 className="title">Stworzone adopcje</h1></>)
+    (<><div className="form">
+    <div className="patch-title" onClick={()=>setShowClicked(!showClicked)}>Zmień informacje o zapotrzebowaniach</div>{showClicked ?(
+    <><Form onSubmit={handleSubmit}>
+          <Form.Control as="textarea" rows={3}  className="form-input"  name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />
+          <Form.Control as="textarea" rows={3} className="form-input" name="equipment" placeholder="Potrzebne wyposażenie" onChange={handleChange} />
+          <Button className="btn-more" type="submit">Zatwierdź</Button>
+        </Form></>):''}</div>
+      <h1 className="title">Stworzone adopcje</h1></>)
     : <h1 className="title">Moje adopcje</h1>}
     {data.map((e: any) => {
         return (

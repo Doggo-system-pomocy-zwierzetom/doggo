@@ -46,8 +46,8 @@ const StyledAdoptionContainer = styled.div`
       border-radius: 6px;
       object-fit: contain;
       /* border-radius: 3px; */
-      background: #e6e6e6;
-      border: 2px solid #dddddd;
+      // background: #e6e6e6;
+      // border: 2px solid #dddddd;
     }
     img {
       width: 30rem;
