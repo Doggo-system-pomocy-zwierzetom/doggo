@@ -249,11 +249,7 @@ export default function AccountView() {
     setFormData({food:'', equipment:''});
     axios
     .patch(
-      `/shelters/${id}`, {_id:id,
-        name :shelter.name,
-        email :shelter.email,
-        NIP: shelter.NIP,
-        password :shelter.password,
+      `/shelters/${id}`, {
         food: shelter.food,
         equipment: shelter.equipment},
       { headers: { Authorization: `Bearer ${token}` } }
