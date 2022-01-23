@@ -36,6 +36,8 @@ const StyledMissingContainerElement = styled.div<Props>`
     width: 8rem;
     height: 8rem;
     object-fit: cover;
+    min-width: 8rem;
+    min-height: 8rem;
     /* border: 0.2rem solid var(--dark-grey); */
 
     border-radius: 5px 0 0 5px;
@@ -84,7 +86,7 @@ function MissingContainerElement({ data, index, selectedItem, setSelectedItem, s
       <img src={`${data.image}`} alt="Zdjęcie psa." />
       <div className="info">
         <p className="name">{data.title}</p>
-        <p className="description">{data.time.substring(0,10) + " " + data.time.substring(11,16)}</p>
+        <p className="description">{data.time.substring(0, 10) + ' ' + data.time.substring(11, 16)}</p>
         {/* <button className="btn-more">Szczegóły</button> */}
         <Link to={`/zaginiecia/${data._id}`} className="btn-more">
           Szczegóły
