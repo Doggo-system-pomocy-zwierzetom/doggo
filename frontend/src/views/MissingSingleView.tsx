@@ -55,9 +55,21 @@ const StyledMissingSingleView = styled.main`
     display: flex;
     gap: 4vw;
     /* flex-wrap: wrap; */
-    .left-column {
+    .column-left {
       /* width: 80%; */
       min-width: 60%;
+    }
+    .column-right {
+      min-width: 40%;
+      display: flex;
+      flex-direction: column;
+      .contact {
+        margin-top: 2rem;
+        width: 100%;
+        background: var(--main-01);
+        padding: 1rem 1.5rem;
+        border-radius: 7px;
+      }
     }
   }
 
@@ -104,7 +116,7 @@ export default function MissingSingleView() {
       .then((data) => {
         data = data.filter((e: any) => e._id === id);
         setData(data);
-        // console.log(data);
+        console.table(data);
       });
   }
 
@@ -138,17 +150,23 @@ export default function MissingSingleView() {
         </button>
       </div>
       <div className="main">
-        <div className="left-column">
+        <div className="column-left">
           <img className="photo" src={`${data[0].image}`} alt="Zdjęcie psa." />
           <p className="description">{data[0].description}</p>
         </div>
-        <MapSingle
-          props={defaultProps}
-          data={data[0]}
-          // setOnClickLocation={setOnClickLocation}
-          selectedItem={selectedItem}
-          setSelectedItem={setSelectedItem}
-        />
+        <div className="column-right">
+          <MapSingle
+            props={defaultProps}
+            data={data[0]}
+            // setOnClickLocation={setOnClickLocation}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          />
+          <div className="contact">
+            <h2>Kontakt</h2>
+            <p>email:</p>
+          </div>
+        </div>
       </div>
       {/* <MissingSingleContainer data={data} /> */}
     </StyledMissingSingleView>

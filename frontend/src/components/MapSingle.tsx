@@ -6,8 +6,8 @@ const StyledMapSingle = styled.div`
   /* height: 50vmax; */
   /* height: 100%; */
   width: 100%;
-  min-height: 0;
-  max-height: 30rem;
+  height: 30rem;
+
   /* max-width: 30rem; */
   /* min-width: 30rem; */
   /* height: 50vmax; */
