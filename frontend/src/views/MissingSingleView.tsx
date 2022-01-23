@@ -50,6 +50,11 @@ max-width: 1300px;
     border: none;
     font-size: 1.2em;
     border-radius: 5px;
+    &:hover {
+      border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
+      color: var(--white);
+      background: var(--dark-grey2);
+    }
   }
 
   .header {
@@ -90,6 +95,9 @@ max-width: 1300px;
     border-radius: 5px;
     background: #000;
     margin-bottom: 2rem;
+  }
+  .description{
+    font-size: 1.1em;
   }
 `;
 
