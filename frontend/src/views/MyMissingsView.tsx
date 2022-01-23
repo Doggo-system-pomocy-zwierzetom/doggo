@@ -161,10 +161,17 @@ export default function MyMissingsView() {
           history.push('/zaginiecia');
         });
   }
+  function sortingFunction(a:any, b:any){
+    let timeA :string = a.time;
+    let timeB :string = b.time;
+    let dateA:any= new Date(timeA);
+    let dateB:any= new Date(timeB);
+    return dateB - dateA;
+}
   return (
     <StyledMyMissingsView>
     <h1 className="title">Zgłoszone zaginięcia</h1>
-    {data.map((e: any) => {
+    {data.sort(sortingFunction).map((e: any) => {
         return (
           <div className={daysFromToday(e.time)>30 ? "adoption_info-red" : "adoption_info"} key={e._id}>
             <div className="info">

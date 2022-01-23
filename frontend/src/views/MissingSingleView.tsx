@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 type Missing = {
+  creator: string;
   latitude: number;
   longitude: number;
   image: string;
@@ -21,6 +22,10 @@ const StyledMissingSingleView = styled.main`
   max-width: 1300px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 20px 0px var(--outline-darken);
+  border: 0.2rem solid var(--outline);
+  background: var(--white);
+  
 
   gap: 1rem;
 
@@ -49,6 +54,7 @@ const StyledMissingSingleView = styled.main`
   .header {
     display: flex;
     justify-content: space-between;
+  
   }
 
   .main {
@@ -96,7 +102,7 @@ export default function MissingSingleView() {
   // });
 
   const [data, setData] = useState<Missing[]>([
-    { latitude: 0, longitude: 0, image: '', title: '', description: '' },
+    { creator: '', latitude: 0, longitude: 0, image: '', title: '', description: '' },
   ]);
   // const [onClickLocation, setOnClickLocation] = useState({ lat: 50.8210857, lng: 19.0765357 });
   const [defaultProps, setDefaultProps] = useState({
@@ -164,7 +170,7 @@ export default function MissingSingleView() {
           />
           <div className="contact">
             <h2>Kontakt</h2>
-            <p>email:</p>
+            <p>email: {data[0].creator}</p>
           </div>
         </div>
       </div>
