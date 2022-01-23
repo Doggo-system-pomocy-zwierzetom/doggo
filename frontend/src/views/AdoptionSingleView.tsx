@@ -6,33 +6,63 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const StyledAdoptionSingleView = styled.main`
-  /* display: flex; */
-  /* margin: 0 auto; */
+max-width: 1300px;
+display: flex;
+flex-direction: column;
+box-shadow: 0 0 20px 0px var(--outline-darken);
+border: 0.2rem solid var(--outline);
+background: var(--white);
 
-  /* justify-content: space-between; */
-  /* flex-direction: column; */
-  /* justify-content: stretch; */
-  background: #ccc;
-  /* margin: 1rem 3vw; */
-  /* padding: 1rem; */
-  /* min-height: 10rem; */
-  /* gap: 1rem; */
-  /* text-align: start; */
 
+gap: 1rem;
+
+padding: 4.6rem 3vw 1rem 3vw;
+
+.header {
+  background: var(--main);
+  border-radius: 5px;
+  margin-top: 2rem;
+  width: 100%;
+  color: var(--white);
+    font-weight: 600;
+    font-size: 2.5em;
+    margin-bottom: 1rem;
+    padding: 1rem 3rem;
+}
   .adoption_image {
     max-width: 500px;
     max-height: 500px;
     height: 100%;
     width: 100%;
-    margin: auto 0;
+    margin: auto auto;
   }
   .adoption_info {
     /* width: 100%; */
+    font-size: 1.1em;
+    margin-top: 2rem;
   }
 
   .animal-name {
     font-size: 1.2em;
     font-weight: 600;
+  }
+  .btn-more{
+    float:left;
+    margin-right: 1rem;
+  }
+  .btn-delete{
+    float:left;
+    width: fit-content;
+    *{
+      text-decoration: none;
+      color: var(--white);
+    }
+    margin-left:0;
+  }
+  .red{
+    color: var(--warning);
+    font-size: 1.2em;
+    font-weight: 700;
   }
   max-width: 800px;
   margin: 0 auto;
@@ -97,16 +127,17 @@ export default function AdoptionSingleView() {
   }, [userMail]);
   return (
     <StyledAdoptionSingleView>
-      <h1>{name}</h1>
+      <h1 className="header">{name}</h1>
       <img className="adoption_image" src={image} alt="" />
       <div className="adoption_info">
         <p>{description}</p>
       </div>
-      {JSON.parse(profile)?.shelter === false && !userMail? <button onClick={()=>addUser()}>Zgłoś chęć adopcji</button> 
-      : (JSON.parse(profile)?.shelter === false ? 'Ktoś już jest zainteresowany adopcją' : '')}
-      <Link className="link-more-info" to={`/adoptuj/`}>
+      <div className="buttons">
+      {JSON.parse(profile)?.shelter === false && !userMail? <button className="btn-more" onClick={()=>addUser()}>Zgłoś chęć adopcji</button> 
+      : (JSON.parse(profile)?.shelter === false ? <p className="red">Ktoś już jest zainteresowany adopcją</p> : '')}
+      <button className='btn-delete'><Link className="link-more-info" to={`/adoptuj/`}>
           Powrót
-      </Link>
+      </Link></button></div>
     </StyledAdoptionSingleView>
   );
 }
