@@ -19,7 +19,8 @@ type Missing = {
 };
 
 const StyledMissingSingleView = styled.main`
-  max-width: 1300px;
+
+max-width: 1300px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 20px 0px var(--outline-darken);
@@ -32,7 +33,7 @@ const StyledMissingSingleView = styled.main`
   padding: 4.6rem 3vw 1rem 3vw;
 
   .name {
-    //color: var(--dark-grey);
+    color: var(--white);
     font-weight: 700;
     font-size: 2.5em;
     margin-top: 1rem;
@@ -56,7 +57,8 @@ const StyledMissingSingleView = styled.main`
     justify-content: space-between;
     background: var(--main);
     border-radius: 5px;
-  
+    margin-top: 2rem;
+    
   }
 
   .main {
