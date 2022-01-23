@@ -71,7 +71,7 @@ export default function AdoptionView() {
           <h1 className="title">Adoptuj</h1>
           {user?.shelter && (
             <button className="btn-adoption" onClick={() => setIsAddAdoptionClicked(true)}>
-              Dodaj adopcje
+              Dodaj adopcję
             </button>
           )}
           {/* <button className="btn-adoption" onClick={() => setIsAddAdoptionClicked(true)}>

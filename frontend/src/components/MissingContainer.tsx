@@ -32,13 +32,20 @@ const StyledMissingContainer = styled.div`
 function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, setDeleteMissing }: any) {
   // console.log(selectedItem);
   console.log(data.length);
-
+  const today = new Date();
+  function daysFromToday(date:string):any{
+    const dateFormat = new Date(date);
+    var diff = Math.abs(today.getTime() - dateFormat.getTime());
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    return diffDays;
+  }
   return (
     <StyledMissingContainer>
       <p className="title">Zaginione zwierzęta w okolicy</p>
       <div className="missing-catalog">
-        {data.length &&
-          data.map((e: any, index: number) => {
+        {data.length && 
+        data.filter((data:any) => (daysFromToday(data.time)<=30))
+          .map((e: any, index: number) => {
             return (
               <MissingContainerElement
                 data={e}

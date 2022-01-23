@@ -67,7 +67,6 @@ const StyledMissingContainerElement = styled.div<Props>`
 function MissingContainerElement({ data, index, selectedItem, setSelectedItem, setCordinates }: any) {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
-
   return (
     <StyledMissingContainerElement
       background={`${selectedItem === index ? 'var(--selected-item)' : 'var(--not-selected-item)'}`}
@@ -85,7 +84,7 @@ function MissingContainerElement({ data, index, selectedItem, setSelectedItem, s
       <img src={`${data.image}`} alt="Zdjęcie psa." />
       <div className="info">
         <p className="name">{data.title}</p>
-        <p className="description">{data.description}</p>
+        <p className="description">{data.time.substring(0,10) + " " + data.time.substring(11,16)}</p>
         {/* <button className="btn-more">Szczegóły</button> */}
         <Link to={`/zaginiecia/${data._id}`} className="btn-more">
           Szczegóły
