@@ -1,4 +1,5 @@
 import Shelter from '../models/shelter.js';
+import mongoose from 'mongoose';
 
 export const getShelters = async (req, res) => {
   try {
@@ -11,10 +12,9 @@ export const getShelters = async (req, res) => {
 export const updateShelter = async (req, res) => {
   const { id: _id } = req.params;
   const ex = req.body;
-
   if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Nieprawidłowe dane');
-
-  const updatedEx = await ShelterModel.findByIdAndUpdate(_id, { ...ex, _id }, { new: true });
+  console.log(_id);
+  const updatedEx = await Shelter.findByIdAndUpdate(_id, { ...ex, _id }, { new: true });
 
   res.json(updatedEx);
 };

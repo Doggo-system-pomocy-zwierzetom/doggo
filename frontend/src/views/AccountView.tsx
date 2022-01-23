@@ -191,9 +191,13 @@ export default function AccountView() {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
   const [data, setData] = useState([])
-  const [formData, setFormData] = useState({food:'', equipment:''})
+  const [formData, setFormData] = useState({
+    food: '',
+    equipment: ''})
   const [removedAdoption, setRemovedAdoption] = useState(false);
   const [showClicked, setShowClicked] = useState(false);
+  const [food, setFood] = useState(JSON.parse(profile).result.food)
+  const [equipment, setEquipment] = useState(JSON.parse(profile).result.equipment)
   async function getData() {
 
     fetch(`/adoptions`, {})
@@ -204,6 +208,20 @@ export default function AccountView() {
         if(JSON.parse(profile).shelter) data = data.filter((e: any) => e.shelterName === JSON.parse(profile).result.name);
         else data = data.filter((e: any) => e.userMail === JSON.parse(profile).result.email);
         setData(data);
+      });
+  }
+  async function getShelterDetails() {
+
+    fetch(`/shelters`, {})
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .then((data) => {
+        if(JSON.parse(profile).shelter) data = data.filter((e: any) => e.name === JSON.parse(profile).result.name);
+        else data = data.filter((e: any) => e.userMail === JSON.parse(profile).result.email);
+        console.log(food);
+        setFood(data.food);
+        setEquipment(data.equipment);
       });
   }
   function removeAdoption(e:any){
@@ -240,25 +258,24 @@ export default function AccountView() {
 
   function handleSubmit(e:any){
     e.preventDefault();
-    let shelter = JSON.parse(profile).result;
     let id = JSON.parse(profile).result._id;
-    console.log(formData);
-    shelter.food = formData.food;
-    shelter.equipment = formData.equipment;
+    console.log(data)
     setShowClicked(false);
-    setFormData({food:'', equipment:''});
     axios
     .patch(
-      `/shelters/${id}`, {
-        food: shelter.food,
-        equipment: shelter.equipment},
+      `/shelters/${id}`, {food: formData.food, equipment:formData.equipment},
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then((res:any) => {
-      console.log(res);
+      //console.log(res);
       //setFormData({food:'', equipment:''});
+      setFood(formData.food);
+      setEquipment(formData.equipment);
       if (res.ok) return res.json();
-    })
+    }).catch((e:Error)=>{
+      console.log(e);
+    }
+    )
   }
   const handleChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value });
   return (
@@ -269,11 +286,11 @@ export default function AccountView() {
     <div className="needs-container">
           <div className="food-container">
             <h5>Zapotrzebowanie na żywność</h5>
-            <p>{JSON.parse(profile).result.food}</p>
+            <p>{food}</p>
           </div>
           <div className="tools-container">
             <h5>Potrzebne wyposażenie</h5>
-            <p>{JSON.parse(profile).result.equipment}</p>
+            <p>{equipment}</p>
           </div>
         </div>
     </div><div className="form">
