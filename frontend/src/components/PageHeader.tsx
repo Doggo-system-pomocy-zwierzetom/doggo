@@ -87,7 +87,10 @@ const StyledPageHeader = styled.div`
     color: var(--white);
   }
   .dropdown-item > a {
-    color: var(--main);
+    //color: var(--main);
+  color: black;
+  text-decoration: none;
+  display: block;
   }
   .btn-missing {
     color: var(--white);
