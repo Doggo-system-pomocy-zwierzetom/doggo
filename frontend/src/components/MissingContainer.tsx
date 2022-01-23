@@ -39,12 +39,20 @@ function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, 
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
     return diffDays;
   }
+  function sortingFunction(a:any, b:any){
+    let timeA :string = a.time;
+    let timeB :string = b.time;
+    let dateA:any= new Date(timeA);
+    let dateB:any= new Date(timeB);
+    return dateA - dateB;
+}
   return (
     <StyledMissingContainer>
       <p className="title">Zaginione zwierzęta w okolicy</p>
       <div className="missing-catalog">
         {data.length && 
         data.filter((data:any) => (daysFromToday(data.time)<=30))
+        .sort(sortingFunction)
           .map((e: any, index: number) => {
             return (
               <MissingContainerElement
