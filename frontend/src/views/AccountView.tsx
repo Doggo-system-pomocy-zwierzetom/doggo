@@ -207,7 +207,7 @@ export default function AccountView() {
   return (
     <StyledAccountView>
     {JSON.parse(profile).shelter ? 
-    (<><div className="zapotrzebowanie"><p>Aktualne zapotrzebowanie na żywność: <span>{JSON.parse(profile).result.food}</span></p>
+    (<><h1 className="title">Zapotrzebowania</h1><div className="zapotrzebowanie"><p>Aktualne zapotrzebowanie na żywność: <span>{JSON.parse(profile).result.food}</span></p>
     <p>Potrzebne wyposażenie: <span>{JSON.parse(profile).result.equipment}</span></p></div><div className="form">
       
     <div className="patch-title" onClick={()=>setShowClicked(!showClicked)}>Zmień informacje o zapotrzebowaniach</div>{showClicked ?(
