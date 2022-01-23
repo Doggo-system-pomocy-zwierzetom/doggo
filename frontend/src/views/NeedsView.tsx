@@ -14,7 +14,7 @@ const StyledNeedsView = styled.main`
     font-weight: 700;
 
     text-shadow: 0px 0px 15px var(--text-shadow-white);
-    margin: 0.5rem 2rem 1rem 2rem;
+    margin: 2rem 2rem 2rem 2rem;
   }
 `;
 

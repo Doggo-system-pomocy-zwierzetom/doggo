@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import pin from '../img/pin-green.svg';
-
+import bone from '../img/bone.svg';
+import house from '../img/house.png';
+import edit from '../img/edit.png';
 const StyledAccountView = styled.main`
 .title{
   max-width: 800px;
@@ -17,9 +19,19 @@ const StyledAccountView = styled.main`
   cursor: pointer;
   font-weight: 700;
   font-size: 1.1em;
+  color: hsl(358deg 69% 40%);
+  &::after {
+    content: '';
+    background: url(${edit}) no-repeat;
+    width: 1.3em;
+    height: 1.3em;
+    background-size: contain;
+    float: left;
+    margin-right: 1em;
+  }
 }
 .patch-title:hover{
-  color: var(--dark-grey2)
+  color: hsl(9.450381679389315, 49.778656126482204%, 47.6078431372549%)
 }
 .form{
   max-width: 800px;
@@ -124,6 +136,55 @@ img {
     font-weight: 700;
   }
 }
+.needs-container {
+  margin-top:1.5rem;
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  .food-container {
+    background: var(--main-01);
+    h5 {
+      &::before {
+        content: '';
+        background: url(${bone}) no-repeat;
+        width: 1.6em;
+        height: 1.5em;
+        background-size: contain;
+        float: left;
+        margin-right: 0.4em;
+        margin-top:0.25em;
+      }
+    }
+  }
+  .tools-container {
+    background: var(--warning-01);
+    h5 {
+      &::before {
+        content: '';
+        background: url(${house}) no-repeat;
+        width: 1.5em;
+        height: 1.5em;
+        background-size: contain;
+        float: left;
+        margin-right: 0.4em;
+      }
+  }
+}
+.food-container,
+.tools-container {
+  width: calc(50% - 1rem);
+  min-width: 250px;
+  padding: 1rem 1.3rem 0.3rem 1.3rem;
+  border-radius: 5px;
+  h5{
+    /* margin:1rem; */
+    font-weight: 600;
+  }
+  p{
+    padding-left:2.4em;
+  }
+}
   `;
 
 export default function AccountView() {
@@ -207,8 +268,19 @@ export default function AccountView() {
   return (
     <StyledAccountView>
     {JSON.parse(profile).shelter ? 
-    (<><h1 className="title">Zapotrzebowania</h1><div className="zapotrzebowanie"><p>Aktualne zapotrzebowanie na żywność: <span>{JSON.parse(profile).result.food}</span></p>
-    <p>Potrzebne wyposażenie: <span>{JSON.parse(profile).result.equipment}</span></p></div><div className="form">
+    (<><h1 className="title">Zapotrzebowania</h1>
+    <div className="zapotrzebowanie">
+    <div className="needs-container">
+          <div className="food-container">
+            <h5>Zapotrzebowanie na żywność</h5>
+            <p>{JSON.parse(profile).result.food}</p>
+          </div>
+          <div className="tools-container">
+            <h5>Potrzebne wyposażenie</h5>
+            <p>{JSON.parse(profile).result.equipment}</p>
+          </div>
+        </div>
+    </div><div className="form">
       
     <div className="patch-title" onClick={()=>setShowClicked(!showClicked)}>Zmień informacje o zapotrzebowaniach</div>{showClicked ?(
     <><Form onSubmit={handleSubmit}>

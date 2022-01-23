@@ -101,6 +101,9 @@ const StyledPageHeader = styled.div`
     cursor: pointer;
     border: none;
     text-decoration: none;
+    &:hover{
+      background: hsl(9.450381679389315, 49.778656126482204%, 47.6078431372549%);
+    }
   }
   .link-login {
     color: #000;

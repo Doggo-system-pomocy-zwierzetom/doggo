@@ -23,14 +23,17 @@ const StyledAdoptionView = styled.main`
   .title {
     color: var(--dark-grey);
     font-weight: 700;
-
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     text-shadow: 0px 0px 15px var(--text-shadow-white);
   }
 
   .btn-adoption {
     color: var(--white);
+    max-height: 4rem;
     margin-right: 0rem;
-    padding: 0.6em 1.4em;
+    margin-top: 1rem;
+    padding: 0.5em 1.3em;
     background: var(--dark-grey2);
     border-radius: 0.3rem;
     font-weight: 600;
@@ -39,6 +42,9 @@ const StyledAdoptionView = styled.main`
     border: none;
     text-decoration: none;
     box-shadow: inset -20px 0px 20px -10px var(--outline);
+    &:hover {
+      background: var(--dark-grey);
+    }
   }
 `;
 const profile: any = localStorage.getItem('profile') || null;
