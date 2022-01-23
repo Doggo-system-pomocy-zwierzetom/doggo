@@ -46,6 +46,7 @@ main{
   --text-shadow-white: hsl(60, 100%, 99.01960784313727%);
   --black: hsl(0, 0%, 0%);
   --dark-grey: hsl(0, 0%, 20%);
+  --dark-grey2: hsl(0, 0%, 30%);
   --warning: hsl(11.450381679389315, 51.778656126482204%, 49.6078431372549%);
   --selected-item: hsl(187.50000000000009, 86.00000000000006%, 93.07843137254902%);
   --not-selected-item: hsl(0, 0%, 98%);
@@ -69,7 +70,7 @@ main{
     color: var(--white);
     border: transparent;
     border-radius: 0.25rem;
-    padding: 0.4rem 1.1rem;
+    padding: 0.5rem 1.2rem;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.03em;
@@ -80,7 +81,32 @@ main{
       /* transition: color .15s ease-in-out, background-color .15s ease-in-out,
       border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
       color: var(--white);
+      background: var(--main);
+    }
+  }
+  .btn-delete {
+    color: var(--white);
+    margin-right: 0rem;
+    padding: 0.5rem 1.3rem;
+    background: var(--dark-grey2);
+    border-radius: 0.3rem;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    box-shadow: inset -20px 0px 20px -10px var(--outline);
+    font-size: 1.03em;
+    padding: 0.5em 1.2em;
+    margin-left: 1.0rem;
+    
 
+    &:hover {
+      /* background: green; */
+      /* transition: color .15s ease-in-out, background-color .15s ease-in-out,
+      border-color .15s ease-in-out, box-shadow .15s ease-in-out; */
+      color: var(--white);
+      background: var(--dark-grey);
     }
   }
 `;

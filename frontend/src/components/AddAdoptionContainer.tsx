@@ -5,15 +5,27 @@ import { Card, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 
 const StyledAddAdoptionContainer = styled.div`
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  down: 0;
-  width: 90vw;
-  max-width: 600px;
+  
+background: var(--white);
+width: 800px;
+margin: auto;
+margin-top: 2rem;
+padding-top: 2rem;
+padding-bottom: 2rem;
+box-shadow: 0 0 20px -5px var(--outline-darken);
+  border: 0.1rem solid var(--outline);
+  border-radius: 8px;
+.card{
+    max-width: 700px;
   margin: auto;
-  margin-top: 6rem;
+  }
+  .btn-delete {
+    margin-top: 2rem;
+  }
+  .btn-more {
+    margin-top: 2rem;
+  }
+  
 `;
 
 function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
@@ -81,6 +93,7 @@ function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
             <Form.Control
               id="description"
               type="text"
+              as="textarea" rows={3}
               onChange={(e) => setAdoption({ ...adoption, description: e.target.value })}
               required
             />
@@ -92,8 +105,8 @@ function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
               required
             />
             <Form.Group>
-              <Button type="submit">Wyślij zgłoszenie</Button>
-              <Button variant="secondary" onClick={() => setIsAddMissingClicked(false)}>
+              <Button className="btn-more" type="submit">Wyślij zgłoszenie</Button>
+              <Button  className="btn-delete" onClick={() => setIsAddMissingClicked(false)}>
                 Anuluj
               </Button>
             </Form.Group>

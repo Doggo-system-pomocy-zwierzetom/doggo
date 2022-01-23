@@ -38,8 +38,8 @@ const StyledAdoptionContainer = styled.div`
       }
     }
     .image {
-      max-width: 16rem;
-      max-height: 16rem;
+      max-width: 18rem;
+      max-height: 15rem;
       /* height: 100%;
       width: 100%; */
       margin: auto 0;
@@ -58,7 +58,7 @@ const StyledAdoptionContainer = styled.div`
   .animal-name {
     margin: 0;
     font-size: 1.4em;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .link-more-info {
@@ -85,7 +85,23 @@ const StyledAdoptionContainer = styled.div`
 
   .btn-more {
     font-size: 1.1em;
-    padding: 0.7em 1.5em;
+    padding: 0.6em 1.4em;
+    margin-left: 0rem;
+  }
+  .btn-delete {
+    color: var(--white);
+    margin-right: 0rem;
+    padding: 0.5rem 1.3rem;
+    background: var(--dark-grey2);
+    border-radius: 0.3rem;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    box-shadow: inset -20px 0px 20px -10px var(--outline);
+    font-size: 1.1em;
+    padding: 0.6em 1.4em;
     margin-left: 1.5rem;
   }
 `;
@@ -108,16 +124,16 @@ export default function AdoptionContainer({ id, name, description, image, shelte
           <p className="shelter">{shelterName}</p>
           <p className="description">{description}</p>
           
-
+<div>
           <Link className="btn-more" to={`/adoptuj/${id}`}>
             Szczegóły
           </Link>
 
           {JSON.parse(profile)?.result.name === shelterName && JSON.parse(profile).shelter ? (
-            <button onClick={() => deleteAdoption(id)}>Usuń</button>
+            <button className="btn-delete" onClick={() => deleteAdoption(id)}>Usuń</button>
           ) : (
             ''
-          )}
+          )}</div>
         </div>
 
         <img src={image} className="image" />

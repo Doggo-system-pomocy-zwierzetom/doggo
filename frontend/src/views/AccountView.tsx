@@ -9,7 +9,7 @@ const StyledAccountView = styled.main`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
   font-weight: 700;
 }
@@ -17,6 +17,9 @@ const StyledAccountView = styled.main`
   cursor: pointer;
   font-weight: 700;
   font-size: 1.1em;
+}
+.patch-title:hover{
+  color: var(--dark-grey2)
 }
 .form{
   max-width: 800px;
@@ -37,6 +40,9 @@ const StyledAccountView = styled.main`
   margin-right: auto;
   max-width: 800px;
 }
+.form-input[name="food"]{
+  margin-top: 2rem;
+}
 .adoption_info{
   display: flex;
   /* justify-content: space-between; */
@@ -55,15 +61,15 @@ const StyledAccountView = styled.main`
   margin-right: auto;
 }
 .image {
-  max-width: 16rem;
-  max-height: 16rem;
+  max-width: 18rem;
+  max-height: 15rem;
   /* height: 100%;
   width: 100%; */
   margin: 0 0;
   border-radius: 6px;
   object-fit: contain;
   /* border-radius: 3px; */
-  // background: #e6e6e6;
+  //background: #e6e6e6;
   // border: 2px solid #dddddd;
 }
 img {
@@ -104,7 +110,20 @@ img {
      font-size: 1.1em;
      padding: 0.5em 1.5em;
    }
-
+.zapotrzebowanie{
+  background: var(--white);
+  box-shadow: 0 0 20px -5px var(--outline-darken);
+  border: 0.1rem solid var(--outline);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  padding: 1.5rem 1.5rem 2rem 2rem;
+  border-radius: 8px;
+  span{
+    font-weight: 700;
+  }
+}
   `;
 
 export default function AccountView() {
@@ -188,7 +207,9 @@ export default function AccountView() {
   return (
     <StyledAccountView>
     {JSON.parse(profile).shelter ? 
-    (<><div className="form">
+    (<><div className="zapotrzebowanie"><p>Aktualne zapotrzebowanie na żywność: <span>{JSON.parse(profile).result.food}</span></p>
+    <p>Potrzebne wyposażenie: <span>{JSON.parse(profile).result.equipment}</span></p></div><div className="form">
+      
     <div className="patch-title" onClick={()=>setShowClicked(!showClicked)}>Zmień informacje o zapotrzebowaniach</div>{showClicked ?(
     <><Form onSubmit={handleSubmit}>
           <Form.Control as="textarea" rows={3}  className="form-input"  name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />

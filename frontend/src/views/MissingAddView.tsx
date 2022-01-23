@@ -7,17 +7,17 @@ import { useHistory } from 'react-router-dom';
 import FormMap from '../components/FormMap';
 
 const StyledMissingAddView = styled.main`
-  max-width: 1000px;
+  max-width: 1200px;
   width: 90vw;
   padding-top: 6rem;
   /* min-width: 1000px; */
   height: 100vh;
-  max-height: 700px;
+  max-height: 800px;
   display: flex;
   /* flex-direction: row; */
   justify-content: center;
   .card {
-    min-width: 300px;
+    min-width: 350px;
   }
 
   .pin {
@@ -41,6 +41,16 @@ const StyledMissingAddView = styled.main`
       width: 100%;
     }
   }
+  .add-missing-form input, textarea{
+    margin-bottom: 1rem;
+  }
+  .btn-delete {
+    margin-top: 2rem;
+  }
+  .btn-more {
+    margin-top: 2rem;
+  }
+ 
 `;
 export default function MissingAddView({ setIsAddMissingClicked }: any) {
   const profile: any = localStorage.getItem('profile') || null;
@@ -124,7 +134,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
         <Card.Body>
           <Card.Text></Card.Text>
 
-          <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form className="add-missing-form" onSubmit={(e) => handleSubmit(e)}>
             <Form.Label htmlFor="title">Tytuł</Form.Label>
             <Form.Control
               id="title"
@@ -136,6 +146,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
             <Form.Label htmlFor="desc">Opis</Form.Label>
             <Form.Control
               id="desc"
+              as="textarea" rows={3}
               type="text"
               value={missing.description}
               onChange={(e) => setMissing({ ...missing, description: e.target.value })}
@@ -161,8 +172,8 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
             <Form.Label htmlFor="">Wybierz miejsce zaginięcia na mapie.</Form.Label>
 
             <Form.Group>
-              <Button type="submit">Wyślij zgłoszenie</Button>
-              <Button variant="secondary" onClick={() => resetValues()}>
+              <Button className="btn-more" type="submit">Wyślij zgłoszenie</Button>
+              <Button className="btn-delete" onClick={() => resetValues()}>
                 Anuluj
               </Button>
             </Form.Group>
