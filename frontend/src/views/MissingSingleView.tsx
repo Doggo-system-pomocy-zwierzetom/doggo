@@ -32,18 +32,18 @@ const StyledMissingSingleView = styled.main`
   padding: 4.6rem 3vw 1rem 3vw;
 
   .name {
-    color: var(--dark-grey);
+    //color: var(--dark-grey);
     font-weight: 700;
     font-size: 2.5em;
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding-left: 3rem;
-    text-shadow: 0px 0px 15px var(--text-shadow-white);
+    //text-shadow: 0px 0px 15px var(--text-shadow-white);
   }
 
   .btn-back {
     background: var(--dark-grey);
-    margin: 0.7rem 0;
+    margin: 0.7rem;
     padding: 0.5rem 2rem;
     color: var(--white);
     border: none;
@@ -54,6 +54,8 @@ const StyledMissingSingleView = styled.main`
   .header {
     display: flex;
     justify-content: space-between;
+    background: var(--main);
+    border-radius: 5px;
   
   }
 
@@ -66,7 +68,7 @@ const StyledMissingSingleView = styled.main`
       min-width: 60%;
     }
     .column-right {
-      min-width: 40%;
+      min-width: 30%;
       display: flex;
       flex-direction: column;
       .contact {

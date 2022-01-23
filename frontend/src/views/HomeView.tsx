@@ -1607,7 +1607,7 @@ export default function HomeView() {
                           15
                         </span>
                         <p>
-                          <strong>Szczęśliwe pieski</strong> w tym roku zostało adoptowanych tylu pmałych
+                          <strong>Szczęśliwe pieski</strong> w tym roku zostało adoptowanych tylu małych
                           pupilów!
                         </p>
                       </div>
@@ -1884,6 +1884,7 @@ export default function HomeView() {
           </div>
         </section>
       </main>
+
       <a href="#" className="back-to-top d-flex align-items-center justify-content-center">
         <i className="bi bi-arrow-up-short"></i>
       </a>
