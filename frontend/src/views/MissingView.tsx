@@ -117,6 +117,13 @@ export default function MissingView() {
 
   const [selectedItem, setSelectedItem] = useState<number>();
 
+  function daysFromToday(date:string):any{
+    const today = new Date();
+    const dateFormat = new Date(date);
+    var diff = Math.abs(today.getTime() - dateFormat.getTime());
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    return diffDays;
+  }
   async function getData() {
     console.log('getData');
     await fetch('/missings', {})
@@ -126,7 +133,8 @@ export default function MissingView() {
         }
       })
       .then((data) => {
-        setData(data);
+        let newData = data.filter((data:any) => (daysFromToday(data.time)<=30));
+        setData(newData);
       });
   }
 
