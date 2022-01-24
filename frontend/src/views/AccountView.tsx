@@ -191,13 +191,13 @@ export default function AccountView() {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
   const [data, setData] = useState([])
+ 
+  const [showClicked, setShowClicked] = useState(false);
+  const [food, setFood] = useState('')
+  const [equipment, setEquipment] = useState('')
   const [formData, setFormData] = useState({
     food: '',
     equipment: ''})
-  const [removedAdoption, setRemovedAdoption] = useState(false);
-  const [showClicked, setShowClicked] = useState(false);
-  const [food, setFood] = useState(JSON.parse(profile).result.food)
-  const [equipment, setEquipment] = useState(JSON.parse(profile).result.equipment)
   async function getData() {
 
     fetch(`/adoptions`, {})
@@ -210,20 +210,21 @@ export default function AccountView() {
         setData(data);
       });
   }
-  async function getShelterDetails() {
+  async function getDataShelter() {
 
     fetch(`/shelters`, {})
       .then((res) => {
         if (res.ok) return res.json();
       })
       .then((data) => {
-        if(JSON.parse(profile).shelter) data = data.filter((e: any) => e.name === JSON.parse(profile).result.name);
-        else data = data.filter((e: any) => e.userMail === JSON.parse(profile).result.email);
-        console.log(food);
-        setFood(data.food);
-        setEquipment(data.equipment);
+        data = data.filter((e: any) => e.name === JSON.parse(profile).result.name);
+        console.log(data[0]);
+        setFood(data[0].food);
+        setEquipment(data[0].equipment);
+        
       });
   }
+  
   function removeAdoption(e:any){
     axios
     .patch(
@@ -238,7 +239,6 @@ export default function AccountView() {
     .then((res:any) => {
       if (res.ok) {
         return res.json();
-        setRemovedAdoption(true);
       }
     })
   }
@@ -253,13 +253,15 @@ export default function AccountView() {
     })
   }
   useEffect(() => {
+    getDataShelter();
     getData();
   }, [removeAdoption, deleteAdoption]);
+
+
 
   function handleSubmit(e:any){
     e.preventDefault();
     let id = JSON.parse(profile).result._id;
-    console.log(data)
     setShowClicked(false);
     axios
     .patch(
@@ -267,10 +269,7 @@ export default function AccountView() {
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then((res:any) => {
-      //console.log(res);
-      //setFormData({food:'', equipment:''});
-      setFood(formData.food);
-      setEquipment(formData.equipment);
+      getDataShelter()
       if (res.ok) return res.json();
     }).catch((e:Error)=>{
       console.log(e);
@@ -295,11 +294,12 @@ export default function AccountView() {
         </div>
     </div><div className="form">
       
-    <div className="patch-title" onClick={()=>setShowClicked(!showClicked)}>Zmień informacje o zapotrzebowaniach</div>{showClicked ?(
+    <div className="patch-title" onClick={()=>{setShowClicked(!showClicked); setFormData({food:food, equipment:equipment})}}>Zmień informacje o zapotrzebowaniach</div>{showClicked ?(
     <><Form onSubmit={handleSubmit}>
-          <Form.Control as="textarea" rows={3}  className="form-input"  name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />
-          <Form.Control as="textarea" rows={3} className="form-input" name="equipment" placeholder="Potrzebne wyposażenie" onChange={handleChange} />
+          <Form.Control as="textarea" rows={3}  className="form-input" value={formData.food} name="food" placeholder="Zapotrzebowanie na żywność" onChange={handleChange} />
+          <Form.Control as="textarea" rows={3} className="form-input" value={formData.equipment} name="equipment" placeholder="Potrzebne wyposażenie" onChange={handleChange} />
           <Button className="btn-more" type="submit">Zatwierdź</Button>
+          <Button className="btn-delete" onClick={()=>setShowClicked(false)}>Anuluj</Button>
         </Form></>):''}</div>
       <h1 className="title">Stworzone adopcje</h1></>)
     : <h1 className="title">Moje adopcje</h1>}

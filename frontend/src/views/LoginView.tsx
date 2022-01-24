@@ -58,6 +58,7 @@ function LoginView() {
   const history = useHistory();
   const initialState = { firstName: '', lastName: '', email: '', password: '', confirmpassword: '' };
   const [formData, setFormData] = useState(initialState);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -80,6 +81,7 @@ function LoginView() {
       })
       .then((res) => {})
       .catch(function (error) {
+        setErrorMessage("Nieprawidłowy login lub hasło");
         console.log(error);
       });
   };
@@ -95,10 +97,11 @@ function LoginView() {
           <Card>
             <Card.Body>
               <h1 className="form-title">Logowanie</h1>
+              
               <Form onSubmit={handleSubmit}>
                 <Form.Control name="email" placeholder="E-mail" type="email" onChange={handleChange} />
                 <Form.Control name="password" placeholder="Hasło" type="password" onChange={handleChange} />
-
+                {errorMessage && (<p style={{color:"var(--warning)", fontWeight:"600"}}>{errorMessage}</p>)}
                 <Button type="submit">Zaloguj się</Button>
                 <p className="link">
                   Nie posiadasz konta?{' '}
