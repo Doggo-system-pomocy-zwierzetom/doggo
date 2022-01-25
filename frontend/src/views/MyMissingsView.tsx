@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledMyMissingsView = styled.main`
@@ -169,6 +169,10 @@ export default function MyMissingsView() {
     return dateB - dateA;
 }
   return (
+    <>
+      {!profile ? (
+        <Redirect to="/logowanie" />
+      ) : (
     <StyledMyMissingsView>
     <h1 className="title">Zgłoszone zaginięcia</h1>
     {data.sort(sortingFunction).map((e: any) => {
@@ -186,6 +190,6 @@ export default function MyMissingsView() {
           </div>
         );})}
     
-    </StyledMyMissingsView>
+    </StyledMyMissingsView>)}</>
   );
 }

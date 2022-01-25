@@ -111,7 +111,7 @@ export default function AdoptionSingleView() {
     .patch(
       `/adoptions/${id}`, {id :id,
         name :name,
-        userMail :JSON.parse(profile).result.email,
+        userMail :JSON.parse(profile)?.result.email,
         shelterName :shelterName,
         image: image,
         description: description},
@@ -133,8 +133,9 @@ export default function AdoptionSingleView() {
         <p>{description}</p>
       </div>
       <div className="buttons">
-      {JSON.parse(profile)?.shelter === false && !userMail? <button className="btn-more" onClick={()=>addUser()}>Zgłoś chęć adopcji</button> 
-      : (JSON.parse(profile)?.shelter === false ? <p className="red">Ktoś już jest zainteresowany adopcją</p> : '')}
+      {JSON.parse(profile)?.shelter === false && !userMail ? <button className="btn-more" onClick={()=>addUser()}>Zgłoś chęć adopcji</button> 
+      : (JSON.parse(profile)?.shelter === false && userMail!==JSON.parse(profile)?.result.email ? <p className="red">Ktoś już jest zainteresowany adopcją</p> : 
+      (userMail===JSON.parse(profile)?.result.email ? <p className="red">Zgłosiłeś chęć adopcji</p> : ''))}
       <button className='btn-delete'><Link className="link-more-info" to={`/adoptuj/`}>
           Powrót
       </Link></button></div>

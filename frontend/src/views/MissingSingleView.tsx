@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import MissingSingleContainer from '../components/MissingSingleContainer';
-import MissingContainer from '../components/MissingContainer';
-import AddMissingButton from '../components/AddMissingButton';
-import AddMissingContainer from '../components/AddMissingContainer';
 import MapSingle from '../components/MapSingle';
 import { useParams } from 'react-router';
-import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 type Missing = {
@@ -186,7 +181,6 @@ export default function MissingSingleView() {
           </div>
         </div>
       </div>
-      {/* <MissingSingleContainer data={data} /> */}
     </StyledMissingSingleView>
   );
 }

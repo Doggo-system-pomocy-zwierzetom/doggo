@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 const missingSchema = mongoose.Schema({
   id: String,
-  title: String,
-  image: String,
-  creator: String,
-  time: Date,
-  description: String,
-  place: String,
-  longitude:  Number, 
-  latitude:  Number,
+  title: { type: String, required:  true },
+  image: { type: String, required:  true },
+  creator: { type: String, required:  true },
+  time: { type: Date, required:  true },
+  description: { type: String, required:  true },
+  place: { type: String, required:  true },
+  longitude:  { type: Number, required:  true },
+  latitude:  { type: Number, required:  true },
 });
 
 const MissingModel = mongoose.model('MissingModel', missingSchema);

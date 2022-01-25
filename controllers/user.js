@@ -48,6 +48,12 @@ export const signupShelter = async (req, res) => {
     const existingShelter = await Shelter.findOne({ email });
     if (existingShelter)
       return res.status(400).json({ message: 'Schronisko o podanym adresie e-mail już istnieje' });
+    const existingShelterName = await Shelter.findOne({ name });
+    if (existingShelterName)
+      return res.status(400).json({ message: 'Schronisko o podanej nazwie już istnieje' });
+    const existingShelterNIP = await Shelter.findOne({ NIP });
+    if (existingShelterNIP)
+      return res.status(400).json({ message: 'Schronisko o podanym numerze NIP już istnieje' });
     if (password !== confirmPassword) return res.status(400).json({ message: 'Podane hasła są różne' });
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await Shelter.create({ email, password: hashedPassword, name, NIP, food, equipment });

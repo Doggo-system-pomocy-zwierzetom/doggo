@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-// import { MyContext } from '../contexts/MyContext';
 import styled from 'styled-components';
 import { Form, Button, Card } from 'react-bootstrap';
 import { signin, signup } from '../actions/auth';
@@ -9,6 +8,8 @@ import { LoginInfoContext } from '../contexts/LoginInfoContextProvider';
 import axios from 'axios';
 import { emitKeypressEvents } from 'readline';
 import dog from '../img/pngwing.com.png';
+import { HTTPRequest } from '@tensorflow/tfjs-core/dist/io/http';
+import { Http2ServerResponse } from 'http2';
 
 const StyledRegisterView = styled.main`
   /* display: flex; */
@@ -23,6 +24,7 @@ const StyledRegisterView = styled.main`
   .card {
     margin-top: 3.5rem;
     margin-left: auto;
+    width: 400px;
     .card-body {
       h1 {
         text-align: center;
@@ -64,8 +66,10 @@ const StyledRegisterView = styled.main`
   }
   .error-message {
     color: var(--warning);
-    text-align: center;
+    text-align: left;
     margin: 0;
+    display:block;
+    max-width: 400px;
   }
   .dog-image {
     max-height: 400px;
@@ -102,11 +106,9 @@ export default function RegisterView() {
         const profile: any = localStorage.getItem('profile') || null;
         setUser(JSON.parse(profile));
         history.push('/');
-        console.log(res);
       })
       .catch(function (error) {
-        setErrorMessage('Coś poszło nie tak...');
-        //console.log(error);
+        setErrorMessage(error.response.data.message);
       });
   };
   const handleSubmitShelter = (e: any) => {
@@ -126,8 +128,8 @@ export default function RegisterView() {
         history.push('/');
       })
       .catch(function (error) {
-        setErrorMessage('Coś poszło nie tak...');
-        // console.log(error);
+        console.log(error.response.data.message)
+        setErrorMessage(error.response.data.message);
       });
   };
   const handleUserChange = (e: any) => {
@@ -148,10 +150,8 @@ export default function RegisterView() {
         <StyledRegisterView>
           <Card>
             <Card.Body>
-              {/* <h1>Rejestracja{ifShelter ? ' schroniska' : ' użytkownika'}</h1> */}
               <h1>Rejestracja</h1>
-              {errorMessage && <p className="error-message">{errorMessage}</p>}
-              {/* <p className="registration-type"> */}
+              
               <div>
                 <input
                   className="checkbox"
@@ -163,23 +163,6 @@ export default function RegisterView() {
                 <label htmlFor="check">Chcę utworzyć konto jako schronisko.</label>
               </div>
 
-              {/* </p> */}
-              {/* <button
-                onClick={() => {
-                  setIfShelter(false);
-                  setFormUserData(initialUserState);
-                }}
-              >
-                Użytkownik
-              </button>
-              <button
-                onClick={() => {
-                  setIfShelter(true);
-                  setFormShelterData(initialShelterState);
-                }}
-              >
-                Schronisko
-              </button> */}
               {ifShelter ? (
                 <Form onSubmit={handleSubmitShelter}>
                   <Form.Control
@@ -217,13 +200,11 @@ export default function RegisterView() {
                     type="password"
                     onChange={handleShelterChange}
                   />
+                  {errorMessage && <p className="error-message">{errorMessage}</p>}
                   <Button className="register-button" type="submit">
                     Zarejestruj się
                   </Button>
-                  {/* <p className="link">
-                    Posiadasz już konto?
-                    <Link to="/logowanie">Zaloguj się</Link>
-                  </p> */}
+                  
                 </Form>
               ) : (
                 <Form onSubmit={handleSubmitUser}>
@@ -262,6 +243,7 @@ export default function RegisterView() {
                     type="password"
                     onChange={handleUserChange}
                   />
+                  {errorMessage && <p className="error-message">{errorMessage}</p>}
                   <Button className="register-button" type="submit">
                     Zarejestruj się
                   </Button>
@@ -274,110 +256,9 @@ export default function RegisterView() {
             </Card.Body>
           </Card>
           <img className="dog-image" src={dog} alt="" />
+          
         </StyledRegisterView>
       )}
     </>
   );
 }
-
-// export default function RegisterView() {
-//   const { toggleNav, registerUser } = useContext(MyContext);
-//   const initialState = {
-//     userInfo: {
-//       name: '',
-//       email: '',
-//       password: '',
-//     },
-//     errorMsg: '',
-//     successMsg: '',
-//   };
-//   const [state, setState] = useState(initialState);
-
-//   // On Submit the Registration Form
-//   const submitForm = async (event: any) => {
-//     event.preventDefault();
-//     const data = await registerUser(state.userInfo);
-//     if (data.success) {
-//       setState({
-//         ...initialState,
-//         successMsg: data.message,
-//       });
-//     } else {
-//       setState({
-//         ...state,
-//         successMsg: '',
-//         errorMsg: data.message,
-//       });
-//     }
-//   };
-
-//   // On change the Input Value (name, email, password)
-//   const onChangeValue = (e: any) => {
-//     setState({
-//       ...state,
-//       userInfo: {
-//         ...state.userInfo,
-//         [e.target.name]: e.target.value,
-//       },
-//     });
-//   };
-
-//   // Show Message on Success or Error
-//   let successMsg: any = '';
-//   let errorMsg: any = '';
-//   if (state.errorMsg) {
-//     errorMsg = <div className="error-msg">{state.errorMsg}</div>;
-//   }
-//   if (state.successMsg) {
-//     successMsg = <div className="success-msg">{state.successMsg}</div>;
-//   }
-
-//   return (
-//     <div className="_loginRegister">
-//       <h1>Sign Up</h1>
-//       <form onSubmit={submitForm} noValidate>
-//         <div className="form-control">
-//           <label>Full Name</label>
-//           <input
-//             name="name"
-//             required
-//             type="text"
-//             value={state.userInfo.name}
-//             onChange={onChangeValue}
-//             placeholder="Enter your name"
-//           />
-//         </div>
-//         <div className="form-control">
-//           <label>Email</label>
-//           <input
-//             name="email"
-//             required
-//             type="email"
-//             value={state.userInfo.email}
-//             onChange={onChangeValue}
-//             placeholder="Enter your email"
-//           />
-//         </div>
-//         <div className="form-control">
-//           <label>Password</label>
-//           <input
-//             name="password"
-//             required
-//             type="password"
-//             value={state.userInfo.password}
-//             onChange={onChangeValue}
-//             placeholder="Enter your password"
-//           />
-//         </div>
-//         {errorMsg}
-//         {successMsg}
-//         <div className="form-control">
-//           <button type="submit">Sign Up</button>
-//         </div>
-//       </form>
-//       <div className="_navBtn">
-//         <button onClick={toggleNav}>Login</button>
-//       </div>
-//     </div>
-//   );
-// }

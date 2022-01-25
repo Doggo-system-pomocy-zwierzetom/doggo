@@ -40,9 +40,11 @@ export default function NeedsView() {
   return (
     <StyledNeedsView>
       <h1 className="title">Schroniska</h1>
-      {data.map((e: any) => {
+      {data.map((e: any, index:any) => {
         return (
-          <ShelterContainer key={e.id} name={e.name} email={e.email} food={e.food} equipment={e.equipment} />
+          <div key={index}>
+            <ShelterContainer key={e.id} name={e.name} email={e.email} food={e.food} equipment={e.equipment} />
+            </div>
         );
       })}
     </StyledNeedsView>
