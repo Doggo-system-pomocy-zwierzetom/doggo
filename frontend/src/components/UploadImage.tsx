@@ -38,7 +38,6 @@ export default function UploadImage({ setImageURL }: any) {
 
   function saveToServer(file: any) {
     console.log(file);
-
     fetch('https://api.imgur.com/3/image', {
       //mode: 'cors',
       method: 'POST',
@@ -50,35 +49,23 @@ export default function UploadImage({ setImageURL }: any) {
       .then((response) => {
         console.log(response);
         if (response.ok) {
-          // alert('Image uploaded to album');
-          // const url = JSON.parse(response).url;
           console.log(response);
-          console.log('201');
           return response.json();
         }
       })
       .then((json) => {
         console.log(json);
         console.log(json.data.link);
-
-        // insertToEditor(json.data.link);
       })
       .catch((error) => {
         console.error(error);
-        //alert('Upload failed: ' + error);
       });
   }
 
   return (
     <StyledUploadImage>
-      {imagePreview === '' ? (
-        <Alert variant="info">wybierz zdjęcie</Alert>
-      ) : (
-        <img className="image-preview" src={imagePreview} alt="Podgląd zdjęcia" />
-      )}
-      {/* <form onSubmit={(e) => onFileSubmit(e)} onChange={(e) => onChange(e)}> */}
+      {imagePreview !== '' && <img className="image-preview" src={imagePreview} alt="Podgląd zdjęcia" />}
       <Form onSubmit={(e) => onFileSubmit(e)}>
-        {/* <form onSubmit={(e) => saveToServer()} onChange={(e) => onChange(e)}> */}
         <Form.Control
           type="file"
           name="avatar"
@@ -91,6 +78,7 @@ export default function UploadImage({ setImageURL }: any) {
           Wyślij
         </Button>
       </Form>
+      {/* <input type="file" accept=".jpef, .png, .jpg" onChange={photoUpload} src={imagePreview} /> */}
     </StyledUploadImage>
   );
 }

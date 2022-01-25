@@ -41,7 +41,8 @@ const StyledMissingAddView = styled.main`
       width: 100%;
     }
   }
-  .add-missing-form input, textarea{
+  .add-missing-form input,
+  textarea {
     margin-bottom: 1rem;
   }
   .btn-delete {
@@ -50,7 +51,10 @@ const StyledMissingAddView = styled.main`
   .btn-more {
     margin-top: 2rem;
   }
- 
+  .image-preview {
+    max-width: 4rem;
+    max-height: 4rem;
+  }
 `;
 export default function MissingAddView({ setIsAddMissingClicked }: any) {
   const profile: any = localStorage.getItem('profile') || null;
@@ -87,8 +91,8 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
       longitude: 19.1250570957476,
     });
   }
-  function handleSubmit(e: any) {
-    e.preventDefault();
+  function handleSubmit() {
+    // e.preventDefault();
     // console.log(onClickLocation.lat, onClickLocation.lng);
 
     // setMissing({ ...missing, longitude: onClickLocation.lng, latitude: onClickLocation.lat });
@@ -107,6 +111,62 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
           history.push('/zaginiecia');
         });
     }
+  }
+
+  const [file, setFile] = useState<string>('');
+  const [imagePreview, setImagePreview] = useState<any>('');
+
+  const onFileSubmit = (e: any) => {
+    e.preventDefault();
+    if (file !== '') saveImageToServer(file);
+    else console.log('Nie wybrano pliku!');
+  };
+
+  const photoUpload = (e: any) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file2 = e.target.files[0];
+    // console.log('reader', reader);
+
+    if (reader !== undefined && file2 !== undefined) {
+      reader.onloadend = () => {
+        console.log(file);
+
+        setFile(file2);
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file2);
+    }
+  };
+
+  function saveImageToServer(file: any) {
+    console.log(file);
+    fetch('https://api.imgur.com/3/image', {
+      //mode: 'cors',
+      method: 'POST',
+      headers: {
+        Authorization: 'Client-ID e938cb3d41df2b6',
+      },
+      body: file,
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.ok) {
+          console.log(response);
+          return response.json();
+        }
+      })
+      .then((json) => {
+        console.log(json);
+        console.log(json.data.link);
+        setMissing({ ...missing, image: json.data.link });
+      })
+      .then(() => {
+        handleSubmit();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   useEffect(() => {
@@ -134,7 +194,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
         <Card.Body>
           <Card.Text></Card.Text>
 
-          <Form className="add-missing-form" onSubmit={(e) => handleSubmit(e)}>
+          <Form className="add-missing-form" onSubmit={(e) => onFileSubmit(e)}>
             <Form.Label htmlFor="title">Tytuł</Form.Label>
             <Form.Control
               id="title"
@@ -146,7 +206,8 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
             <Form.Label htmlFor="desc">Opis</Form.Label>
             <Form.Control
               id="desc"
-              as="textarea" rows={3}
+              as="textarea"
+              rows={3}
               type="text"
               value={missing.description}
               onChange={(e) => setMissing({ ...missing, description: e.target.value })}
@@ -161,18 +222,32 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
               required
             />
             <Form.Label htmlFor="image">Zdjęcie</Form.Label>
-            <Form.Control
+            {/* <Form.Control
               id="image"
               type="text"
               value={missing.image}
               onChange={(e) => setMissing({ ...missing, image: e.target.value })}
               required
+            /> */}
+            {imagePreview !== '' && (
+              <img className="image-preview" src={imagePreview} alt="Podgląd zdjęcia" />
+            )}
+
+            <Form.Control
+              type="file"
+              name="avatar"
+              id="file"
+              accept=".jpef, .png, .jpg"
+              onChange={photoUpload}
+              src={imagePreview}
             />
             {/* <UploadImage /> */}
             <Form.Label htmlFor="">Wybierz miejsce zaginięcia na mapie.</Form.Label>
 
             <Form.Group>
-              <Button className="btn-more" type="submit">Wyślij zgłoszenie</Button>
+              <Button className="btn-more" type="submit">
+                Wyślij zgłoszenie
+              </Button>
               <Button className="btn-delete" onClick={() => resetValues()}>
                 Anuluj
               </Button>
@@ -181,6 +256,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
           {/* <input id="missingImg" type="file" onChange={(e) => handleUpload(e)} required /> */}
           {/* {!confirmedImg ? (<p>Nieprawidłowe zdjęcie, upewnij się, że znajduje się na nim odpowiednie zwierzę</p>) : ''} */}
           <div>{/* <button type="submit" disabled={!confirmedImg}>Wyślij zgłoszenie</button> */}</div>
+          {/* <UploadImage /> */}
         </Card.Body>
       </Card>
       <FormMap
