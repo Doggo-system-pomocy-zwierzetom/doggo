@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 const adoptionSchema = mongoose.Schema({
     id :String,
-    name :String,
+    name: { type: String, required: true },
     userMail :String,
-    shelterName :String,
-    image: String,
-    description: String
+    shelterName :{ type: String, required: true },
+    image: { type: String, required: true },
+    description: { type: String, required: true },
 });
 
 const AdoptionModel = mongoose.model('AdoptionModel', adoptionSchema);

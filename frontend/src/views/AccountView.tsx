@@ -6,6 +6,7 @@ import pin from '../img/pin-green.svg';
 import bone from '../img/bone.svg';
 import house from '../img/house.png';
 import edit from '../img/edit.png';
+import { Redirect} from 'react-router-dom';
 const StyledAccountView = styled.main`
 .title{
   max-width: 800px;
@@ -191,7 +192,6 @@ export default function AccountView() {
   const profile: any = localStorage.getItem('profile') || null;
   const token: any = profile ? JSON.parse(profile).token : '';
   const [data, setData] = useState([])
- 
   const [showClicked, setShowClicked] = useState(false);
   const [food, setFood] = useState('')
   const [equipment, setEquipment] = useState('')
@@ -253,7 +253,7 @@ export default function AccountView() {
     })
   }
   useEffect(() => {
-    if(JSON.parse(profile).shelter) getDataShelter();
+    if(JSON.parse(profile)?.shelter) getDataShelter();
     getData();
   }, [removeAdoption, deleteAdoption]);
 
@@ -278,6 +278,9 @@ export default function AccountView() {
   }
   const handleChange = (e: any) => setFormData({ ...formData, [e.target.name]: e.target.value });
   return (
+    <>{profile===null ? (
+      <Redirect to="/logowanie" />
+    ) : (
     <StyledAccountView>
     {JSON.parse(profile).shelter ? 
     (<><h1 className="title">Zapotrzebowania</h1>
@@ -316,6 +319,6 @@ export default function AccountView() {
             </div>
         );})}
     
-    </StyledAccountView>
-  );
+    </StyledAccountView>)}
+  </>);
 }
