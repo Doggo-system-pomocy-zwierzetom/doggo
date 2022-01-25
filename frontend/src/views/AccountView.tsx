@@ -205,8 +205,8 @@ export default function AccountView() {
         if (res.ok) return res.json();
       })
       .then((data) => {
-        if(JSON.parse(profile).shelter) data = data.filter((e: any) => e.shelterName === JSON.parse(profile).result.name);
-        else data = data.filter((e: any) => e.userMail === JSON.parse(profile).result.email);
+        if(JSON.parse(profile)?.shelter) data = data.filter((e: any) => e.shelterName === JSON.parse(profile)?.result.name);
+        else data = data.filter((e: any) => e.userMail === JSON.parse(profile)?.result.email);
         setData(data);
       });
   }
