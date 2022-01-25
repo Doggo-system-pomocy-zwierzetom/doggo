@@ -128,6 +128,7 @@ export default function RegisterView() {
         history.push('/');
       })
       .catch(function (error) {
+        console.log(error.response.data.message)
         setErrorMessage(error.response.data.message);
       });
   };
@@ -199,6 +200,7 @@ export default function RegisterView() {
                     type="password"
                     onChange={handleShelterChange}
                   />
+                  {errorMessage && <p className="error-message">{errorMessage}</p>}
                   <Button className="register-button" type="submit">
                     Zarejestruj się
                   </Button>
