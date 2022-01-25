@@ -124,7 +124,7 @@ function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
   };
 
   useEffect(() => {
-    handleSubmit();
+    if (adoption.image !== '') handleSubmit();
   }, [adoption.image]);
 
   return (

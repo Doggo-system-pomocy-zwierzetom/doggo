@@ -179,7 +179,7 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
   }, []);
 
   useEffect(() => {
-    handleSubmit();
+    if (missing.image !== '') handleSubmit();
   }, [missing.image]);
 
   useEffect(() => {
