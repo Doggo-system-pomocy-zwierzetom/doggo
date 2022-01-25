@@ -139,9 +139,9 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
     }
   };
 
-  function saveImageToServer(file: any) {
+  async function saveImageToServer(file: any) {
     console.log(file);
-    fetch('https://api.imgur.com/3/image', {
+    await fetch('https://api.imgur.com/3/image', {
       //mode: 'cors',
       method: 'POST',
       headers: {
@@ -152,18 +152,16 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
       .then((response) => {
         console.log(response);
         if (response.ok) {
-          console.log(response);
+          // console.log(response);
           return response.json();
         }
       })
       .then((json) => {
-        console.log(json);
+        // console.log(json);
         console.log(json.data.link);
         setMissing({ ...missing, image: json.data.link });
       })
-      .then(() => {
-        handleSubmit();
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -179,6 +177,10 @@ export default function MissingAddView({ setIsAddMissingClicked }: any) {
       });
     });
   }, []);
+
+  useEffect(() => {
+    handleSubmit();
+  }, [missing.image]);
 
   useEffect(() => {
     console.log(onClickLocation);
