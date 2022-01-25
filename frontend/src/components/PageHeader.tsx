@@ -88,10 +88,11 @@ const StyledPageHeader = styled.div`
   }
   .dropdown-item > a {
     //color: var(--main);
-  color: black;
+  color: var(--white);
   text-decoration: none;
   display: block;
   }
+
   .btn-missing {
     color: var(--white);
     margin: auto;
@@ -117,6 +118,16 @@ const StyledPageHeader = styled.div`
   .user-menu {
     display: flex;
     gap: 1.5rem;
+  }
+  .dropdown-menu{
+    background: var(--main);
+    *{
+      color: var(--white);
+      &:hover{
+        background: var(--second);
+      }
+    }
+    
   }
 
 `;
@@ -182,7 +193,7 @@ function PageHeader() {
               </Link>
               {user ? (
                 <NavDropdown title={`${user && user.result.name}`} id="navbarScrollingDropdown">
-                  <NavDropdown.Item href="#action3">{user.name}</NavDropdown.Item>
+                  
 
                   <NavDropdown.Item>
                     <Link to="/konto">Moje konto</Link>

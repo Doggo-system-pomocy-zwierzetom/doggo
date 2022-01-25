@@ -253,7 +253,7 @@ export default function AccountView() {
     })
   }
   useEffect(() => {
-    getDataShelter();
+    if(JSON.parse(profile).shelter) getDataShelter();
     getData();
   }, [removeAdoption, deleteAdoption]);
 
@@ -305,7 +305,7 @@ export default function AccountView() {
     : <h1 className="title">Moje adopcje</h1>}
     {data.map((e: any) => {
         return (
-          <div className="adoption_info">
+          <div key={e._id} className="adoption_info">
           <div className="info">
             <h2 className="animal-name">{e.name}</h2>
             {JSON.parse(profile).shelter ? <p>{e.userMail}</p> : <p className='shelter'>{e.shelterName}</p>}

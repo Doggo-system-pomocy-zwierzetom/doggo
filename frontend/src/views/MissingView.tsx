@@ -133,13 +133,17 @@ export default function MissingView() {
         }
       })
       .then((data) => {
-        let newData = data.filter((data:any) => (daysFromToday(data.time)<=30));
+        let newData = data.filter((data:any) => (daysFromToday(data.time)<=30))
         setData(newData);
+        console.log("data");
+        console.log(data);
       });
   }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
+      console.log("pos ");
+      console.log(position);
       setDefaultProps({
         center: {
           lat: position.coords.latitude,
@@ -165,6 +169,7 @@ export default function MissingView() {
       <div className="missing-container">
         <MissingContainer
           data={data}
+          props={defaultProps}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           setCordinates={setDefaultProps}

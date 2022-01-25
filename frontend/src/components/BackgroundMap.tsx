@@ -17,7 +17,6 @@ export default function BackgroundMap({
   // useEffect(() => {
   //   setCordinates(props);
   // }, [props]);
-  console.log(data);
 
   return (
     <GoogleMapReact

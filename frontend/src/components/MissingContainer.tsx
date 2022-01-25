@@ -29,9 +29,8 @@ const StyledMissingContainer = styled.div`
     gap: 1rem;
   }
 `;
-function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, setDeleteMissing }: any) {
+function MissingContainer({ data, props, selectedItem, setSelectedItem, setCordinates, setDeleteMissing }: any) {
   // console.log(selectedItem);
-  console.log(data.length);
   const today = new Date();
   function daysFromToday(date:string):any{
     const dateFormat = new Date(date);
@@ -55,6 +54,7 @@ function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, 
         .sort(sortingFunction)
           .map((e: any, index: number) => {
             return (
+              <div key={index}>
               <MissingContainerElement
                 data={e}
                 index={index}
@@ -63,6 +63,7 @@ function MissingContainer({ data, selectedItem, setSelectedItem, setCordinates, 
                 setCordinates={setCordinates}
                 setDeleteMissing={setDeleteMissing}
               />
+              </div>
             );
           })}
       </div>
