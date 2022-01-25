@@ -24,6 +24,10 @@ const StyledAddAdoptionContainer = styled.div`
   .btn-more {
     margin-top: 2rem;
   }
+  .image-preview {
+    max-width: 4rem;
+    max-height: 4rem;
+  }
 `;
 
 function AddAdoptionContainer({ setIsAddMissingClicked }: any) {
