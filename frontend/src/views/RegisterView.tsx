@@ -68,7 +68,7 @@ const StyledRegisterView = styled.main`
     color: var(--warning);
     text-align: left;
     margin: 0;
-    display:block;
+    display: block;
     max-width: 400px;
   }
   .dog-image {
@@ -78,6 +78,18 @@ const StyledRegisterView = styled.main`
     margin-left: -3px;
     /* position: relative; */
     /* z-index: 1; */
+  }
+  @media (max-width: 700px) {
+    .dog-image {
+      display: none;
+    }
+    .card {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    padding-left: 3vw;
+    padding-right: 3vw;
   }
 `;
 
@@ -128,7 +140,7 @@ export default function RegisterView() {
         history.push('/');
       })
       .catch(function (error) {
-        console.log(error.response.data.message)
+        console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
       });
   };
@@ -151,7 +163,7 @@ export default function RegisterView() {
           <Card>
             <Card.Body>
               <h1>Rejestracja</h1>
-              
+
               <div>
                 <input
                   className="checkbox"
@@ -204,7 +216,6 @@ export default function RegisterView() {
                   <Button className="register-button" type="submit">
                     Zarejestruj się
                   </Button>
-                  
                 </Form>
               ) : (
                 <Form onSubmit={handleSubmitUser}>
@@ -256,7 +267,6 @@ export default function RegisterView() {
             </Card.Body>
           </Card>
           <img className="dog-image" src={dog} alt="" />
-          
         </StyledRegisterView>
       )}
     </>

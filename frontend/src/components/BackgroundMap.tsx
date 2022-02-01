@@ -2,10 +2,10 @@ import GoogleMapReact from 'google-map-react';
 import { useEffect, useState } from 'react';
 import image from '../img/pin-green.svg';
 import image2 from '../img/pin.svg';
+
 const defaultMapOptions = {
   fullscreenControl: false,
 };
-
 export default function BackgroundMap({
   props,
   setOnClickLocation,

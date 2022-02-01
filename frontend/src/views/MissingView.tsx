@@ -21,6 +21,7 @@ const StyledMissing = styled.main`
     /* z-index: 1; */
     max-height: 100vh;
     /* height: 100vh; */
+    max-width: 95%;
   }
   .add-missing-button {
     position: absolute;
@@ -59,6 +60,11 @@ const StyledMissing = styled.main`
       animation-direction: alternate;
     }
   }
+
+  .background-map {
+    width: 100%;
+    height: 100%;
+  }
   @keyframes changewidth {
     from {
       width: 6rem;
@@ -72,6 +78,15 @@ const StyledMissing = styled.main`
       height: 5rem;
       top: -5rem;
       left: -2.5rem;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .background-map {
+      display: none;
+    }
+    .missing-container {
+      margin: 0 auto;
     }
   }
 `;
@@ -117,7 +132,7 @@ export default function MissingView() {
 
   const [selectedItem, setSelectedItem] = useState<number>();
 
-  function daysFromToday(date:string):any{
+  function daysFromToday(date: string): any {
     const today = new Date();
     const dateFormat = new Date(date);
     var diff = Math.abs(today.getTime() - dateFormat.getTime());
@@ -133,16 +148,16 @@ export default function MissingView() {
         }
       })
       .then((data) => {
-        let newData = data.filter((data:any) => (daysFromToday(data.time)<=30))
+        let newData = data.filter((data: any) => daysFromToday(data.time) <= 30);
         setData(newData);
-        console.log("data");
+        console.log('data');
         console.log(data);
       });
   }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log("pos ");
+      console.log('pos ');
       console.log(position);
       setDefaultProps({
         center: {
@@ -187,14 +202,15 @@ export default function MissingView() {
           <AddMissingContainer setIsAddMissingClicked={setIsAddMissingClicked} />
         </div>
       )}
-
-      <BackgroundMap
-        props={defaultProps}
-        data={data}
-        setOnClickLocation={setOnClickLocation}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
+      <div className="background-map">
+        <BackgroundMap
+          props={defaultProps}
+          data={data}
+          setOnClickLocation={setOnClickLocation}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+      </div>
     </StyledMissing>
   );
 }
