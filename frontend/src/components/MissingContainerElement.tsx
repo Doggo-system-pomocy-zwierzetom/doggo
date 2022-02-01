@@ -13,20 +13,17 @@ const StyledMissingContainerElement = styled.div<Props>`
   padding-right: 1.3rem;
   display: flex;
   gap: 1.2rem;
-  /* margin: 0.6rem auto; */
+  margin: 0 auto;
   width: 100%;
   /* max-width:min-content; */
   min-width: 0;
+  /* max-width: 90vw; */
   /* background: #ddd; */
   background: ${(props) => props.background || 'red'};
   /* border: 0.07rem solid var(--card-outline); */
   outline: ${(props) => props.outline || ''};
   box-shadow: -2px 0 11px 0px var(--outline-darken);
   p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
     height: 100%;
     /* height: min-content; */
   }
@@ -56,6 +53,9 @@ const StyledMissingContainerElement = styled.div<Props>`
   }
   p {
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .name {
     font-size: 1.4em;
