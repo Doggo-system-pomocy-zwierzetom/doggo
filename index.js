@@ -15,6 +15,7 @@ dotenv.config();
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
+app.set("trust proxy", 1);
 app.use('/adoptions', adoptionsRoutes);
 app.use('/missings', missingsRoutes);
 app.use('/user', userRoutes);
