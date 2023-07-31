@@ -38,13 +38,14 @@ export default function UploadImage({ setImageURL }: any) {
 
   function saveToServer(file: any) {
     console.log(file);
-    fetch('https://api.imgur.com/3/image', {
-      //mode: 'cors',
+    const formData = new FormData();
+    formData.append('media', file);
+
+    formData.append('key', '000442a1b0d53357c422b84d9fb85b87');
+
+    fetch('https://thumbsnap.com/api/upload', {
       method: 'POST',
-      headers: {
-        Authorization: 'Client-ID e938cb3d41df2b6',
-      },
-      body: file,
+      body: formData,
     })
       .then((response) => {
         console.log(response);
@@ -55,7 +56,7 @@ export default function UploadImage({ setImageURL }: any) {
       })
       .then((json) => {
         console.log(json);
-        console.log(json.data.link);
+        console.log(json.data.thumb);
       })
       .catch((error) => {
         console.error(error);

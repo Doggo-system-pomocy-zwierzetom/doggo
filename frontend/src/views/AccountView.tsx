@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import pin from '../img/pin-green.svg';
-import bone from '../img/bone.svg';
+// import bone from '../img/bone.svg';
 import house from '../img/house.png';
 import edit from '../img/edit.png';
 import { Redirect} from 'react-router-dom';
@@ -148,7 +148,6 @@ img {
     h5 {
       &::before {
         content: '';
-        background: url(${bone}) no-repeat;
         width: 1.6em;
         height: 1.5em;
         background-size: contain;

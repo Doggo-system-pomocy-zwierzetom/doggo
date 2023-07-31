@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
-import bone from '../img/bone.svg';
+// import bone from '../img/bone.svg';
 import house from '../img/house.png';
 
 const StyledShelterContainer = styled.div`
@@ -54,7 +54,6 @@ const StyledShelterContainer = styled.div`
       h5 {
         &::before {
           content: '';
-          background: url(${bone}) no-repeat;
           width: 1.6em;
           height: 1.5em;
           background-size: contain;
