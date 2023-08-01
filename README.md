@@ -1,3 +1,3 @@
 # Doggo
 
-Live demo: https://grupowy-pies.herokuapp.com/
+Live demo: https://doggo-backend.onrender.com/
