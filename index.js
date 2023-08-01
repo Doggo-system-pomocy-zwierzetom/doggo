@@ -14,7 +14,9 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: ['https://doggo-prc5.onrender.com/']
+}));
 app.set("trust proxy", 1);
 app.use('/adoptions', adoptionsRoutes);
 app.use('/missings', missingsRoutes);
