@@ -28,6 +28,8 @@ https://github.com/Finarfin32/finarfin32/blob/Finarfin32-gifs/Doggo%20-%20dokume
 
 ## Authors
 
+- [@EmiliaZamorowska](https://github.com/EmiliaZamorowska)
+- [@tybur3](https://github.com/tybur3)
 - [@finarfin32](https://github.com/Finarfin32)
 
 ## Tech Stack
