@@ -43,7 +43,7 @@ function MissingContainer({
   setCordinates,
   setDeleteMissing,
 }: any) {
-  // console.log(selectedItem);
+  //console.log(selectedItem);
   const today = new Date();
   function daysFromToday(date: string): any {
     const dateFormat = new Date(date);
@@ -63,8 +63,9 @@ function MissingContainer({
       <p className="title">Zaginione zwierzęta w okolicy</p>
       <div className="missing-catalog">
         {data.length &&
-          data
-            .filter((data: any) => daysFromToday(data.time) <= 30)
+          data 
+            //filter removed for the purpose of hosting demo app version
+            .filter((data: any) => daysFromToday(data.time) <= 3000000000000)
             .sort(sortingFunction)
             .map((e: any, index: number) => {
               return (

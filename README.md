@@ -42,6 +42,18 @@ https://github.com/Finarfin32/finarfin32/blob/Finarfin32-gifs/Doggo%20-%20dokume
 
 In the project directory, you can run:
 
-### `npm install`
+<!-- ### `npm install` -->
 
-### `npm run dev`
+### `npm run build`
+
+### `npm start`
+
+### Konta testowe do logowania się
+
+- Konto osoby prywatnej:
+  login: user1234@wp.pl
+  hasło: 1234
+
+- Konto schroniska:
+  login: schronisko1@wp.pl
+  hasło: 1234
