@@ -9,6 +9,7 @@ Unregistered users will only be able to access information within the applicatio
 ## Demo
 
 Live demo: https://doggo-backend.onrender.com/
+(need time to load - free hosting)
 
 #### Main Page
 
